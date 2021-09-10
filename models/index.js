@@ -1,4 +1,4 @@
-const { sequelize, syncDb } = require('../db')
+const { sequelize } = require('../db')
 const { DataTypes } = require('sequelize')
 
 const DefineUser = require('./userModel')
@@ -34,6 +34,6 @@ User.hasOne(Member, {
 });
 Member.belongsTo(User);
 
-syncDb(sequelize, {alter: true})
+// syncDb(sequelize, {alter: true})
 
 module.exports = { User, Counselor, Chapter, Admin, Member }
