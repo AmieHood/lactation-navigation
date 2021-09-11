@@ -10,14 +10,16 @@ const sequelize = new Sequelize(
     }
 );
 
-sequelize.authenticate()
-    .then(
-    () => {
-        console.log('Connection has been established.');
-    })
-    .catch((err) => {
-        console.error('Unable to connect to the database:', err);
-    });
+// sequelize.authenticate()
+//     .then(
+//     () => {
+//         console.log('Connection has been established.');
+//     })
+//     .catch((err) => {
+//         console.error('Unable to connect to the database:', err);
+//     });
+
+// sequelize.sync({force: true})
 
 
 // async function syncDb(sequelize, options){

@@ -3,12 +3,11 @@ const express = require('express')
 const app = express()
 const port = 3000
 const { sequelize } = require('./db')
-
-app.use(require('./middleware/headers'))
-
 const controllers = require('./controllers')
 
 app.use(express.json())
+
+app.use(require('./middleware/headers'))
 
 // const user = require('./controllers/userController')
 app.use('/user', controllers.userController)
@@ -19,10 +18,11 @@ app.use('/chapter', controllers.chapterController)
 //     res.send('This is a test.')
 // })
 
+
 sequelize.authenticate()
 .then(() => sequelize.sync())
 .then(() => {
-    app.listen(3000, () => {
+    app.listen(port, () => {
         console.log(`[Server]: App is listening on 3000.`);
     })
 })
@@ -32,7 +32,7 @@ sequelize.authenticate()
 // app.listen(port, () => {
 //     console.log(`App listening at http://localhost:${port}`);
 // })
-;(async() => {
+// ;(async() => {
     // try{
     //     await syncDb()
     //     console.log('connection established successfully');
@@ -46,4 +46,4 @@ sequelize.authenticate()
     // app.listen(port, () => {
     //     console.log(`App listening at http://localhost:${port}`);
     // })
-})()
+// })()
