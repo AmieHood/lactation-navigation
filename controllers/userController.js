@@ -10,7 +10,7 @@ router.post("/signup", async (req, res) => {
     const { email, password, firstName, lastName, userCity, userState, userPhone } = req.body
      
     try {
-        const createUser = await User.create({
+        const user = await User.create({
             email,
             password: bcrypt.hashSync(password, 12),
             firstName,
@@ -21,14 +21,14 @@ router.post("/signup", async (req, res) => {
         })
         console.log("user created" );
 
-        let token = jwt.sign({id: User.id, email: User.email}, 
+        let token = jwt.sign({id: user.id, email: user.email}, 
             process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24})
 
-            console.log("token maybe?");
+            console.log(token);
 
         res.status(201).json({
             message: "User successfully registered", 
-            user: createUser,
+            user: user,
             sessionToken: token
         })
 

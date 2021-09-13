@@ -20,12 +20,13 @@ Counselor.belongsTo(User);
 
 Chapter.hasMany(Counselor, {
     // foreignKey: {
-    //     name: 'counselorId',
-    //     allowNull: false
+    //     name: 'ChapterId',
+    //     allowNull: true
     //   }
 });
 Counselor.belongsTo(Chapter);
 
+//ignore
 User.hasOne(Admin, {
     onDelete: 'CASCADE'
 });

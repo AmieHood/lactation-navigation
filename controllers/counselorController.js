@@ -1,22 +1,40 @@
 let express = require('express')
 let router = express.Router()
-const { User, Counselor } = require('../models')
+const { User, Counselor, Chapter } = require('../models')
 let validateJWT = require("../middleware/validate-jwt")
 
 //create Counselor
-router.post('/', validateJWT, async (req, res) => {
-    // const { userId } = req.user
+router.post('/create', validateJWT, async (req, res) => {
+    const userId = req.user.id
+    console.log(userId);
     try {
-        const result = await Counselor.create({
-            dateAccredited: req.body.dateAccredited,
-            UserId: req.user.id
-            // ChapterId: 
+        let currentUser = await User.findOne({where: { id: userId}})
+        console.log(currentUser);
+        let result = await currentUser.createCounselor({
+            dateAccredited: req.body.dateAccredited
         })
-        console.log(userId)
         res.json(result)
     } catch (error) {
         console.log(error);
         res.json({ error })
+    }
+})
+
+//update Counselor
+router.put('/:id', async(req, res) => {
+    const { dateAccredited } = req.body
+    const {id} = req.params
+    try {
+    
+    const updatedCounselor = {
+        dateAccredited: dateAccredited
+    }
+    const query = ({where: { id: id }})
+        const update = await Counselor.update(updatedCounselor, query)
+        res.json(update)
+    } catch (error) {
+        console.error(error)
+        res.json({ error})
     }
 })
 

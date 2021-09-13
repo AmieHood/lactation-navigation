@@ -1,21 +1,24 @@
 let express = require('express')
 let router = express.Router()
 let validateJWT = require("../middleware/validate-jwt")
-const { Counselor, Chapter } = require('../models')
+const { User, Counselor, Chapter } = require('../models')
 
-router.post("/", validateJWT, async (req, res) => {
+router.post("/create", validateJWT, async (req, res) => {
     const { chapterName, chapterCity, chapterState, chapterPhone, chapterWebsite } = req.body
+    const userId = req.user.id
 
     try {
-        const result = await Chapter.create({
+        const newChapter = await Chapter.create({
             chapterName,
             chapterCity,
             chapterState,
             chapterPhone,
             chapterWebsite, 
-            counselorId: req.body.CounselorId
         })
-        res.json(result)
+        const currentCounselor = await Counselor.findOne({where: {UserId: userId}})
+        await newChapter.addCounselor(currentCounselor)
+        let updatedChapter = await Chapter.findOne({where: {id: newChapter.id}})
+        res.json(updatedChapter)
     } catch (error) {
         res.json({ error })
     }
@@ -44,14 +47,12 @@ router.get('/:id', async(req, res) => {
 //update Chapter
 router.put('/:id', async(req, res) => {
     const { chapterName, chapterCity, chapterState, chapterPhone, chapterWebsite } = req.body
-
     const updatedChapter = {
         chapterName: chapterName,
         chapterCity: chapterCity,
         chapterState: chapterState,
         chapterPhone: chapterPhone,
         chapterWebsite: chapterWebsite, 
-        counselorId: req.body.Counselor.id
     }
     const query = ({where: { id: req.params.id}})
     try {
