@@ -21,7 +21,7 @@ router.post('/create', validateJWT, async (req, res) => {
 })
 
 //update Counselor
-router.put('/:id', async(req, res) => {
+router.put('/:id', validateJWT, async(req, res) => {
     const { dateAccredited } = req.body
     const {id} = req.params
     try {
@@ -54,7 +54,7 @@ router.get('/all', validateJWT, async (req, res) => {
 
 router.get('/user/:id', async(req, res) => {
     try {
-        const counselor = await Counselor.findOne({where: {userId: req.params.id}})
+        const counselor = await Counselor.findOne({where: {UserId: req.params.id}})
         res.json(counselor)
     } catch (error) {
         res.json({ error})
@@ -71,5 +71,14 @@ router.get('/:id', async(req, res) => {
     }
 })
 
+//Delete Counselor
+router.delete('/:id', validateJWT, async(req, res) => {
+    try {
+        const deleteCounselor = await Counselor.destroy({where: { id: req.params.id}})
+        res.json(deleteCounselor)
+    } catch (error) {
+        res.json({ error})
+    }
+})
 
 module.exports = router

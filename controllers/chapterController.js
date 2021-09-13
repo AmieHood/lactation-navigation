@@ -24,7 +24,29 @@ router.post("/create", validateJWT, async (req, res) => {
     }
 })
 
-// get all Chapters
+//update Chapter
+router.put('/:id', validateJWT, async(req, res) => {
+    const { chapterName, chapterCity, chapterState, chapterPhone, chapterWebsite } = req.body
+    // const userId = req.user.id
+
+    const updatedChapter = {
+        chapterName,
+        chapterCity,
+        chapterState,
+        chapterPhone,
+        chapterWebsite, 
+    }
+    const query = ({where: { id: req.params.id}})
+    try {
+        const update = await Chapter.update(updatedChapter, query)
+        res.json(update)
+    } catch (error) {
+        console.error(error)
+        res.json({ error})
+    }
+})
+
+// get all Chapters (working)
 router.get('/all', validateJWT, async (req, res) => {
     try {
         const all = await Chapter.findAll()
@@ -34,7 +56,7 @@ router.get('/all', validateJWT, async (req, res) => {
     }
 })
 
-//get one Chapter
+//get one Chapter (working)
 router.get('/:id', async(req, res) => {
     try {
         const one = await Chapter.findOne({where: { id: req.params.id}})
@@ -44,22 +66,12 @@ router.get('/:id', async(req, res) => {
     }
 })
 
-//update Chapter
-router.put('/:id', async(req, res) => {
-    const { chapterName, chapterCity, chapterState, chapterPhone, chapterWebsite } = req.body
-    const updatedChapter = {
-        chapterName: chapterName,
-        chapterCity: chapterCity,
-        chapterState: chapterState,
-        chapterPhone: chapterPhone,
-        chapterWebsite: chapterWebsite, 
-    }
-    const query = ({where: { id: req.params.id}})
+// Delete Chapter
+router.delete('/:id', validateJWT, async(req, res) => {
     try {
-        const update = await Chapter.update(updatedChapter, query)
-        res.json(update)
+        const deleteChapter = await Chapter.destroy({where: { id: req.params.id}})
+        res.json(deleteChapter)
     } catch (error) {
-        console.error(error)
         res.json({ error})
     }
 })
