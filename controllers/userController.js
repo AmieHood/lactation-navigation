@@ -89,7 +89,7 @@ router.post("/login", async (req, res) => {
 })
     
 
-//get all users
+//get all users (working)
 router.get('/all', validateJWT, async (req, res) => {
     try{
         const all = await User.findAll()
@@ -99,7 +99,7 @@ router.get('/all', validateJWT, async (req, res) => {
     }
 })
 
-//get one user
+//get one user (working)
 
 router.get('/:id', validateJWT, async (req, res) => {
     try{
@@ -112,7 +112,7 @@ router.get('/:id', validateJWT, async (req, res) => {
     }
 })
 
-//Delete User
+//Delete User (working)
 router.delete('/:id', validateJWT, async(req, res) => {
     try {
         const deleteUser = await User.destroy({where: { id: req.params.id}})

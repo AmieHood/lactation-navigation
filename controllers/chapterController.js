@@ -3,6 +3,7 @@ let router = express.Router()
 let validateJWT = require("../middleware/validate-jwt")
 const { User, Counselor, Chapter } = require('../models')
 
+//create Chapter
 router.post("/create", validateJWT, async (req, res) => {
     const { chapterName, chapterCity, chapterState, chapterPhone, chapterWebsite } = req.body
     const userId = req.user.id
@@ -24,7 +25,7 @@ router.post("/create", validateJWT, async (req, res) => {
     }
 })
 
-//update Chapter
+//update Chapter //!Works if add ChapterId to endpoint
 router.put('/:id', validateJWT, async(req, res) => {
     const { chapterName, chapterCity, chapterState, chapterPhone, chapterWebsite } = req.body
     // const userId = req.user.id
@@ -66,7 +67,7 @@ router.get('/:id', async(req, res) => {
     }
 })
 
-// Delete Chapter
+// Delete Chapter (working)
 router.delete('/:id', validateJWT, async(req, res) => {
     try {
         const deleteChapter = await Chapter.destroy({where: { id: req.params.id}})

@@ -14,16 +14,12 @@ const Admin = DefineAdmin(sequelize, DataTypes)
 const Member = DefineMember(sequelize, DataTypes)
 
 User.hasOne(Counselor, {
-    onDelete: 'CASCADE'
+    //? probably don't want cascade here because it could delete Chapters
+    // onDelete: 'CASCADE'
 });
 Counselor.belongsTo(User);
 
-Chapter.hasMany(Counselor, {
-    // foreignKey: {
-    //     name: 'ChapterId',
-    //     allowNull: true
-    //   }
-});
+Chapter.hasMany(Counselor);
 Counselor.belongsTo(Chapter);
 
 //ignore
