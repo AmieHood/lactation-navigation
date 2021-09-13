@@ -11,6 +11,7 @@ app.use(require('./middleware/headers'))
 
 // const user = require('./controllers/userController')
 app.use('/user', controllers.userController)
+app.use('/counselor', controllers.counselorController)
 // ! place validate server here
 app.use('/chapter', controllers.chapterController)
 
@@ -18,9 +19,9 @@ app.use('/chapter', controllers.chapterController)
 //     res.send('This is a test.')
 // })
 
-
 sequelize.authenticate()
 .then(() => sequelize.sync())
+// .then(() => sequelize.sync({force: true}))
 .then(() => {
     app.listen(port, () => {
         console.log(`[Server]: App is listening on 3000.`);
@@ -29,6 +30,10 @@ sequelize.authenticate()
 .catch((err) => {
     console.log(`[Server]: Server crashed. Error = ${err}`);
 })
+
+// sequelize.sync({force: true})
+
+
 // app.listen(port, () => {
 //     console.log(`App listening at http://localhost:${port}`);
 // })

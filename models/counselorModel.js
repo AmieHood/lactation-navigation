@@ -1,7 +1,8 @@
 module.exports = (sequelize, DataTypes) => {
     const Counselor = sequelize.define("Counselor", {
         dateAccredited: {
-            type: DataTypes.DATEONLY
+            type: DataTypes.DATEONLY,
+            allowNull: false
         }
     })
     return Counselor

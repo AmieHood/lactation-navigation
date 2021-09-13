@@ -18,7 +18,12 @@ User.hasOne(Counselor, {
 });
 Counselor.belongsTo(User);
 
-Chapter.hasMany(Counselor);
+Chapter.hasMany(Counselor, {
+    // foreignKey: {
+    //     name: 'counselorId',
+    //     allowNull: false
+    //   }
+});
 Counselor.belongsTo(Chapter);
 
 User.hasOne(Admin, {

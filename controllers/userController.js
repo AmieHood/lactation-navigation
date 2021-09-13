@@ -1,10 +1,11 @@
 let express = require('express')
 let router = express.Router()
 const {User} = require('../models')
+const { UniqueConstraintError } = require("sequelize/lib/errors")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
 
-//New User account
+//Signup User account
 router.post("/signup", async (req, res) => {
     const { email, password, firstName, lastName, userCity, userState, userPhone } = req.body
      
@@ -18,55 +19,97 @@ router.post("/signup", async (req, res) => {
             userState,
             userPhone
         })
+        console.log("user created" );
 
         let token = jwt.sign({id: User.id, email: User.email}, 
             process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24})
+
+            console.log("token maybe?");
 
         res.status(201).json({
             message: "User successfully registered", 
             user: createUser,
             sessionToken: token
         })
-        
-    // res.status(200).json({
-    //     email: createUser.email,
-    //     firstName: createUser.firstName,
-    //     lastName: createUser.lastName,
-    //     userCity: createUser.userCity,
-    //     userState: createUser.userState,
-    //     userPhone: createUser.userPhone
-    // })
-    } catch (err){
-        console.log(err)
-        message = {
-            msg:'Failed to Create User'
+
+    } catch(err) {
+        console.error(err); //! delete before submission
+        if (err instanceof UniqueConstraintError){
+            res.status(409).json({
+                message: "username already in use",
+            })
+        } else {
+            res.status(500).json({
+                message: "Failed to register user",
+                error: err.message //! delete before submission
+            })
         }
     }
-    // res.json(message)
 })
 
 //Login User
 router.post("/login", async (req, res) => {
-    const { email } = req.body
+    const { email, password } = req.body
 
     try {
-        const getUser = await User.findOne({
+        const loginUser = await User.findOne({
             where: {
                 email: email
             }
         })
-        res.status(200).json({
-            email: getUser.email,
-            firstName: getUser.firstName,
-            lastName: getUser.lastName,
-            userCity: getUser.userCity,
-            userState: getUser.userState,
-            userPhone: getUser.userPhone
-        })
+        if(loginUser){
+            
+            let passwordComparison = await bcrypt.compare(password, loginUser.password)
+            
+            if (passwordComparison) {
+
+            let token = jwt.sign({id: loginUser.id}, process.env.JWT_SECRET, {expiresIn: 60 * 60 * 24})
+
+            res.status(200).json({
+                user: loginUser,
+                message: "User successfully logged in!",
+                sessionToken: token
+            })
+            } else {
+                res.status(401).json({
+                    message: "Incorrect username or password"
+                })
+            }
+        } else {
+            res.status(401).json({
+                message: "Incorrect username or password"
+            })
+        }
     } catch(err) {
-        console.log(err);
+        res.status(500).json({
+            message: "Failed to login user",
+        })
     }
 })
     
+
+//get all users
+router.get('/all', async (req, res) => {
+    try{
+        const all = await User.findAll()
+        res.json(all)
+    } catch (error) {
+        res.json({ error })
+    }
+})
+
+//get one user
+
+router.get('/:id', async (req, res) => {
+    try{
+        const one = await User.findOne({
+            where: { id: req.params.id}
+        })
+        res.json(one)
+    } catch (error) {
+        res.json({ error })
+    }
+})
+
 
 module.exports = router
