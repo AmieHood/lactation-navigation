@@ -1,5 +1,4 @@
 import styled, { createGlobalStyle } from 'styled-components'
-import BGImage from './assets/home-image.jpeg'
 
 export const GlobalStyle = createGlobalStyle`
     html {
@@ -7,17 +6,23 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     body {
-        background-image: url(${BGImage});
-        background-size: cover;
         margin: 0;
-        padding: 0 20px;
+        padding: 0;
         display: flex;
         justify-content: center;
-        color: white
+        color: white;
+        background-color: #218e8a;
     }
 
     * {
         box-sizing: border-box;
         font-family: 'Montserrat', sans-serif;
     }
+`
+
+export const Container = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    background-color: #218e8a;
 `
