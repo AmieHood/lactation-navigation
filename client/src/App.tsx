@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import Home from './components/Home';
 //styles
 import { GlobalStyle } from './App.styles';
-//Signup
-import Signup from './components/Auth/Signup';
 //Portal
 import Portal from './components/Auth/Portal';
+//User
+import User from './components/Users/User'
+//Chapter
+import Chapter from './components/Chapter/Chapter'
 
 type AppState = {
   token: string
@@ -46,9 +48,10 @@ class App extends Component <{}, AppState> {
       <>
       <GlobalStyle />
       <div className="App">
-        {/* <Home /> */}
-        {/* <Signup updateToken={this.updateToken}/> */}
+        <Home />
         <Portal updateToken={this.updateToken} />
+        <User />
+        <Chapter updateToken={this.updateToken} />
       </div>
       </>
     );

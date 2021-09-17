@@ -1,7 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import { Form, Input, Button, Label, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, FormGroup, Alert } from 'reactstrap'
-import { regexp } from "sequelize/types/lib/operators";
+import { Form, Input, Button, Label, FormGroup, Alert } from 'reactstrap'
 
 type SignupProps = {
     updateToken: (newToken: string) => void
@@ -78,6 +77,8 @@ class Signup extends Component <SignupProps, SignupState>{
                     console.error(err)
                     console.info(err)
                 })
+
+        
     }
 
     render(){
