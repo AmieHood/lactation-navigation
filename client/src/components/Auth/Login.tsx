@@ -17,6 +17,8 @@ class Login extends Component<LoginProps, SignupState> {
             email: '', 
             password: '',
             confirmPassword: '',
+            emailValid: true,
+            message: ''
         }
     }
   

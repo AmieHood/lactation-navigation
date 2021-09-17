@@ -1,8 +1,7 @@
 import React from "react";
 import { Component } from "react";
-import { Form, Input, Button, Label, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, FormGroup } from 'reactstrap'
-
-// const Regex = RegExp(/^\s?[A-Z0–9]+[A-Z0–9._+-]{0,}@[A-Z0–9._+-]+\.[A-Z0–9]{2,4}\s?$/i);
+import { Form, Input, Button, Label, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle, FormGroup, Alert } from 'reactstrap'
+import { regexp } from "sequelize/types/lib/operators";
 
 type SignupProps = {
     updateToken: (newToken: string) => void
@@ -14,10 +13,8 @@ export type SignupState = {
     email: string, 
     password: string,
     confirmPassword: string,
-    // errors: {
-    //     email: string,
-    //     password: string
-    // }
+    emailValid: boolean, 
+    message: string
 }
 
 class Signup extends Component <SignupProps, SignupState>{
@@ -28,7 +25,9 @@ class Signup extends Component <SignupProps, SignupState>{
             lastName: '', 
             email: '', 
             password: '',
-            confirmPassword: ''
+            confirmPassword: '',
+            emailValid: false,
+            message: ''
         }
 
         this.handleChange= this.handleChange.bind(this)
@@ -40,26 +39,17 @@ class Signup extends Component <SignupProps, SignupState>{
         const value = target.value
         const name = target.name
         this.setState({
-           [name]: value } as unknown as Pick<
-              SignupState,
-              keyof SignupState
+            [name]: value } as unknown as Pick<
+            SignupState,
+            keyof SignupState
             >)
+            return (
+                'You are registered!'
+            )
+            
             console.info(this.state)
+            
         }
-        // error handling
-        // let errors = this.state.errors;
-        // switch (name) {
-        //     case 'email':
-        //         errors.email = Regex.test(value)? '': 'Email is not valid!';
-        //         break;
-        //     case 'password':
-        //         errors.password = value.length < 8 ? 'Password must be eight characters long!': '';
-        //         break;
-        //     default:
-        //         break;
-        // }
-        // this.setState(Object.assign(this.state, { errors, [name]: value}))
-        // console.info(this.state.errors)
     
     handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         console.info('fetch?')
@@ -94,13 +84,6 @@ class Signup extends Component <SignupProps, SignupState>{
         return(
             <>
             <div>
-            {/* <Card>
-                <CardImg top width="100%" src="../assets/beach.jpg" alt="Card image cap" />
-                <CardBody>
-                    <CardTitle tag="h5">Card title</CardTitle>
-                    <CardSubtitle tag="h6" className="mb-2 text-muted">Card subtitle</CardSubtitle>
-                    <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                    <Button>Button</Button> */}
                     <h1>Sign Up</h1>
                     <Form onSubmit={this.handleSubmit} >
                         <FormGroup>
@@ -113,15 +96,15 @@ class Signup extends Component <SignupProps, SignupState>{
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="email">Email</Label>
-                            <Input type='email' name='email' onChange={this.handleChange} value={this.state.email}/>
+                            <Input required pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$' name='email' title='Please enter a valid email address.' onChange={this.handleChange} value={this.state.email}/>
                         </FormGroup>
                         <FormGroup>
                             <Label htmlFor="password">Password</Label>
-                            <Input type='password'  name='password' onChange={this.handleChange} value={this.state.password}/>
+                            <Input required pattern='^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z]).*$'  title='Password must be at least 8 characters, contain one upper case letter, one lower case letter, and a number.'  name='password' minLength={8} onChange={this.handleChange} value={this.state.password}/>
                         </FormGroup>              
                         <FormGroup>
                             <Label htmlFor="confirmPassword">Confirm Password</Label>
-                            <Input type='password' name='confirmPassword' onChange={this.handleChange} value={this.state.confirmPassword}/>
+                            <Input name='confirmPassword' onChange={this.handleChange} value={this.state.confirmPassword}/>
                         </FormGroup>              
                         <FormGroup>
                             <Button type='submit'>Register</Button>
