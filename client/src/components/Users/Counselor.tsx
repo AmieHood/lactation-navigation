@@ -6,21 +6,65 @@ import logo from '../../assets/logo.png'
 import User from './User'
 
 type CounselorProps = {
-    // onChange: (string: string) => void
+    updateToken: (newToken: string) => void
+    token: string
 }
 
-class Counselor extends Component <CounselorProps, {}> {
+type CounselorState = {
+    dateAccredited: string,
+    role: 'Counselor'
+}
+
+class Counselor extends Component <CounselorProps, CounselorState> {
     constructor(props: CounselorProps) {
         super(props)
         this.state = {
-            firstName: '',
-            lastName: '', 
-            email: '', 
-            password: '',
-            confirmPassword: '',
-            emailValid: true,
-            message: '', 
+            dateAccredited: '',
+            role: 'Counselor'
         }
+    }
+
+
+    handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const target = event.target
+        const value = target.value
+        const name = target.name
+        this.setState({
+            [name]: value } as unknown as Pick<
+            CounselorState,
+            keyof CounselorState
+            >)
+            return (
+                'Congratulations! You are a Breastfeeding Counselor!'
+            )
+            
+    }
+
+    handleSubmit = (event: React.FormEvent<HTMLFormElement>): void  => {
+        event.preventDefault()
+        let newCounselorData = {
+            dateAccredited: this.state.dateAccredited
+        }
+        console.log(`newCounselorData --> ${newCounselorData.dateAccredited}`);
+
+        fetch(`http://localhost:3000/counselor/create`, {
+                    method: 'POST',
+                    body: JSON.stringify(newCounselorData),
+                    headers: new Headers ({
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${this.props.token}`
+                    }),
+                })
+                .then(res => res.json())
+                .then(data => {
+                    // this.props.token(data.sessionToken)
+                    console.info(data)
+                })
+                .catch(err => {
+                    console.error(err)
+                    console.info(err)
+                })
+
     }
     render(){
         return(
@@ -28,19 +72,15 @@ class Counselor extends Component <CounselorProps, {}> {
                 <div>
                 <Container>
                     <Row>
-                        <Col><Media top width="100%" src={logo} alt="Card image cap"></Media><h1>User Profile</h1></Col>
+                        <Col><Media top width="100%" src={logo} alt="Card image cap"></Media><h1>Counselor Profile</h1></Col>
                     </Row>
                     <Row>
-                        <Form>
-                            <FormGroup>
-                                <Label htmlFor='email'></Label>
-                                <Input placeholder='Insert current email here' />
-                            </FormGroup>
-                            <FormGroup>
-                                <Label htmlFor='password'></Label>
-                                <Input placeholder='Insert current password here' />
-                            </FormGroup>
-                            <Button>Submit Edit</Button>
+                        <Form onSubmit={this.handleSubmit}>
+                        <FormGroup>
+                            <Label htmlFor="dateAccredited">Date Accredited</Label>
+                            <Input name='dateAccredited' title='Please enter a valid email address.' onChange={this.handleChange} value={this.state.dateAccredited}/>
+                        </FormGroup>
+                            <Button>Create Counselor</Button>
                         </Form>
                     </Row>
                 </Container>

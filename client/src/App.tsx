@@ -9,6 +9,8 @@ import Portal from './components/Auth/Portal';
 import User from './components/Users/User'
 //Chapter
 import Chapter from './components/Chapter/Chapter'
+//Counselor
+import Counselor from './components/Users/Counselor'
 
 type AppState = {
   token: string
@@ -50,8 +52,9 @@ class App extends Component <{}, AppState> {
       <div className="App">
         <Home />
         <Portal updateToken={this.updateToken} />
-        <User />
-        <Chapter updateToken={this.updateToken} />
+        <User updateToken={this.updateToken}/>
+        <Chapter token={this.state.token} updateToken={this.updateToken} />
+        <Counselor token={this.state.token} updateToken={this.updateToken} />
       </div>
       </>
     );

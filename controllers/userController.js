@@ -9,6 +9,7 @@ const validateJWT = require('../middleware/validate-jwt')
 //Signup User account
 router.post("/signup", async (req, res) => {
     const { email, password, firstName, lastName, userCity, userState, userPhone } = req.body
+    // const userRole = 'Admin'
      
     try {
         const user = await User.create({
@@ -18,7 +19,8 @@ router.post("/signup", async (req, res) => {
             lastName,
             userCity,
             userState,
-            userPhone
+            userPhone,
+            // role: userRole
         })
         console.log("user created" );
 

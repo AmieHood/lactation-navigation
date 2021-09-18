@@ -6,6 +6,7 @@ import logo from '../../assets/logo.png'
 
 type ChapterProps = {
     updateToken: (newToken: string) => void
+    token: string
 }
 
 type ChapterState = {
@@ -60,12 +61,12 @@ class Chapter extends Component <ChapterProps, ChapterState> {
                     method: 'POST',
                     body: JSON.stringify(newChapterData),
                     headers: new Headers ({
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${this.props.token}`
                     }),
                 })
                 .then(res => res.json())
                 .then(data => {
-                    this.props.updateToken(data.sessionToken)
                     console.info(data)
                 })
                 .catch(err => {

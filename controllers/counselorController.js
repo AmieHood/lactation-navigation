@@ -6,12 +6,15 @@ let validateJWT = require("../middleware/validate-jwt")
 //create Counselor
 router.post('/create', validateJWT, async (req, res) => {
     const userId = req.user.id
+    const userRole = 'Counselor'
+
     console.log(userId);
     try {
         let currentUser = await User.findOne({where: { id: userId}})
         console.log(currentUser);
         let result = await currentUser.createCounselor({
-            dateAccredited: req.body.dateAccredited
+            dateAccredited: req.body.dateAccredited, 
+            role: userRole
         })
         res.json(result)
     } catch (error) {
