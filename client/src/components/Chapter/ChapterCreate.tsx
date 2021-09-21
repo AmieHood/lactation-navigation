@@ -3,21 +3,16 @@ import { Component } from "react";
 // import {SignupState} from '../Auth/Signup'
 import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media, Card, CardImg, CardBody } from 'reactstrap';
 import logo from '../../assets/logo.png'
+import { Chapter } from '../../types'
 
 type ChapterProps = {
-    updateToken: (newToken: string) => void
+    fetchChapters: () => void
     token: string
 }
 
-type ChapterState = {
-    chapterName: string,
-    chapterCity: string,
-    chapterState: string,
-    chapterPhone: string,
-    chapterWebsite: string
-}
 
-class Chapter extends Component <ChapterProps, ChapterState> {
+
+class ChapterCreate extends Component <ChapterProps, Chapter> {
     constructor(props: ChapterProps) {
         super(props)
         this.state = {
@@ -37,8 +32,8 @@ class Chapter extends Component <ChapterProps, ChapterState> {
         const name = target.name
         this.setState({
             [name]: value } as unknown as Pick<
-            ChapterState,
-            keyof ChapterState
+            Chapter,
+            keyof Chapter
             >)
             return (
                 'Chapter Created!'
@@ -68,6 +63,14 @@ class Chapter extends Component <ChapterProps, ChapterState> {
                 .then(res => res.json())
                 .then(data => {
                     console.info(data)
+                    this.setState({
+                        chapterName: '',
+                        chapterCity: '',
+                        chapterState: '',
+                        chapterPhone: '',
+                        chapterWebsite: ''
+                    })
+                    this.props.fetchChapters()
                 })
                 .catch(err => {
                     console.error(err)
@@ -117,7 +120,7 @@ class Chapter extends Component <ChapterProps, ChapterState> {
     }
 }
 
-export default Chapter
+export default ChapterCreate
 {/* <Card>
     <CardImg src={logo} alt="Card image cap" />
     <CardBody>

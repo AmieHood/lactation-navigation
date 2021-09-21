@@ -8,9 +8,9 @@ import Portal from "./components/Auth/Portal";
 //User
 import User from "./components/Users/User";
 //Chapter
-import Chapter from "./components/Chapter/Chapter";
+import ChapterIndex from "./components/Chapter/ChapterIndex";
 //Counselor
-import Counselor from "./components/Users/Counselor";
+import CounselorIndex from "./components/Counselor/CounselorIndex";
 import { Card, CardBody, CardHeader, Container } from "reactstrap";
 import Sitebar from "./components/Navbar/Navbar";
 import {
@@ -59,21 +59,21 @@ class App extends Component<{}, AppState> {
         <Portal updateToken={this.updateToken} />
       </Route>
       <Route exact path="/chapter">
-        <Chapter
+        <ChapterIndex
           token={this.state.token}
-          updateToken={this.updateToken}
         />
       </Route>
       <Route exact path="/counselor">
-        <Counselor token={this.state.token}/>
+        <CounselorIndex token={this.state.token}/>
       </Route>
       <Route exact path="/user">
-        <User updateToken={this.updateToken} />
+        <User token={this.state.token} />
       </Route>
     </Switch>
     )
   }
 
+  
   render() {
     return (
       <>

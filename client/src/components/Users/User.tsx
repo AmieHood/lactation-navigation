@@ -3,12 +3,14 @@ import { Component } from "react";
 // import {SignupState} from '../Auth/Signup'
 import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media } from 'reactstrap';
 import logo from '../../assets/logo.png'
-import Counselor from "./Counselor";
+import Counselor from "../Counselor/CounselorCreate";
+import APIURL from '../../utils/Environment'
 // import { useHistory, withRouter } from "react-router-dom";
 
 
 type UserProps = {
-    updateToken: (newToken: string) => void
+    // updateToken: (newToken: string) => void
+    token: string
 }
 
 type UserState = {
@@ -75,16 +77,17 @@ class User extends Component <UserProps, UserState> {
 
         console.log(`updatedUserData --> ${updatedUserData.firstName} ${updatedUserData.lastName}`);
 
-        fetch(`http://localhost:3000/user`, {
+        fetch(`http://localhost:3000/user/:id`, {
                     method: 'PUT',
                     body: JSON.stringify(updatedUserData),
                     headers: new Headers ({
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${this.props.token}`
                     }),
                 })
                 .then(res => res.json())
                 .then(data => {
-                    this.props.updateToken(data.sessionToken)
+                    // this.props.updateToken(data.sessionToken)
                     console.info(data)
                 })
                 .catch(err => {
@@ -93,6 +96,21 @@ class User extends Component <UserProps, UserState> {
                 })
 
     }
+
+    // async componentDidMount(){
+    //     try {
+    //         let res = await fetch(APIURL + "/")
+    //         let json = await res.json()
+    //         let { user } = json
+    //         if (user?.role == "Counselor"){
+    //             this.setState({role: "Counselor"})
+    //         } else {
+    //             this.setState({ failed: true})
+    //         }
+    //     } catch {
+    //         this.setState({ failed: true})
+    //     }
+    // }
 
     render(){
         return(

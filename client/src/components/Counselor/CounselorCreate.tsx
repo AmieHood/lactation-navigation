@@ -1,32 +1,26 @@
-import React from "react";
-import { Component } from "react";
-// import {SignupState} from '../Auth/Signup'
+import React, { Component } from "react";
 import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media } from 'reactstrap';
 import logo from '../../assets/logo.png'
-import APIURL from "../../utils/Environment";
-import { Redirect } from 'react-router-dom'
-import User from './User'
+import { Counselor } from '../../types'
 
 type CounselorProps = {
-    // updateToken: (newToken: string) => void
+    fetchCounselors: () => void
     token: string
 }
 
-type CounselorState = {
-    dateAccredited: string
-    role: string | null
-    token: string
-    failed: boolean
-}
+// type CounselorState = {
+//     dateAccredited: string
+//     role: string | null
+//     token: string
+// }
 
-class Counselor extends Component <CounselorProps, CounselorState> {
+class CounselorCreate extends Component <CounselorProps, Counselor> {
     constructor(props: CounselorProps) {
         super(props)
         this.state = {
-            token: this.props.token,
+            // token: this.props.token,
             dateAccredited: '',
-            role: null,
-            failed: false
+            role: 'Counselor'
         }
     }
 
@@ -37,11 +31,11 @@ class Counselor extends Component <CounselorProps, CounselorState> {
         const name = target.name
         this.setState({
             [name]: value } as unknown as Pick<
-            CounselorState,
-            keyof CounselorState
+            Counselor,
+            keyof Counselor
             >)
             return (
-                'Congratulations! You are a Breastfeeding Counselor!'
+                'Breastfeeding Counselor Created!'
             )
             
     }
@@ -49,7 +43,8 @@ class Counselor extends Component <CounselorProps, CounselorState> {
     handleSubmit = (event: React.FormEvent<HTMLFormElement>): void  => {
         event.preventDefault()
         let newCounselorData = {
-            dateAccredited: this.state.dateAccredited
+            dateAccredited: this.state.dateAccredited,
+            role: this.state.role
         }
         console.log(`newCounselorData --> ${newCounselorData.dateAccredited}`);
 
@@ -63,8 +58,12 @@ class Counselor extends Component <CounselorProps, CounselorState> {
                 })
                 .then(res => res.json())
                 .then(data => {
-                    // this.props.token(data.sessionToken)
                     console.info(data)
+                    this.setState({
+                        dateAccredited: '',
+                        role: ''
+                    })
+                    this.props.fetchCounselors()
                 })
                 .catch(err => {
                     console.error(err)
@@ -72,30 +71,13 @@ class Counselor extends Component <CounselorProps, CounselorState> {
                 })
 
     }
-    async componentDidMount(){
-        try {
-            let res = await fetch(APIURL + "/")
-            let json = await res.json()
-            let { user } = json
-            if (user?.role == "Counselor"){
-                this.setState({role: "Counselor"})
-            } else {
-                this.setState({ failed: true})
-            }
-        } catch {
-            this.setState({ failed: true})
-        }
-    }
+    
     render(){
         return(
-            this.state.failed 
-            ? <Redirect to="/" /> 
-                :   !this.state.role 
-                ?  <h2> Loading profile details</h2>      
-                :   <div>
+                <div>
                     <Container>
                         <Row>
-                            <Col><Media top width="100%" src={logo} alt="Card image cap"></Media><h1>Counselor Profile</h1></Col>
+                            <Col><Media top width="100%" src={logo} alt="Card image cap"></Media><h1>New Counselor Profile</h1></Col>
                         </Row>
                         <Row>
                             <Form onSubmit={this.handleSubmit}>
@@ -113,4 +95,4 @@ class Counselor extends Component <CounselorProps, CounselorState> {
     }
 }
 
-export default Counselor
+export default CounselorCreate
