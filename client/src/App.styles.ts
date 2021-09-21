@@ -11,6 +11,7 @@ export const GlobalStyle = createGlobalStyle`
         display: flex;
         justify-content: center;
         color: white;
+        // background-color: #218e8a;
         background-color: #3B054F;
     }
 

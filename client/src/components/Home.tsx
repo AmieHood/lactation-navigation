@@ -5,7 +5,7 @@ import BGImage from '../assets/home-image.jpeg'
 import BGImageDesktop from '../assets/home-image-desktop.jpeg'
 import { Container } from "../App.styles";
 import { Button } from 'reactstrap';
-
+import { Redirect } from 'react-router-dom'
 const Background = styled.div`
     background-image: url(${BGImageDesktop});
     background-size: cover;
@@ -37,6 +37,7 @@ const Text = styled.div`
 
 class Home extends Component {
     render(){
+      
         return(
             <>
             <Container>
@@ -49,7 +50,8 @@ class Home extends Component {
                 </Background>
             </Container>
             </>
-        )
+    
+        ) 
 
     }
 } 
