@@ -81,15 +81,15 @@ class CounselorCreate extends Component <CounselorProps, Counselor> {
                             <CardTitle className='card-img-overlay' tag="h1">Create New Counselor</CardTitle>
                         </CardBody>
                     </Card>
-                            <Form onSubmit={this.handleSubmit}>
-                            <FormGroup>
-                                <Label htmlFor="dateAccredited">Date Accredited</Label>
-                                <Input type='date' name='dateAccredited' onChange={this.handleChange} value={this.state.dateAccredited}/>
-                                {/* <Label htmlFor="dateAccredited"></Label>
-                                <Input placeholder='Date Accredited' type='text' name='dateAccredited' title='Please enter a date in yyyy-mm-dd format.' onChange={this.handleChange} value={this.state.dateAccredited}/> */}
-                            </FormGroup>
-                                <Button>Create Counselor</Button>
-                            </Form>
+                    <Form onSubmit={this.handleSubmit}>
+                    <FormGroup>
+                        <Label htmlFor="dateAccredited">Date Accredited</Label>
+                        <Input type='date' name='dateAccredited' onChange={this.handleChange} value={this.state.dateAccredited}/>
+                        {/* <Label htmlFor="dateAccredited"></Label>
+                        <Input placeholder='Date Accredited' type='text' name='dateAccredited' title='Please enter a date in yyyy-mm-dd format.' onChange={this.handleChange} value={this.state.dateAccredited}/> */}
+                    </FormGroup>
+                        <Button>Create Counselor</Button>
+                    </Form>
                 </div> 
             
             )

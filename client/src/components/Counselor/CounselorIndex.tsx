@@ -1,7 +1,6 @@
 import React from "react";
 import { Component } from "react";
 import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media } from 'reactstrap';
-import logo from '../../assets/logo.png'
 import APIURL from "../../utils/Environment";
 import { Redirect } from 'react-router-dom'
 import User from '../Users/UserEdit'
@@ -31,7 +30,7 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
             updateActive: false,
             counselorToUpdate: null,
             failed: false,
-            role: null
+            role: ''
         }
     }
 
@@ -84,36 +83,36 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
         this.setState({ updateActive: false })
     }
 
-    componentDidMount = (): void => {
-        this.fetchCounselors()
-    }
+    // componentDidMount = (): void => {
+    //     this.fetchCounselors()
+    // }
     
-//     async componentDidMount(){
-//             console.info('working?')
-//             console.info(`${APIURL}/counselor`)
-//             try {
-//                     let res = await fetch(`${APIURL}/counselor/all`)
-//                     let json = await res.json()
-//                     let { user } = json
-//                     console.info(json)
-//                     if (user?.role == "Counselor"){
-//                             this.setState({role: "Counselor"})
-//                 this.fetchCounselors()
-//         } else {
-//             this.setState({ failed: true})
-//         }
-//     } catch {
-//         this.setState({ failed: true})
-//     }
-// }
+    async componentDidMount(){
+            console.info('working?')
+            console.info(`${APIURL}/counselor`)
+            try {
+                    let res = await fetch(`${APIURL}/counselor/all`)
+                    let json = await res.json()
+                    let { Counselor } = json
+                    console.info({ Counselor })
+                    console.info(json)
+                    if (Counselor?.role == "Counselor"){
+                        this.setState({role: "Counselor"})
+                        this.fetchCounselors()
+
+                // this.fetchCounselors()
+        } else {
+            this.setState({ failed: true})
+        }
+    } catch {
+        this.setState({ failed: true})
+    }
+    }
+
+
     
     render(){
         return(
-            // this.state.failed 
-            // ? <Redirect to="/" /> 
-            //     :   !this.state.role 
-            //     ?  <h2> Loading profile details</h2>      
-            //     : 
             <div>
             <Container>
                 <Row>
@@ -121,10 +120,16 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
                         <CounselorCreate
                             fetchCounselors={this.fetchCounselors}
                             token={this.props.token}
-                        />
+                            />
                     </Col>
                 </Row>
             </Container>
+        {                   
+            this.state.failed 
+            ? <Redirect to="/counselor" /> 
+                :   !this.state.role 
+                ?  <h2> Loading profile details</h2>      
+                : 
             <Container>
                 
                 <Row>
@@ -137,8 +142,6 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
                             token={this.props.token}
                         />
                     </Col>
-                    {/* won't show up until workout is set (originally set to null)
-                    - null doesn't guarantee workout has been set */}
                     {this.state.updateActive && this.state.counselorToUpdate ? (
                         <CounselorEdit
                             counselorToUpdate={this.state.counselorToUpdate}
@@ -151,6 +154,7 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
                     )}
                 </Row>
             </Container>
+        }
             </div> 
             
         )

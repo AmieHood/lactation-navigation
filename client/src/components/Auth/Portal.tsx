@@ -2,80 +2,61 @@ import React from "react";
 import { Component } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
-import { Container, Row, Col } from 'reactstrap'
-
-
+import { Container, Row, Col } from "reactstrap";
+import { Link } from "react-router-dom";
 
 type Props = {
-    updateToken (newToken: string): void
-}
+    updateToken(newToken: string): void;
+    };
 
-class Portal extends Component <Props, any> {
-    constructor(props: Props){
-        super(props)
+    type PortalState = {
+    showLogin: boolean;
+    };
+
+    class Portal extends Component<Props, PortalState> {
+    constructor(props: Props) {
+        super(props);
+        this.state = {
+        showLogin: true,
+        };
+
+        // this.toggle = this.toggle.bind(this);
     }
-    render(){
-        return(
+
+    //Login/Signup toggle
+    toggle = () => {
+        this.setState({ showLogin: !this.state.showLogin });
+    };
+
+    render() {
+        return (
+        <>
+        <Container>
+        <Row>
+            {this.state.showLogin ? (
             <>
-                <Container>
-                    <Row>
-                    <Col md='6' className='auth-container'>
-                        <Signup updateToken={this.props.updateToken}/>
-                    </Col>
-                    <Col md='6' className='login-col'>
-                        <Login updateToken={this.props.updateToken} />
-                    </Col>
-                    </Row>
-                </Container>
+            <Col md="6" className="login-col">
+            <Login updateToken={this.props.updateToken} />
+            </Col>
+            <Link to="/portal" onClick={this.toggle}>
+            Sign Up Here
+            </Link>
             </>
-        )
+            ) : (
+            <>
+            <Col md="6" className="auth-container">
+            <Signup updateToken={this.props.updateToken} />
+            </Col>
+            <Link to="/portal" onClick={this.toggle}>
+            Already have an account? Log In here.
+            </Link>
+            </>
+            )}
+        </Row>
+        </Container>
+        </>
+        );
     }
 }
 
 export default Portal;
-// const Portal = (props) => {
-    //     const [showLogin, setShowLogin] = useState(true);
-//     const [email, setEmail] = useState();
-//     const [password, setPassword] = useState();
-//     const [displayName, setDisplayName] = useState();
-
-//     //Login/Signup toggle
-//     const toggleLoginSignup = () => {
-//         setShowLogin(!showLogin);
-//     };
-//     const submitForm = () =>
-//         console.log(
-//         `Form is sent!\nemail: ${email}\ndisplayName: ${displayName}\npassword: ${password}`
-//         );
-    
-
-//     return (
-//         <>
-//         {showLogin ? (
-//             <Login
-//             email={email}
-//             setPassword={setPassword}
-//             setEmail={setEmail}
-//             ={toggleLoginSignup}
-//             submitForm={submitForm}
-//             displayName={displayName}
-//             setDisplayName={setDisplayName}
-//             token={props.token}
-//             newToken={props.newToken}        
-//             />
-//         ) : (
-//             <Signup
-//             email={email}
-//             password={password}
-//             setPassword={setPassword}
-//             setEmail={setEmail}
-//             ={LoginSignup}
-//             submitForm={submitForm}
-//             displayName={displayName}
-//             setDisplayName={setDisplayName}
-//             />
-//         )}
-//         </>
-//     );
-// }
-

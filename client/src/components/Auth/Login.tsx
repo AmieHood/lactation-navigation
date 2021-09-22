@@ -1,10 +1,13 @@
 import React from "react";
 import { Component } from "react";
-import { Button, Form, FormGroup, Input, Label } from 'reactstrap'
+import { Button, Form, FormGroup, Input, Label, Card, CardImg, CardBody, CardTitle } from 'reactstrap'
 import { SignupState } from "./Signup";
+import logo from '../../assets/dad.jpg'
+import { Link } from "react-router-dom";
 
 type LoginProps = {
     updateToken: (newToken: string) => void
+    // showLogin: boolean
 }
 
 
@@ -18,7 +21,7 @@ class Login extends Component<LoginProps, SignupState> {
             password: '',
             confirmPassword: '',
             emailValid: true,
-            message: ''
+            message: '',
         }
     }
   
@@ -56,7 +59,13 @@ class Login extends Component<LoginProps, SignupState> {
     render() {
         return (
             <div>
-            <h1>Login</h1>
+             <Card className='card'>
+                    <CardImg className='all-cards' top width="100%" src={logo} alt="Card image cap" />
+                    <CardBody className='all-cards'>
+                        <CardTitle className='card-img-overlay' tag="h1">Log In</CardTitle>
+                    </CardBody>
+                </Card>
+
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup>
                 <Label htmlFor='email'>Email</Label>

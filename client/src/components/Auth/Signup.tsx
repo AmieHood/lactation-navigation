@@ -1,9 +1,11 @@
 import React from "react";
 import { Component } from "react";
-import { Form, Input, Button, Label, FormGroup, Alert } from 'reactstrap'
+import { Form, Input, Button, Label, FormGroup, Alert, Card, CardImg, CardBody, CardTitle } from 'reactstrap'
+import logo from '../../assets/dad.jpg'
 
 type SignupProps = {
     updateToken: (newToken: string) => void
+    // showLogin: boolean
 }
 
 export type SignupState = {
@@ -85,7 +87,12 @@ class Signup extends Component <SignupProps, SignupState>{
         return(
             <>
             <div>
-                    <h1>Sign Up</h1>
+                <Card className='card'>
+                    <CardImg className='all-cards' top width="100%" src={logo} alt="Card image cap" />
+                    <CardBody className='all-cards'>
+                        <CardTitle className='card-img-overlay' tag="h1">Sign Up</CardTitle>
+                    </CardBody>
+                </Card>
                     <Form onSubmit={this.handleSubmit} >
                         <FormGroup>
                             <Label htmlFor="firstName">First Name</Label>
@@ -110,6 +117,9 @@ class Signup extends Component <SignupProps, SignupState>{
                         <FormGroup>
                             <Button type='submit'>Register</Button>
                         </FormGroup>
+                    </Form>
+                    <Form>
+                        {/* <Button onClick={this.props.showLogin}>Log In</Button> */}
                     </Form>
                 {/* </CardBody>
             </Card> */}

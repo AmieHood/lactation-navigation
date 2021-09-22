@@ -108,7 +108,7 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
             <div>
             <Container>
                 <Row>
-                    <Col md='3'>
+                    <Col md='9'>
                         <ChapterCreate
                             fetchChapters={this.fetchChapters}
                             token={this.props.token}
@@ -126,8 +126,6 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
                         />
 
                     </Col>
-                    {/* won't show up until workout is set (originally set to null)
-                    - null doesn't guarantee workout has been set */}
                     {this.state.updateActive && this.state.chapterToUpdate ? (
                         <ChapterEdit
                             chapterToUpdate={this.state.chapterToUpdate}
