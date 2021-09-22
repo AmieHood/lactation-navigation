@@ -44,8 +44,7 @@ class Home extends Component {
                 <Background>
                     <Text>
                         <h1>Support Begins Here</h1>
-                        <hr />
-                        <Button type='button'>Log In</Button>
+                        <Button type='button' className='custom-btn'>Log In</Button>
                     </Text>
                 </Background>
             </Container>

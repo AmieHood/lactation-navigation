@@ -19,18 +19,13 @@ type CounselorEditProps = {
     fetchCounselors: () => void
 };
 
-// type Counselor = {
-//     dateAccredited: string;
-//     role: string | null;
-//     id?: number;
-// };
-
 class CounselorEdit extends Component<CounselorEditProps, Counselor> {
     constructor(props: CounselorEditProps) {
         super(props);
         this.state = {
             dateAccredited: this.props.counselorToUpdate.dateAccredited,
             role: this.props.counselorToUpdate.role,
+            token: this.props.token
         };
     }
 
@@ -63,6 +58,10 @@ class CounselorEdit extends Component<CounselorEditProps, Counselor> {
         });
     };
 
+    // handleClose = (): void => {
+    //     this.setState({ modal: !modal})
+    // }
+
     handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const target = e.target;
         const value = target.value;
@@ -75,18 +74,27 @@ class CounselorEdit extends Component<CounselorEditProps, Counselor> {
     render() {
         return (
         <Modal isOpen={true}>
-            <ModalHeader>Update Counselor</ModalHeader>
-            <ModalBody>
+            <ModalHeader className='modal-header'>Update Counselor</ModalHeader>
+            <ModalBody className='modal-body'>
             <Form onSubmit={this.counselorUpdate}>
                 <FormGroup>
                 <Label htmlFor="dateAccredited">Edit Date of Accreditation:</Label>
+                {/* <Input
+                    name="dateAccredited"
+                    value={this.state.dateAccredited}
+                    onChange={this.handleChange}
+                /> */}
                 <Input
+                    type='date'
                     name="dateAccredited"
                     value={this.state.dateAccredited}
                     onChange={this.handleChange}
                 />
                 </FormGroup>
-                <Button type="submit">Update Counselor!</Button>
+                <Button type="submit">Update Counselor</Button>
+                <Button type="button" className="close modal-header" ariaLabel="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </Button>
             </Form>
             </ModalBody>
         </Modal>

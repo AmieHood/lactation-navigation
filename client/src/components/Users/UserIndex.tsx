@@ -2,43 +2,35 @@ import React from "react";
 import { Component } from "react";
 import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media } from 'reactstrap';
 import logo from '../../assets/logo.png'
-import APIURL from "../../utils/Environment";
-import { Redirect } from 'react-router-dom'
-import User from '../Users/UserEdit'
-import { Counselor } from '../../types'
-import CounselorCreate from './CounselorCreate'
-import CounselorEdit from './CounselorEdit'
-import CounselorTable from './CounselorTable'
+import { User } from '../../types'
+// import UserCreate from './UserCreate'
+import UserEdit from './UserEdit'
+import UserTable from './UserTable'
 
-type CounselorIndexProps = {
+type UserIndexProps = {
     token: string
-    // role: string
 }
 
-type CounselorIndexState = {
-    counselors: Counselor[]
+type UserIndexState = {
+    users: User[]
     updateActive: boolean
-    counselorToUpdate: Counselor | null
-    failed: boolean
-    role: string | null
+    userToUpdate: User | null
 }
 
-class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState> {
-    constructor(props: CounselorIndexProps) {
+class UserIndex extends Component <UserIndexProps, UserIndexState> {
+    constructor(props: UserIndexProps) {
         super(props)
         this.state = {
-            counselors: [],
+            users: [],
             updateActive: false,
-            counselorToUpdate: null,
-            failed: false,
-            role: null
+            userToUpdate: null
         }
     }
 
-    fetchCounselors = (): void => {
-        fetch(`http://localhost:3000/counselor/all`, {
+    fetchUsers = (): void => {
+        fetch(`http://localhost:3000/user/all`, {
                     method: 'GET',
-                    // body: JSON.stringify(newCounselorData),
+                    // body: JSON.stringify(newUserData),
                     headers: new Headers ({
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${this.props.token}`
@@ -46,7 +38,7 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
                 })
                 .then(res => res.json())
                 .then(data => {
-                    this.setState({ counselors: data})
+                    this.setState({ users: data})
                     console.info(data)
                 })
                 .catch(err => {
@@ -61,19 +53,19 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
     //     const name = target.name
     //     this.setState({
     //         [name]: value } as unknown as Pick<
-    //         CounselorState,
-    //         keyof CounselorState
+    //         UserState,
+    //         keyof UserState
     //         >)
     //         return (
-    //             'Congratulations! You are a Breastfeeding Counselor!'
+    //             'Congratulations! You are a Breastfeeding User!'
     //         )
             
     // }
 
 
-    editUpdateCounselor = (counselor: Counselor): void => {
-        this.setState({ counselorToUpdate: counselor})
-        console.log(counselor);
+    editUpdateUser = (user: User): void => {
+        this.setState({ userToUpdate: user})
+        console.log(user);
     }
 
     updateOn = (): void => {
@@ -85,20 +77,19 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
     }
 
     componentDidMount = (): void => {
-        this.fetchCounselors()
+        this.fetchUsers()
     }
-    
-//     async componentDidMount(){
-//             console.info('working?')
-//             console.info(`${APIURL}/counselor`)
-//             try {
-//                     let res = await fetch(`${APIURL}/counselor/all`)
-//                     let json = await res.json()
-//                     let { user } = json
-//                     console.info(json)
-//                     if (user?.role == "Counselor"){
-//                             this.setState({role: "Counselor"})
-//                 this.fetchCounselors()
+
+    // async componentDidMount(){
+//     console.info('working?')
+//     console.info(`${APIURL}/counselor`)
+//     try {
+//         let res = await fetch(`${APIURL}/counselor/all`)
+//         let json = await res.json()
+//         let { user } = json
+//         console.info(json)
+//         if (user?.role == "Counselor"){
+//             this.setState({role: "Counselor"})
 //         } else {
 //             this.setState({ failed: true})
 //         }
@@ -109,7 +100,7 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
     
     render(){
         return(
-            // this.state.failed 
+               // this.state.failed 
             // ? <Redirect to="/" /> 
             //     :   !this.state.role 
             //     ?  <h2> Loading profile details</h2>      
@@ -117,34 +108,32 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
             <div>
             <Container>
                 <Row>
-                    <Col md='9'>
-                        <CounselorCreate
-                            fetchCounselors={this.fetchCounselors}
+                    {/* <Col md='3'>
+                        <UserCreate
+                            fetchUsers={this.fetchUsers}
                             token={this.props.token}
                         />
-                    </Col>
+                    </Col> */}
                 </Row>
-            </Container>
-            <Container>
-                
                 <Row>
                     <Col md='9'>
-                        <CounselorTable
-                            counselors={this.state.counselors}
-                            editUpdateCounselor={this.editUpdateCounselor}
+                        <UserTable
+                            users={this.state.users}
+                            editUpdateUser={this.editUpdateUser}
                             updateOn={this.updateOn}
-                            fetchCounselors={this.fetchCounselors}
+                            fetchUsers={this.fetchUsers}
                             token={this.props.token}
                         />
+
                     </Col>
                     {/* won't show up until workout is set (originally set to null)
                     - null doesn't guarantee workout has been set */}
-                    {this.state.updateActive && this.state.counselorToUpdate ? (
-                        <CounselorEdit
-                            counselorToUpdate={this.state.counselorToUpdate}
+                    {this.state.updateActive && this.state.userToUpdate ? (
+                        <UserEdit
+                            userToUpdate={this.state.userToUpdate}
                             updateOff={this.updateOff}
                             token={this.props.token}
-                            fetchCounselors={this.fetchCounselors}
+                            fetchUsers={this.fetchUsers}
                         />
                     ) : (
                         <></>
@@ -157,4 +146,4 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
     }
 }
 
-export default CounselorIndex
+export default UserIndex

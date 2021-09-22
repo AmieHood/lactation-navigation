@@ -56,7 +56,7 @@ export default Portal;
 //             email={email}
 //             setPassword={setPassword}
 //             setEmail={setEmail}
-//             toggle={toggleLoginSignup}
+//             ={toggleLoginSignup}
 //             submitForm={submitForm}
 //             displayName={displayName}
 //             setDisplayName={setDisplayName}
@@ -69,7 +69,7 @@ export default Portal;
 //             password={password}
 //             setPassword={setPassword}
 //             setEmail={setEmail}
-//             toggle={toggleLoginSignup}
+//             ={LoginSignup}
 //             submitForm={submitForm}
 //             displayName={displayName}
 //             setDisplayName={setDisplayName}

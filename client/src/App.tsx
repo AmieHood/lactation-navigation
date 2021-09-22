@@ -6,12 +6,11 @@ import { GlobalStyle } from "./App.styles";
 //Portal
 import Portal from "./components/Auth/Portal";
 //User
-import User from "./components/Users/User";
+import UserIndex from "./components/Users/UserIndex";
 //Chapter
 import ChapterIndex from "./components/Chapter/ChapterIndex";
 //Counselor
 import CounselorIndex from "./components/Counselor/CounselorIndex";
-import { Card, CardBody, CardHeader, Container } from "reactstrap";
 import Sitebar from "./components/Navbar/Navbar";
 import {
   BrowserRouter as Router,
@@ -67,7 +66,7 @@ class App extends Component<{}, AppState> {
         <CounselorIndex token={this.state.token}/>
       </Route>
       <Route exact path="/user">
-        <User token={this.state.token} />
+        <UserIndex token={this.state.token} />
       </Route>
     </Switch>
     )

@@ -4,7 +4,6 @@ import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media } fro
 import logo from '../../assets/logo.png'
 import APIURL from "../../utils/Environment";
 import { Redirect } from 'react-router-dom'
-import User from './User'
 
 type AdminProps = {
     token: string

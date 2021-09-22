@@ -14,7 +14,7 @@ import { Chapter } from '../../types'
 
 type ChapterEditProps = {
     token: string;
-    chapterToUpdate: Chapter;
+    chapterToUpdate: Chapter
     updateOff: () => void
     fetchChapters: () => void
 };
@@ -37,7 +37,7 @@ class ChapterEdit extends Component<ChapterEditProps, Chapter> {
         };
     }
 
-    chapterUpdate = (e: React.FormEvent<HTMLFormElement>): void => {
+    handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         let updatedChapterData = {
             chapterName: this.state.chapterName,
@@ -83,7 +83,7 @@ class ChapterEdit extends Component<ChapterEditProps, Chapter> {
         <Modal isOpen={true}>
             <ModalHeader>Update Chapter</ModalHeader>
             <ModalBody>
-            <Form onSubmit={this.chapterUpdate}>
+            <Form onSubmit={this.handleSubmit}>
                 <FormGroup>
                 <Label htmlFor="chapterName">Edit Chapter Name:</Label>
                 <Input

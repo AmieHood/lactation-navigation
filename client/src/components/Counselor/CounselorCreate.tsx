@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media } from 'reactstrap';
-import logo from '../../assets/logo.png'
+import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media, Card, CardBody, CardImg, CardTitle } from 'reactstrap';
+import logo from '../../assets/beach.jpg'
 import { Counselor } from '../../types'
 
 type CounselorProps = {
@@ -18,7 +18,7 @@ class CounselorCreate extends Component <CounselorProps, Counselor> {
     constructor(props: CounselorProps) {
         super(props)
         this.state = {
-            // token: this.props.token,
+            token: this.props.token,
             dateAccredited: '',
             role: 'Counselor'
         }
@@ -75,24 +75,25 @@ class CounselorCreate extends Component <CounselorProps, Counselor> {
     render(){
         return(
                 <div>
-                    <Container>
-                        <Row>
-                            <Col><Media top width="100%" src={logo} alt="Card image cap"></Media><h1>New Counselor Profile</h1></Col>
-                        </Row>
-                        <Row>
+                    <Card className='card'>
+                        <CardImg className='all-cards' top width="100%" src={logo} alt="Card image cap" />
+                        <CardBody className='all-cards'>
+                            <CardTitle className='card-img-overlay' tag="h1">Create New Counselor</CardTitle>
+                        </CardBody>
+                    </Card>
                             <Form onSubmit={this.handleSubmit}>
                             <FormGroup>
                                 <Label htmlFor="dateAccredited">Date Accredited</Label>
-                                <Input name='dateAccredited' title='Please enter a valid email address.' onChange={this.handleChange} value={this.state.dateAccredited}/>
+                                <Input type='date' name='dateAccredited' onChange={this.handleChange} value={this.state.dateAccredited}/>
+                                {/* <Label htmlFor="dateAccredited"></Label>
+                                <Input placeholder='Date Accredited' type='text' name='dateAccredited' title='Please enter a date in yyyy-mm-dd format.' onChange={this.handleChange} value={this.state.dateAccredited}/> */}
                             </FormGroup>
                                 <Button>Create Counselor</Button>
                             </Form>
-                        </Row>
-                    </Container>
                 </div> 
             
-        )
+            )
+        }
     }
-}
-
-export default CounselorCreate
+    
+    export default CounselorCreate
