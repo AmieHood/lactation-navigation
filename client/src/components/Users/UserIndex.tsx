@@ -1,9 +1,7 @@
 import React from "react";
 import { Component } from "react";
-import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media } from 'reactstrap';
-import logo from '../../assets/logo.png'
+import { Container, Col, Row } from 'reactstrap';
 import { User } from '../../types'
-// import UserCreate from './UserCreate'
 import UserEdit from './UserEdit'
 import UserTable from './UserTable'
 
@@ -108,14 +106,6 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
             <div>
             <Container>
                 <Row>
-                    {/* <Col md='3'>
-                        <UserCreate
-                            fetchUsers={this.fetchUsers}
-                            token={this.props.token}
-                        />
-                    </Col> */}
-                </Row>
-                <Row>
                     <Col md='9'>
                         <UserTable
                             users={this.state.users}
@@ -126,8 +116,6 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                         />
 
                     </Col>
-                    {/* won't show up until workout is set (originally set to null)
-                    - null doesn't guarantee workout has been set */}
                     {this.state.updateActive && this.state.userToUpdate ? (
                         <UserEdit
                             userToUpdate={this.state.userToUpdate}

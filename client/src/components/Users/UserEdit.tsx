@@ -1,7 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media, Modal, ModalBody, ModalHeader } from 'reactstrap';
-import logo from '../../assets/logo.png'
+import { Form, Button, FormGroup, Label, Input, Modal, ModalBody, ModalHeader } from 'reactstrap';
 import { User } from '../../types'
 
 
@@ -11,16 +10,6 @@ type UserEditProps = {
     updateOff: () => void
     fetchUsers: () => void
 }
-
-// type User = {
-//     firstName: string,
-//     lastName: string, 
-//     email: string, 
-//     password: string,
-//     confirmPassword: string,
-//     emailValid: boolean, 
-//     message: string
-// }
 
 class UserEdit extends Component <UserEditProps, User> {
     constructor(props: UserEditProps) {
@@ -96,21 +85,6 @@ class UserEdit extends Component <UserEditProps, User> {
                 })
 
     }
-
-    // async componentDidMount(){
-    //     try {
-    //         let res = await fetch(APIURL + "/")
-    //         let json = await res.json()
-    //         let { user } = json
-    //         if (user?.role == "Counselor"){
-    //             this.setState({role: "Counselor"})
-    //         } else {
-    //             this.setState({ failed: true})
-    //         }
-    //     } catch {
-    //         this.setState({ failed: true})
-    //     }
-    // }
 
     render(){
         return(

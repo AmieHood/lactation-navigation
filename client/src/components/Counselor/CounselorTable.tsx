@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Button, Table } from 'reactstrap'
 import { Counselor } from '../../types'
+import APIURL from '../../utils/Environment'
 
 type CounselorTableProps = {
     token: string
@@ -10,13 +11,17 @@ type CounselorTableProps = {
     fetchCounselors: () => void
 }
 
-// type Counselor = {
-//     dateAccredited: string;
-//     role: string | null;
-//     id?: number;
-// };
+type CounselorTableState = {
+    failed: boolean
+};
 
 class CounselorTable extends Component<CounselorTableProps, {}> {
+    constructor(props: CounselorTableProps){
+        super(props)
+        this.state = {
+            failed: false
+        }
+    }
     deleteCounselor = (counselor: Counselor) => {
         fetch(`http://localhost:3000/counselor/${counselor.id}`, {
             method: 'DELETE',
@@ -25,7 +30,6 @@ class CounselorTable extends Component<CounselorTableProps, {}> {
                 Authorization: `Bearer ${this.props.token}`,
             }),
         })
-            // Refetch all workouts so only workouts which haven't been deleted are detected.
             .then(() => this.props.fetchCounselors())
 }
 
@@ -37,7 +41,6 @@ class CounselorTable extends Component<CounselorTableProps, {}> {
                 <td>{counselor.dateAccredited}</td>
                 <td>{counselor.role}</td>
                 <td>
-                    {/* using the functions passed as props from WorkoutIndex */}
                     <Button
                         color='warning'
                         onClick={() => {
@@ -47,9 +50,6 @@ class CounselorTable extends Component<CounselorTableProps, {}> {
                     >
                         Update
                     </Button>
-                    {/* onClick takes a callback fn defined in our JSX.
-                - It calls deleteWorkout with a 'workout' argument, which is defined
-                -- through our .map in workoutMapper. */}
                     <Button
                         color='danger'
                         onClick={() => {
@@ -64,23 +64,57 @@ class CounselorTable extends Component<CounselorTableProps, {}> {
         })
     }
 
+//     async componentDidMount(){
+//         console.info('working?')
+//         console.info(`${APIURL}/counselor`)
+//         try {
+//                 let res = await fetch(`${APIURL}/counselor/validate`, {
+//                     headers: new Headers ({
+//                         'Content-Type': 'application/json',
+//                         Authorization: `Bearer ${this.props.token}`
+//                     })
+//                 })
+//                     let json = await res.json()
+//                     let Counselor = json
+//                     console.info(Counselor)
+//                     console.info(json)
+//                 if (Counselor == null){
+//                     this.setState({failed: true})
+//                     return
+//                 } else {
+//                     this.setState({ failed: false})
+//                     this.counselorMapper()
+//     }
+// } catch (error) {
+//     console.error(error)
+//     this.setState({ failed: true})
+// }
+// }
+
+
     render() {
+
         return (
+            // {
+            //  this.state.failed
+            // ? <> </> 
+            // :   
             <>
-                <h3>Counselor List</h3>
-                <hr />
-                <Table striped>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Date Accredited</th>
-                        <th>Role</th>
-                    </tr>
-                </thead>
-                <tbody>{this.counselorMapper()}</tbody>
-                </Table>
+            <h3>Counselor List</h3>
+            <hr />
+            <Table striped>
+            <thead>
+            <tr>
+            <th>#</th>
+            <th>Date Accredited</th>
+            <th>Role</th>
+            </tr>
+            </thead>
+            <tbody>{this.counselorMapper()}</tbody>
+            </Table>
             </>
-        )
+            // }
+            )
     }
     }
 

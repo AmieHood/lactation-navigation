@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media, Card, CardBody, CardImg, CardTitle } from 'reactstrap';
+import { Form, Button, FormGroup, Label, Input, Card, CardBody, CardImg, CardTitle } from 'reactstrap';
 import logo from '../../assets/beach.jpg'
 import { Counselor } from '../../types'
 
@@ -7,12 +7,6 @@ type CounselorProps = {
     fetchCounselors: () => void
     token: string
 }
-
-// type CounselorState = {
-//     dateAccredited: string
-//     role: string | null
-//     token: string
-// }
 
 class CounselorCreate extends Component <CounselorProps, Counselor> {
     constructor(props: CounselorProps) {
@@ -85,8 +79,6 @@ class CounselorCreate extends Component <CounselorProps, Counselor> {
                     <FormGroup>
                         <Label htmlFor="dateAccredited">Date Accredited</Label>
                         <Input type='date' name='dateAccredited' onChange={this.handleChange} value={this.state.dateAccredited}/>
-                        {/* <Label htmlFor="dateAccredited"></Label>
-                        <Input placeholder='Date Accredited' type='text' name='dateAccredited' title='Please enter a date in yyyy-mm-dd format.' onChange={this.handleChange} value={this.state.dateAccredited}/> */}
                     </FormGroup>
                         <Button>Create Counselor</Button>
                     </Form>

@@ -10,12 +10,6 @@ type UserTableProps = {
     fetchUsers: () => void
 }
 
-// type User = {
-//     dateAccredited: string;
-//     role: string | null;
-//     id?: number;
-// };
-
 class UserTable extends Component<UserTableProps, {}> {
     deleteUser = (user: User) => {
         fetch(`http://localhost:3000/user/${user.id}`, {
@@ -25,7 +19,6 @@ class UserTable extends Component<UserTableProps, {}> {
                 Authorization: `Bearer ${this.props.token}`,
             }),
         })
-            // Refetch all users so only users which haven't been deleted are detected.
             .then(() => this.props.fetchUsers())
 }
 
@@ -38,7 +31,6 @@ class UserTable extends Component<UserTableProps, {}> {
                 <td>{user.lastName}</td>
                 <td>{user.email}</td>
                 <td>
-                    {/* using the functions passed as props from UserIndex */}
                     <Button
                         color='warning'
                         onClick={() => {
@@ -48,9 +40,6 @@ class UserTable extends Component<UserTableProps, {}> {
                     >
                         Update
                     </Button>
-                    {/* onClick takes a callback fn defined in our JSX.
-                - It calls deleteUser with a 'user' argument, which is defined
-                -- through our .map in userMapper. */}
                     <Button
                         color='danger'
                         onClick={() => {

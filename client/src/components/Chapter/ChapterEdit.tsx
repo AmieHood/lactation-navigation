@@ -19,12 +19,6 @@ type ChapterEditProps = {
     fetchChapters: () => void
 };
 
-// type Chapter = {
-//     dateAccredited: string;
-//     role: string | null;
-//     id?: number;
-// };
-
 class ChapterEdit extends Component<ChapterEditProps, Chapter> {
     constructor(props: ChapterEditProps) {
         super(props);
@@ -85,7 +79,7 @@ class ChapterEdit extends Component<ChapterEditProps, Chapter> {
             <ModalBody>
             <Form onSubmit={this.handleSubmit}>
                 <FormGroup>
-                <Label htmlFor="chapterName">Edit Chapter Name:</Label>
+                <Label htmlFor="chapterName">Chapter Name:</Label>
                 <Input
                     name="chapterName"
                     value={this.state.chapterName}
@@ -93,34 +87,34 @@ class ChapterEdit extends Component<ChapterEditProps, Chapter> {
                 />
                 </FormGroup>
                 <FormGroup>
-                <Label htmlFor="chapterName">Edit Chapter Name:</Label>
+                <Label htmlFor="chapterCity">City:</Label>
                 <Input
-                    name="chapterName"
-                    value={this.state.chapterName}
+                    name="chapterCity"
+                    value={this.state.chapterCity}
                     onChange={this.handleChange}
                 />
                 </FormGroup>
                 <FormGroup>
-                <Label htmlFor="chapterName">Edit Chapter Name:</Label>
+                <Label htmlFor="chapterState">State:</Label>
                 <Input
-                    name="chapterName"
-                    value={this.state.chapterName}
+                    name="chapterState"
+                    value={this.state.chapterState}
                     onChange={this.handleChange}
                 />
                 </FormGroup>
                 <FormGroup>
-                <Label htmlFor="chapterName">Edit Chapter Name:</Label>
+                <Label htmlFor="chapterPhone">Phone:</Label>
                 <Input
-                    name="chapterName"
-                    value={this.state.chapterName}
+                    name="chapterPhone"
+                    value={this.state.chapterPhone}
                     onChange={this.handleChange}
                 />
                 </FormGroup>
                 <FormGroup>
-                <Label htmlFor="chapterName">Edit Chapter Name:</Label>
+                <Label htmlFor="chapterWebsite">Website:</Label>
                 <Input
-                    name="chapterName"
-                    value={this.state.chapterName}
+                    name="chapterWebsite"
+                    value={this.state.chapterWebsite}
                     onChange={this.handleChange}
                 />
                 </FormGroup>

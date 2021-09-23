@@ -10,8 +10,6 @@ type ChapterProps = {
     token: string
 }
 
-
-
 class ChapterCreate extends Component <ChapterProps, Chapter> {
     constructor(props: ChapterProps) {
         super(props)
@@ -76,8 +74,6 @@ class ChapterCreate extends Component <ChapterProps, Chapter> {
                     console.error(err)
                     console.info(err)
                 })
-
-        
     }
 
     render(){
@@ -122,61 +118,3 @@ class ChapterCreate extends Component <ChapterProps, Chapter> {
 }
 
 export default ChapterCreate
-                // <Container>
-                //     <Row>
-                //         <Col><Media top width="100%" src={logo} alt="Card image cap"></Media><h1>Chapter</h1></Col>
-                //     </Row>
-                //     <Row>
-                        // <Form onSubmit={this.handleSubmit}>
-                        //     <FormGroup>
-                        //         <Label htmlFor='chapterName'></Label>
-                        //         <Input placeholder='Chapter Name' type='text' name='chapterName' onChange={this.handleChange} value={this.state.chapterName} />
-                        //     </FormGroup>
-                        //     <FormGroup>
-                        //         <Label htmlFor='chapterCity'></Label>
-                        //         <Input placeholder='City' type='text' name='chapterCity' onChange={this.handleChange} value={this.state.chapterCity} />
-                        //     </FormGroup>
-                        //     <FormGroup>
-                        //         <Label htmlFor='chapterState'></Label>
-                        //         <Input placeholder='State' type='text' name='chapterState' onChange={this.handleChange} value={this.state.chapterState} />
-                        //     </FormGroup>
-                        //     <FormGroup>
-                        //         <Label htmlFor='chapterPhone'></Label>
-                        //         <Input placeholder='Phone' type='text' name='chapterPhone' onChange={this.handleChange} value={this.state.chapterPhone}/>
-                        //     </FormGroup>
-                        //     <FormGroup>
-                        //         <Label htmlFor='chapterWebsite'></Label>
-                        //         <Input placeholder='Website' type='text' name='chapterWebsite' onChange={this.handleChange} value={this.state.chapterWebsite} />
-                        //     </FormGroup>
-                        //     <Button type='submit'>Edit Chapter</Button>
-                        // </Form>
-                //     </Row>
-                // </Container>
-{/* <Card>
-    <CardImg src={logo} alt="Card image cap" />
-    <CardBody>
-    <Form onSubmit={this.handleSubmit}>
-        <FormGroup>
-            <Label htmlFor='chapterName'></Label>
-            <Input placeholder='Chapter Name' type='text' name='chapterName' onChange={this.handleChange} value={this.state.chapterName} />
-        </FormGroup>
-        <FormGroup>
-            <Label htmlFor='chapterCity'></Label>
-            <Input placeholder='City' type='text' name='chapterCity' onChange={this.handleChange} value={this.state.chapterCity} />
-        </FormGroup>
-        <FormGroup>
-            <Label htmlFor='chapterState'></Label>
-            <Input placeholder='State' type='text' name='chapterState' onChange={this.handleChange} value={this.state.chapterState} />
-        </FormGroup>
-        <FormGroup>
-            <Label htmlFor='chapterPhone'></Label>
-            <Input placeholder='Phone' type='text' name='chapterPhone' onChange={this.handleChange} value={this.state.chapterPhone}/>
-        </FormGroup>
-        <FormGroup>
-            <Label htmlFor='chapterWebsite'></Label>
-            <Input placeholder='Website' type='text' name='chapterWebsite' onChange={this.handleChange} value={this.state.chapterWebsite} />
-        </FormGroup>
-        <Button type='submit'>Edit Chapter</Button>
-    </Form>
-    </CardBody>
-</Card> */}

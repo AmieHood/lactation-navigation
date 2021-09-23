@@ -1,9 +1,8 @@
 import React from "react";
 import { Component } from "react";
-import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media } from 'reactstrap';
+import { Container, Col, Row } from 'reactstrap';
 import APIURL from "../../utils/Environment";
 import { Redirect } from 'react-router-dom'
-import User from '../Users/UserEdit'
 import { Counselor } from '../../types'
 import CounselorCreate from './CounselorCreate'
 import CounselorEdit from './CounselorEdit'
@@ -11,7 +10,6 @@ import CounselorTable from './CounselorTable'
 
 type CounselorIndexProps = {
     token: string
-    // role: string
 }
 
 type CounselorIndexState = {
@@ -37,7 +35,6 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
     fetchCounselors = (): void => {
         fetch(`http://localhost:3000/counselor/all`, {
                     method: 'GET',
-                    // body: JSON.stringify(newCounselorData),
                     headers: new Headers ({
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${this.props.token}`
@@ -54,20 +51,6 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
                 })
     }
 
-    // handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     const target = event.target
-    //     const value = target.value
-    //     const name = target.name
-    //     this.setState({
-    //         [name]: value } as unknown as Pick<
-    //         CounselorState,
-    //         keyof CounselorState
-    //         >)
-    //         return (
-    //             'Congratulations! You are a Breastfeeding Counselor!'
-    //         )
-            
-    // }
 
 
     editUpdateCounselor = (counselor: Counselor): void => {
@@ -82,29 +65,30 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
     updateOff = (): void => {
         this.setState({ updateActive: false })
     }
-
-    // componentDidMount = (): void => {
-    //     this.fetchCounselors()
-    // }
     
     async componentDidMount(){
             console.info('working?')
             console.info(`${APIURL}/counselor`)
             try {
-                    let res = await fetch(`${APIURL}/counselor/all`)
-                    let json = await res.json()
-                    let { Counselor } = json
-                    console.info({ Counselor })
-                    console.info(json)
-                    if (Counselor?.role == "Counselor"){
-                        this.setState({role: "Counselor"})
+                    let res = await fetch(`${APIURL}/counselor/validate`, {
+                        headers: new Headers ({
+                            'Content-Type': 'application/json',
+                            Authorization: `Bearer ${this.props.token}`
+                        })
+                    })
+                        let json = await res.json()
+                        let Counselor = json
+                        console.info(Counselor)
+                        console.info(json)
+                    if (Counselor == null){
+                        this.setState({failed: true})
+                        return
+                    } else {
+                        this.setState({ failed: false})
                         this.fetchCounselors()
-
-                // this.fetchCounselors()
-        } else {
-            this.setState({ failed: true})
         }
-    } catch {
+    } catch (error) {
+        console.error(error)
         this.setState({ failed: true})
     }
     }
@@ -125,13 +109,10 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
                 </Row>
             </Container>
         {                   
-            this.state.failed 
+            this.state.failed
             ? <Redirect to="/counselor" /> 
-                :   !this.state.role 
-                ?  <h2> Loading profile details</h2>      
-                : 
+            :   
             <Container>
-                
                 <Row>
                     <Col md='9'>
                         <CounselorTable
@@ -155,8 +136,7 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
                 </Row>
             </Container>
         }
-            </div> 
-            
+            </div>
         )
     }
 }

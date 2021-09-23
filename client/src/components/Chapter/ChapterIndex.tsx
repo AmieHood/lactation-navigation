@@ -47,22 +47,6 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
                 })
     }
 
-    // handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     const target = event.target
-    //     const value = target.value
-    //     const name = target.name
-    //     this.setState({
-    //         [name]: value } as unknown as Pick<
-    //         ChapterState,
-    //         keyof ChapterState
-    //         >)
-    //         return (
-    //             'Congratulations! You are a Breastfeeding Chapter!'
-    //         )
-            
-    // }
-
-
     editUpdateChapter = (chapter: Chapter): void => {
         this.setState({ chapterToUpdate: chapter})
         console.log(chapter);

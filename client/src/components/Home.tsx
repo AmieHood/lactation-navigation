@@ -5,7 +5,8 @@ import BGImage from '../assets/home-image.jpeg'
 import BGImageDesktop from '../assets/home-image-desktop.jpeg'
 import { Container } from "../App.styles";
 import { Button } from 'reactstrap';
-import { Redirect } from 'react-router-dom'
+import { Link } from "react-router-dom";
+// import { Redirect } from 'react-router-dom'
 const Background = styled.div`
     background-image: url(${BGImageDesktop});
     background-size: cover;
@@ -36,15 +37,18 @@ const Text = styled.div`
 
 
 class Home extends Component {
+
+    handleClick = (event: React.FormEvent<HTMLFormElement>) => {
+
+    }
     render(){
-      
         return(
             <>
             <Container>
                 <Background>
                     <Text>
                         <h1>Support Begins Here</h1>
-                        <Button type='button' className='custom-btn'>Log In</Button>
+                        <Link to='/portal'><Button type='button'>Log In</Button></Link>
                     </Text>
                 </Background>
             </Container>

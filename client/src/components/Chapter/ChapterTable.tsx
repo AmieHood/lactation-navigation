@@ -25,7 +25,6 @@ class ChapterTable extends Component<ChapterTableProps, {}> {
                 Authorization: `Bearer ${this.props.token}`,
             }),
         })
-            // Refetch all chapters so only chapters which haven't been deleted are detected.
             .then(() => this.props.fetchChapters())
 }
 
@@ -40,7 +39,6 @@ class ChapterTable extends Component<ChapterTableProps, {}> {
                 <td>{chapter.chapterPhone}</td>
                 <td>{chapter.chapterWebsite}</td>
                 <td>
-                    {/* using the functions passed as props from ChapterIndex */}
                     <Button
                         color='warning'
                         onClick={() => {
@@ -50,9 +48,6 @@ class ChapterTable extends Component<ChapterTableProps, {}> {
                     >
                         Update
                     </Button>
-                    {/* onClick takes a callback fn defined in our JSX.
-                - It calls deleteChapter with a 'chapter' argument, which is defined
-                -- through our .map in chapterMapper. */}
                     <Button
                         color='danger'
                         onClick={() => {

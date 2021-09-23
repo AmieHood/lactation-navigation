@@ -1,8 +1,7 @@
 module.exports = (sequelize, DataTypes) => {
     const Counselor = sequelize.define("Counselor", {
         dateAccredited: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.STRING
         },
         role: {
             type: DataTypes.STRING

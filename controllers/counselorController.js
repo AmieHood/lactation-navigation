@@ -23,6 +23,15 @@ router.post('/create', validateJWT, async (req, res) => {
     }
 })
 
+router.get('/validate', validateJWT, async (req, res) => {
+    try {
+        let validatedUser = await Counselor.findOne({ where: { UserId: req.user.id}})
+        if (validatedUser) res.send(validatedUser)
+    } catch (error) {
+        res.json({error})
+    }
+})
+
 //update Counselor //!working but have to add counselor id to endpoint. Need to figure out how to just reference token
 router.put('/:id', validateJWT, async(req, res) => {
     const { dateAccredited } = req.body

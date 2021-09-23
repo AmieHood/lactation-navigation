@@ -12,7 +12,6 @@ import {
     Button,
     NavLink,
 } from "reactstrap";
-import { link } from "fs";
 
 const logoStyle = {
     width: "64px",
@@ -36,7 +35,6 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
         click: false,
         };
         this.toggle = this.toggle.bind(this);
-        // this.handleClick = this.handleClick(this)
     }
     toggle() {
         this.setState({ isOpen: !this.state.isOpen });
@@ -72,7 +70,7 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
                 </NavItem>
                 <NavItem>
                     <NavLink to="/portal" onClick={this.toggle}>
-                    <Link to="/portal">Sign Up</Link>
+                    <Link to="/portal">Log In</Link>
                     </NavLink>
                 </NavItem>
                 {this.props.token ? (
@@ -109,25 +107,3 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
     }
 }
 export default Sitebar;
-
-// <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-
-// <div className="container-fluid">
-// <img style={logoStyle} src={logo}/>
-//     <a className="navbar-brand" href="#">Lactation Navigation</a>
-//     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-//     <span className="navbar-toggler-icon"></span>
-//     </button>
-//     <div className="collapse navbar-collapse" id="navbarSupportedContent">
-//     <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-//         <li className="nav-item">
-//         <a className="nav-link active" aria-current="page" href="#">Home</a>
-//         </li>
-//         <li className="nav-item">
-//         <a className="nav-link" href="#">Link</a>
-//         </li>
-//     </ul>
-
-//     </div>
-// </div>
-// </nav>
