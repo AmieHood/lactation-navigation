@@ -23,21 +23,8 @@ class UserEdit extends Component <UserEditProps, User> {
             emailValid: true,
             message: '', 
         }
-        this.handleOnClick= this.handleOnClick.bind(this)
         this.handleSubmit = this.handleSubmit.bind(this)
     }
-
-    handleOnClick = () => {
-        window.location.replace('/counselor')
-        // const { history } = this.props
-        // if(history) history.push('/counselor')
-            // this.props.history.push({
-            //   pathname: "/counselor",
-            // //   state: {
-            // //     token: token,
-            // //   },
-            // })
-    } 
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const target = event.target
@@ -47,10 +34,7 @@ class UserEdit extends Component <UserEditProps, User> {
             [name]: value } as unknown as Pick<
             User,
             keyof User
-            >)
-            return (
-                'Profile updated!'
-            )            
+            >)         
         }
 
     handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
@@ -90,10 +74,10 @@ class UserEdit extends Component <UserEditProps, User> {
         return(
             <>
                 <div>
-                        <Modal>
+                        <Modal isOpen={true}>
                             <ModalHeader>Update Profile</ModalHeader>
                             <ModalBody>
-                                <Form>
+                                <Form onSubmit={this.handleSubmit}>
                                 <FormGroup>
                                     <Label htmlFor="firstName">First Name</Label>
                                     <Input type='text' name='firstName' onChange={this.handleChange} value={this.state.firstName}/>
@@ -102,18 +86,6 @@ class UserEdit extends Component <UserEditProps, User> {
                                     <Label htmlFor="lastName">Last Name</Label>
                                     <Input type='text' name='lastName' onChange={this.handleChange} value={this.state.lastName}/>
                                 </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="email">Email</Label>
-                                    <Input required pattern='^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$' name='email' title='Please enter a valid email address.' onChange={this.handleChange} value={this.state.email}/>
-                                </FormGroup>
-                                <FormGroup>
-                                    <Label htmlFor="password">Password</Label>
-                                    <Input required pattern='^(?=.{8,20})(?=.*[a-z])(?=.*[A-Z]).*$'  title='Password must be at least 8 characters, contain one upper case letter, one lower case letter, and a number.'  name='password' minLength={8} onChange={this.handleChange} value={this.state.password}/>
-                                </FormGroup>              
-                                <FormGroup>
-                                    <Label htmlFor="confirmPassword">Confirm Password</Label>
-                                    <Input name='confirmPassword' onChange={this.handleChange} value={this.state.confirmPassword}/>
-                                </FormGroup>              
                                 <FormGroup>
                                     <Button type='submit'>Update Profile</Button>
                                 </FormGroup>

@@ -12,7 +12,6 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: center;
         color: white;
         background-color: #999999;
-        // background-color: #3B054F;
     }
 
     .container {
@@ -76,6 +75,20 @@ export const GlobalStyle = createGlobalStyle`
     * {
         box-sizing: border-box;
         font-family: 'Montserrat', sans-serif;
+    }
+
+    .message {
+        position: fixed !important;
+        top: 0px !important;
+        left: 0px !important
+        width: 100%;
+        z-index: 9999 !important;
+        border-radius: 0px !important;
+        margin-top: 3em
+    }
+
+    .chapter {
+        filter: brightness(50%) !important;
     }
 `
 

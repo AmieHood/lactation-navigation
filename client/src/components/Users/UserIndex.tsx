@@ -1,9 +1,12 @@
 import React from "react";
 import { Component } from "react";
 import { Container, Col, Row } from 'reactstrap';
+import APIURL from "../../utils/Environment";
 import { User } from '../../types'
 import UserEdit from './UserEdit'
 import UserTable from './UserTable'
+import ProfileEdit from './ProfileEdit'
+import { Redirect } from 'react-router-dom'
 
 type UserIndexProps = {
     token: string
@@ -13,6 +16,8 @@ type UserIndexState = {
     users: User[]
     updateActive: boolean
     userToUpdate: User | null
+    failed: boolean
+    role: string | null
 }
 
 class UserIndex extends Component <UserIndexProps, UserIndexState> {
@@ -21,7 +26,9 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
         this.state = {
             users: [],
             updateActive: false,
-            userToUpdate: null
+            userToUpdate: null,
+            failed: false,
+            role: ''
         }
     }
 
@@ -45,21 +52,6 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                 })
     }
 
-    // handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //     const target = event.target
-    //     const value = target.value
-    //     const name = target.name
-    //     this.setState({
-    //         [name]: value } as unknown as Pick<
-    //         UserState,
-    //         keyof UserState
-    //         >)
-    //         return (
-    //             'Congratulations! You are a Breastfeeding User!'
-    //         )
-            
-    // }
-
 
     editUpdateUser = (user: User): void => {
         this.setState({ userToUpdate: user})
@@ -74,36 +66,52 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
         this.setState({ updateActive: false })
     }
 
-    componentDidMount = (): void => {
-        this.fetchUsers()
-    }
+    // componentDidMount = (): void => {
+    //     this.fetchUsers()
+    // }
 
-    // async componentDidMount(){
-//     console.info('working?')
-//     console.info(`${APIURL}/counselor`)
-//     try {
-//         let res = await fetch(`${APIURL}/counselor/all`)
-//         let json = await res.json()
-//         let { user } = json
-//         console.info(json)
-//         if (user?.role == "Counselor"){
-//             this.setState({role: "Counselor"})
-//         } else {
-//             this.setState({ failed: true})
-//         }
-//     } catch {
-//         this.setState({ failed: true})
-//     }
-// }
+    async componentDidMount(){
+        console.info('working?')
+        console.info(`${APIURL}/counselor`)
+        try {
+                let res = await fetch(`${APIURL}/counselor/validate`, {
+                    headers: new Headers ({
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${this.props.token}`
+                    })
+                })
+                    let json = await res.json()
+                    let Counselor = json
+                    console.info(Counselor)
+                    console.info(json)
+                if (Counselor == null){
+                    this.setState({failed: true})
+                    return
+                } else {
+                    this.setState({ failed: false})
+                    this.fetchUsers()
+                }
+} catch (error) {
+    console.error(error)
+    this.setState({ failed: true})
+}
+}
     
     render(){
         return(
-               // this.state.failed 
-            // ? <Redirect to="/" /> 
-            //     :   !this.state.role 
-            //     ?  <h2> Loading profile details</h2>      
-            //     : 
             <div>
+            <Container>
+                <Row>
+                    <Col md='9'>
+                        <ProfileEdit
+                            token={this.props.token}
+                            />
+                    </Col>
+                </Row>
+            </Container>
+            {this.state.failed
+            ? <Redirect to="/user" />
+            :
             <Container>
                 <Row>
                     <Col md='9'>
@@ -113,21 +121,22 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                             updateOn={this.updateOn}
                             fetchUsers={this.fetchUsers}
                             token={this.props.token}
-                        />
+                            />
 
                     </Col>
                     {this.state.updateActive && this.state.userToUpdate ? (
                         <UserEdit
-                            userToUpdate={this.state.userToUpdate}
-                            updateOff={this.updateOff}
-                            token={this.props.token}
-                            fetchUsers={this.fetchUsers}
+                        userToUpdate={this.state.userToUpdate}
+                        updateOff={this.updateOff}
+                        token={this.props.token}
+                        fetchUsers={this.fetchUsers}
                         />
-                    ) : (
-                        <></>
-                    )}
+                        ) : (
+                            <></>
+                            )}
                 </Row>
             </Container>
+            }
             </div> 
             
         )

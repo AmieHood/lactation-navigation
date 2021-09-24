@@ -2,7 +2,7 @@ import React from "react";
 import { Component } from "react";
 import Login from "./Login";
 import Signup from "./Signup";
-import { Container, Row, Col } from "reactstrap";
+import { Container, Row, Col, Button } from "reactstrap";
 import { Link } from "react-router-dom";
 
 type Props = {
@@ -38,17 +38,15 @@ type Props = {
             <Col md="6" className="login-col">
             <Login updateToken={this.props.updateToken} />
             </Col>
-            <Link to="/portal" onClick={this.toggle}>
-            Sign Up Here
-            </Link>
+            <Link to="/portal"><Button onClick={this.toggle}>Sign Up Here</Button></Link>
             </>
             ) : (
             <>
             <Col md="6" className="auth-container">
             <Signup updateToken={this.props.updateToken} />
             </Col>
-            <Link to="/portal" onClick={this.toggle}>
-            Already have an account? Log In here.
+            <p>Already have an account?</p> 
+            <Link to="/portal"><Button onClick={this.toggle}>Log In here.</Button>
             </Link>
             </>
             )}

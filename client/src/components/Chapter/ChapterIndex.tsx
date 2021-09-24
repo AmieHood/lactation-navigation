@@ -6,6 +6,8 @@ import { Chapter } from '../../types'
 import ChapterCreate from './ChapterCreate'
 import ChapterEdit from './ChapterEdit'
 import ChapterTable from './ChapterTable'
+import APIURL from '../../utils/Environment'
+import { Redirect } from "react-router";
 
 type ChapterIndexProps = {
     token: string
@@ -15,6 +17,8 @@ type ChapterIndexState = {
     chapters: Chapter[]
     updateActive: boolean
     chapterToUpdate: Chapter | null
+    failed: boolean
+    role: string | null
 }
 
 class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
@@ -23,7 +27,9 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
         this.state = {
             chapters: [],
             updateActive: false,
-            chapterToUpdate: null
+            chapterToUpdate: null,
+            failed: false,
+            role: ''
         }
     }
 
@@ -60,70 +66,80 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
         this.setState({ updateActive: false })
     }
 
-    componentDidMount = (): void => {
-        this.fetchChapters()
-    }
+    // componentDidMount = (): void => {
+    //     this.fetchChapters()
+    // }
 
-    // async componentDidMount(){
-//     console.info('working?')
-//     console.info(`${APIURL}/counselor`)
-//     try {
-//         let res = await fetch(`${APIURL}/counselor/all`)
-//         let json = await res.json()
-//         let { user } = json
-//         console.info(json)
-//         if (user?.role == "Counselor"){
-//             this.setState({role: "Counselor"})
-//         } else {
-//             this.setState({ failed: true})
-//         }
-//     } catch {
-//         this.setState({ failed: true})
-//     }
-// }
+    async componentDidMount(){
+        console.info('working?')
+        console.info(`${APIURL}/counselor`)
+        try {
+                let res = await fetch(`${APIURL}/counselor/validate`, {
+                    headers: new Headers ({
+                        'Content-Type': 'application/json',
+                        Authorization: `Bearer ${this.props.token}`
+                    })
+                })
+                    let json = await res.json()
+                    let Counselor = json
+                    console.info(Counselor)
+                    console.info(json)
+                if (Counselor == null){
+                    this.setState({failed: true})
+                    return
+                } else {
+                    this.setState({ failed: false})
+                    this.fetchChapters()
+                }
+} catch (error) {
+    console.error(error)
+    this.setState({ failed: true})
+}
+}
+
     
     render(){
         return(
-               // this.state.failed 
-            // ? <Redirect to="/" /> 
-            //     :   !this.state.role 
-            //     ?  <h2> Loading profile details</h2>      
-            //     : 
             <div>
+            {this.state.failed
+            ?
+            <Redirect to='/' />
+            :
             <Container>
-                <Row>
-                    <Col md='9'>
-                        <ChapterCreate
-                            fetchChapters={this.fetchChapters}
-                            token={this.props.token}
-                        />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col md='9'>
-                        <ChapterTable
-                            chapters={this.state.chapters}
-                            editUpdateChapter={this.editUpdateChapter}
-                            updateOn={this.updateOn}
-                            fetchChapters={this.fetchChapters}
-                            token={this.props.token}
-                        />
-
-                    </Col>
-                    {this.state.updateActive && this.state.chapterToUpdate ? (
-                        <ChapterEdit
-                            chapterToUpdate={this.state.chapterToUpdate}
-                            updateOff={this.updateOff}
-                            token={this.props.token}
-                            fetchChapters={this.fetchChapters}
-                        />
-                    ) : (
-                        <></>
-                    )}
-                </Row>
-            </Container>
-            </div> 
+            <Row>
+            <Col md='9'>
+            <ChapterCreate
+            fetchChapters={this.fetchChapters}
+            token={this.props.token}
+            />
+            </Col>
+            </Row>
+            <Row>
+            <Col md='9'>
+            <ChapterTable
+            chapters={this.state.chapters}
+            editUpdateChapter={this.editUpdateChapter}
+            updateOn={this.updateOn}
+            fetchChapters={this.fetchChapters}
+            token={this.props.token}
+            />
             
+            </Col>
+            {this.state.updateActive && this.state.chapterToUpdate ? (
+                <ChapterEdit
+                chapterToUpdate={this.state.chapterToUpdate}
+                updateOff={this.updateOff}
+                token={this.props.token}
+                fetchChapters={this.fetchChapters}
+                />
+                ) : (
+                    <></>
+                    )}
+                    </Row>
+                    </Container>
+                }
+                    </div> 
+                    
         )
     }
 }

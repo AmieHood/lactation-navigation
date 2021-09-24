@@ -28,10 +28,6 @@ class CounselorCreate extends Component <CounselorProps, Counselor> {
             Counselor,
             keyof Counselor
             >)
-            return (
-                'Breastfeeding Counselor Created!'
-            )
-            
     }
 
     handleSubmit = (event: React.FormEvent<HTMLFormElement>): void  => {

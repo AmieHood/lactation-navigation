@@ -27,15 +27,9 @@ class App extends Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      token: ""
+      token: localStorage.getItem("token") || "" 
     };
   }
-
-  componentDidMount() {
-    this.setState({ token: localStorage.getItem("token") || "" })
-    console.info(this.state.token); 
-    }
-
 
   updateToken = (newToken: string): void => {
     localStorage.setItem("token", newToken);

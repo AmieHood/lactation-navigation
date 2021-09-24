@@ -82,7 +82,7 @@ class ChapterCreate extends Component <ChapterProps, Chapter> {
                 <div>
                     <Container>
                 <Card className='card'>
-                        <CardImg className='all-cards' top width="100%" src={logo} alt="Card image cap" />
+                        <CardImg className='all-cards chapter' top width="100%" src={logo} alt="Card image cap" />
                         <CardBody className='all-cards'>
                             <CardTitle className='card-img-overlay' tag="h1">Create New Chapter</CardTitle>
                         </CardBody>

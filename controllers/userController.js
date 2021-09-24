@@ -114,6 +114,29 @@ router.get('/:id', validateJWT, async (req, res) => {
     }
 })
 
+//update User 
+router.put('/:id', validateJWT, async(req, res) => {
+    const { email, firstName, lastName, userCity, userState, userPhone } = req.body
+    // const {id} = req.params
+    try {
+    
+    const updatedUser = {
+        email: email,
+        firstName: firstName,
+        lastName: lastName,
+        userCity: userCity,
+        userState: userState,
+        userPhone: userPhone,
+    }
+    const query = ({where: { id: req.params.id }})
+        const update = await User.update(updatedUser, query)
+        res.json(update)
+    } catch (error) {
+        console.error(error)
+        res.json({ error})
+    }
+})
+
 //Delete User (working)
 router.delete('/:id', validateJWT, async(req, res) => {
     try {

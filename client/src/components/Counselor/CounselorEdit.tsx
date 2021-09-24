@@ -58,10 +58,6 @@ class CounselorEdit extends Component<CounselorEditProps, Counselor> {
         });
     };
 
-    // handleClose = (): void => {
-    //     this.setState({ modal: !modal})
-    // }
-
     handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         const target = e.target;
         const value = target.value;
@@ -79,11 +75,6 @@ class CounselorEdit extends Component<CounselorEditProps, Counselor> {
             <Form onSubmit={this.counselorUpdate}>
                 <FormGroup>
                 <Label htmlFor="dateAccredited">Edit Date of Accreditation:</Label>
-                {/* <Input
-                    name="dateAccredited"
-                    value={this.state.dateAccredited}
-                    onChange={this.handleChange}
-                /> */}
                 <Input
                     type='date'
                     name="dateAccredited"
@@ -92,7 +83,7 @@ class CounselorEdit extends Component<CounselorEditProps, Counselor> {
                 />
                 </FormGroup>
                 <Button type="submit">Update Counselor</Button>
-                <Button type="button" className="close modal-header" ariaLabel="Close">
+                <Button type="button" className="close modal-header">
                     <span aria-hidden="true">&times;</span>
                     </Button>
             </Form>
@@ -103,21 +94,3 @@ class CounselorEdit extends Component<CounselorEditProps, Counselor> {
 }
 
 export default CounselorEdit;
-
-// async componentDidMount(){
-//     console.info('working?')
-//     console.info(`${APIURL}/counselor`)
-//     try {
-//         let res = await fetch(`${APIURL}/counselor/all`)
-//         let json = await res.json()
-//         let { user } = json
-//         console.info(json)
-//         if (user?.role == "Counselor"){
-//             this.setState({role: "Counselor"})
-//         } else {
-//             this.setState({ failed: true})
-//         }
-//     } catch {
-//         this.setState({ failed: true})
-//     }
-// }

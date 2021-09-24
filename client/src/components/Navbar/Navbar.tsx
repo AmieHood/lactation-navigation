@@ -53,7 +53,7 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
                 Lactation Navigation
             </NavbarBrand>
             <NavbarToggler onClick={this.toggle} className="mr-2">
-                <div id="close-icon" className={this.state.isOpen ? "open" : ""}>
+                <div id="close-icon" className={!this.state.isOpen ? "" : "open"}>
                 <span></span>
                 <span></span>
                 <span></span>
