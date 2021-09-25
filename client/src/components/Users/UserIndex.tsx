@@ -15,7 +15,7 @@ type UserIndexProps = {
 type UserIndexState = {
     users: User[]
     updateActive: boolean
-    userToUpdate: User | null
+    userToUpdate: User
     failed: boolean
     role: string | null
 }
@@ -26,7 +26,16 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
         this.state = {
             users: [],
             updateActive: false,
-            userToUpdate: null,
+            userToUpdate: {
+                firstName: '',
+                lastName: '', 
+                email: '', 
+                password: '',
+                confirmPassword: '',
+                emailValid: false, 
+                message: '',
+                id: 0
+            },
             failed: false,
             role: ''
         }
@@ -104,6 +113,7 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                 <Row>
                     <Col md='9'>
                         <ProfileEdit
+                            userToUpdate={this.state.userToUpdate}
                             token={this.props.token}
                             />
                     </Col>

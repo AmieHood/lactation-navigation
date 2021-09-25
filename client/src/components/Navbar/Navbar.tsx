@@ -9,7 +9,6 @@ import {
     NavbarBrand,
     Nav,
     NavItem,
-    Button,
     NavLink,
 } from "reactstrap";
 
@@ -48,7 +47,7 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
         return (
         <>
             <Navbar className="sitebar" expand="md">
-            <img style={logoStyle} src={logo} />
+            <img style={logoStyle} src={logo} alt=''/>
             <NavbarBrand href="/" className="mr-auto sitebar">
                 Lactation Navigation
             </NavbarBrand>
@@ -73,15 +72,20 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
                     <Link to="/portal">Log In</Link>
                     </NavLink>
                 </NavItem>
+                <NavItem>
+                    <NavLink to="/findchapter" onClick={this.toggle}>
+                    <Link to="/findchapter">Find Support</Link>
+                    </NavLink>
+                </NavItem>
                 {this.props.token ? (
                     <>
                     <NavItem>
-                        <NavLink to="/portal" onClick={this.toggle}>
+                        <NavLink to="/user" onClick={this.toggle}>
                         <Link to="/user">Profile</Link>
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink to="/portal" onClick={this.toggle}>
+                        <NavLink to="/chapter" onClick={this.toggle}>
                         <Link to="/chapter">Chapter</Link>
                         </NavLink>
                     </NavItem>

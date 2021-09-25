@@ -1,7 +1,6 @@
 import React from "react";
 import { Component } from "react";
-import { Form, Button, FormGroup, Label, Input, Container, Col, Row, Media } from 'reactstrap';
-import logo from '../../assets/logo.png'
+import { Container, Col, Row, Media } from 'reactstrap';
 import { Chapter } from '../../types'
 import ChapterCreate from './ChapterCreate'
 import ChapterEdit from './ChapterEdit'
@@ -105,6 +104,7 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
             ?
             <Redirect to='/' />
             :
+            <>
             <Container>
             <Row>
             <Col md='9'>
@@ -114,6 +114,9 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
             />
             </Col>
             </Row>
+            </Container>
+
+            <Container>
             <Row>
             <Col md='9'>
             <ChapterTable
@@ -137,9 +140,11 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
                     )}
                     </Row>
                     </Container>
+                    </>
                 }
-                    </div> 
                     
+            </div> 
+            
         )
     }
 }

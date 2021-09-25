@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Button, Table } from 'reactstrap'
 import { Counselor } from '../../types'
-import APIURL from '../../utils/Environment'
 
 type CounselorTableProps = {
     token: string
@@ -11,9 +10,9 @@ type CounselorTableProps = {
     fetchCounselors: () => void
 }
 
-type CounselorTableState = {
-    failed: boolean
-};
+// type CounselorTableState = {
+//     failed: boolean
+// };
 
 class CounselorTable extends Component<CounselorTableProps, {}> {
     constructor(props: CounselorTableProps){

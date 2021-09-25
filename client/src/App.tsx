@@ -16,8 +16,8 @@ import {
   BrowserRouter as Router,
   Route,
   Switch,
-  Redirect,
 } from "react-router-dom";
+import FindChapter from "./components/Unprotected/FindChapter";
 
 type AppState = {
   token: string;
@@ -50,6 +50,9 @@ class App extends Component<{}, AppState> {
       </Route>
       <Route exact path="/portal">
         <Portal updateToken={this.updateToken} />
+      </Route>
+      <Route exact path="/findchapter">
+        <FindChapter />
       </Route>
       <Route exact path="/chapter">
         <ChapterIndex

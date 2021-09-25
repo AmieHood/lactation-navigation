@@ -46,7 +46,7 @@ class Signup extends Component <SignupProps, SignupState>{
             SignupState,
             keyof SignupState
             >)            
-            console.info(this.state)
+            // console.info(this.state)
         }
     
     handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
