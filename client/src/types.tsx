@@ -1,9 +1,9 @@
 // Counselor Create
-export interface Counselor {
+export type Counselor = {
     dateAccredited: string
     role: string | null
-    id?: number,
     token: string
+    id?: number,
 }
 
 export interface Chapter {

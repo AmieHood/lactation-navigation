@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/logo.png";
+import logo from "../../assets/reverselogo.png";
 
 import {
     Collapse,
@@ -13,7 +13,7 @@ import {
 } from "reactstrap";
 
 const logoStyle = {
-    width: "64px",
+    height: "5em",
 };
 
 type SitebarProps = {
@@ -47,7 +47,8 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
         return (
         <>
             <Navbar className="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 " expand="lg">
-            <img style={logoStyle} src={logo} alt=''/>
+            <NavbarBrand href='/'><img style={logoStyle} src={logo} alt=''/></NavbarBrand>
+            
             <NavbarToggler onClick={this.toggle} className="mr-2">
                 <div id="close-icon" className={!this.state.isOpen ? "" : "open"}>
                 <span className='navbar-toggler-icon'></span>
@@ -57,16 +58,11 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
             </NavbarToggler>
             <Collapse isOpen={!this.state.isOpen} navbar>
                 <Nav className="mr-auto sitebar" navbar>
-                <NavItem>
+                {/* <NavItem>
                     <NavLink to="/" onClick={this.toggle}>
                     <Link to="/" className='nav-link text-white nav-item' >Home</Link>
                     </NavLink>
-                </NavItem>
-                <NavItem>
-                    <NavLink to="/portal" onClick={this.toggle}>
-                    <Link to="/portal" className='nav-link text-white nav-item'>Log In</Link>
-                    </NavLink>
-                </NavItem>
+                </NavItem> */}
                 <NavItem>
                     <NavLink to="/findchapter" onClick={this.toggle}>
                     <Link to="/findchapter" className='nav-link text-white nav-item'>Find Support</Link>
@@ -80,13 +76,13 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink to="/chapter" onClick={this.toggle}>
-                        <Link to="/chapter" className='nav-link text-white nav-item'>Chapter</Link>
+                        <NavLink to="/counselor" onClick={this.toggle}>
+                        <Link to="/counselor" className='nav-link text-white nav-item' >Counselor</Link>
                         </NavLink>
                     </NavItem>
                     <NavItem>
-                        <NavLink to="/counselor" onClick={this.toggle}>
-                        <Link to="/counselor" className='nav-link text-white nav-item' >Counselor</Link>
+                        <NavLink to="/chapter" onClick={this.toggle}>
+                        <Link to="/chapter" className='nav-link text-white nav-item'>Chapter</Link>
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -96,7 +92,14 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
                     </NavItem>
                     </>
                 ) : (
-                    <></>
+                    <>
+                    
+                <NavItem>
+                    <NavLink to="/portal" onClick={this.toggle}>
+                    <Link to="/portal" className='nav-link text-white nav-item'>Log In</Link>
+                    </NavLink>
+                </NavItem>
+                    </>
                 )}
                 </Nav>
             </Collapse>

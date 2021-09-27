@@ -20,8 +20,6 @@ const Background = styled.div`
     @media screen and (max-width: 768px) {
         background-image: url(${BGImage});
     }
-
-
 `
 
 const Text = styled.div`

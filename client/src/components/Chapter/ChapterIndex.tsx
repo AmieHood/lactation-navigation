@@ -136,20 +136,20 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
             <Redirect to='/' />
             :
             <>
-            <Container responsive>
+            {/* <Container>
             <Row>
-            <Col md='12' xs='12'>
+            <Col md='9' xs='12'> */}
             <ChapterCreate
             fetchChapters={this.fetchChapters}
             token={this.props.token}
             />
-            </Col>
+            {/* </Col>
             </Row>
             </Container>
 
-            <Container responsive>
+            <Container>
             <Row>
-            <Col md='12' xs='12'>
+            <Col md='9' xs='12'> */}
             <ChapterTable
             chapters={this.state.chapters}
             editUpdateChapter={this.editUpdateChapter}
@@ -158,7 +158,7 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
             token={this.props.token}
             />
             
-            </Col>
+            {/* </Col> */}
             {this.state.updateActive && this.state.chapterToUpdate ? (
                 <ChapterEdit
                 chapterToUpdate={this.state.chapterToUpdate}
@@ -169,8 +169,8 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
                 ) : (
                     <></>
                     )}
-                    </Row>
-                    </Container>
+                    {/* </Row>
+                    </Container> */}
                     </>
                 }   
             </> 

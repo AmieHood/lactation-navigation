@@ -65,32 +65,36 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
     updateOff = (): void => {
         this.setState({ updateActive: false })
     }
-    
-    async componentDidMount(){
-            console.info('working?')
-            console.info(`${APIURL}/counselor`)
-            try {
-                    let res = await fetch(`${APIURL}/counselor/validate`, {
-                        headers: new Headers ({
-                            'Content-Type': 'application/json',
-                            Authorization: `Bearer ${this.props.token}`
-                        })
-                    })
-                        let json = await res.json()
-                        let Counselor = json
-                        console.info(Counselor)
-                        console.info(json)
-                    if (Counselor == null){
-                        this.setState({failed: true})
-                        return
-                    } else {
-                        this.setState({ failed: false})
-                        this.fetchCounselors()
+
+    fetchCounselor = async (): Promise<void> => {
+        console.info('working?')
+        console.info(`${APIURL}/counselor`)
+        try {
+            let res = await fetch(`${APIURL}/counselor/validate`, {
+                headers: new Headers ({
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${this.props.token}`
+                })
+            })
+                let Counselor = await res.json()
+                // let Counselor = json
+                console.info(Counselor)
+                // console.info(json)
+            if (Counselor === null){
+                this.setState({failed: true})
+                return
+            } else {
+                this.setState({ failed: false})
+                this.fetchCounselors()
         }
-    } catch (error) {
+        } catch (error) {
         console.error(error)
         this.setState({ failed: true})
+        }
     }
+    
+    componentDidMount(){
+            this.fetchCounselor()
     }
 
 
@@ -98,23 +102,24 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
     render(){
         return(
             <div>
-            <Container>
-                <Row>
-                    <Col md='9'>
+            {/* <Container> */}
+                {/* <Row>
+                    <Col md='9'> */}
                         <CounselorCreate
                             fetchCounselors={this.fetchCounselors}
                             token={this.props.token}
                             />
-                    </Col>
-                </Row>
-            </Container>
+                    {/* </Col>
+                </Row> */}
+            {/* </Container> */}
         {                   
             this.state.failed
             ? <Redirect to="/counselor" /> 
-            :   
-            <Container>
-                <Row>
-                    <Col md='9'>
+            :  
+            <> 
+             {/* <Container> */}
+                {/* <Row> */}
+                    {/* <Col md='9'> */}
                         <CounselorTable
                             counselors={this.state.counselors}
                             editUpdateCounselor={this.editUpdateCounselor}
@@ -122,7 +127,7 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
                             fetchCounselors={this.fetchCounselors}
                             token={this.props.token}
                         />
-                    </Col>
+                    {/* </Col> */}
                     {this.state.updateActive && this.state.counselorToUpdate ? (
                         <CounselorEdit
                             counselorToUpdate={this.state.counselorToUpdate}
@@ -133,8 +138,9 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
                     ) : (
                         <></>
                     )}
-                </Row>
-            </Container>
+                {/* </Row> */}
+            {/* </Container> */}
+            </>
         }
             </div>
         )

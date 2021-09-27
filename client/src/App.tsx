@@ -37,6 +37,8 @@ class App extends Component<{}, AppState> {
     console.info(this.state.token);
   };
 
+
+
   clearToken = () => {
     localStorage.clear();
     this.setState({ token: "" });

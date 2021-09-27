@@ -102,12 +102,6 @@ export const GlobalStyle = createGlobalStyle`
     //     margin-top: 5em;
     // }
 
-    @media (min-width: 656px) {
-        .table-responsive {
-            overflow: visible
-        }
-    }
-
 `
 
 export const Container = styled.div`

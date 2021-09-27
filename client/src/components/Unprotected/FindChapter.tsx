@@ -1,11 +1,12 @@
 import React, { Component } from 'react'
-import { Input, Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem } from 'reactstrap'
+import { Input, Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardImg, CardBody, CardTitle } from 'reactstrap'
 import { Chapter } from '../../types'
 import { States } from '../../types'
+import logo from '../../assets/findchapter.jpg'
 
 type FindChapterProps = {
     // chapters: Chapter[]
-    //statesArray: []
+    // statesArray: States
 }
 
 type FindChapterState = {
@@ -21,13 +22,75 @@ type FindChapterState = {
 //     id?: number;
 // };
 
+// type StatesArray = [
+//     "AL",
+//     "AK",
+//     "AS",
+//     "AZ",
+//     "AR",
+//     "CA",
+//     "CO",
+//     "CT",
+//     "DE",
+//     "DC",
+//     "FM",
+//     "FL",
+//     "GA",
+//     "GU",
+//     "HI",
+//     "ID",
+//     "IL",
+//     "IN",
+//     "IA",
+//     "KS",
+//     "KY",
+//     "LA",
+//     "ME",
+//     "MH",
+//     "MD",
+//     "MA",
+//     "MI",
+//     "MN",
+//     "MS",
+//     "MO",
+//     "MT",
+//     "NE",
+//     "NV",
+//     "NH",
+//     "NJ",
+//     "NM",
+//     "NY",
+//     "NC",
+//     "ND",
+//     "MP",
+//     "OH",
+//     "OK",
+//     "OR",
+//     "PW",
+//     "PA",
+//     "PR",
+//     "RI",
+//     "SC",
+//     "SD",
+//     "TN",
+//     "TX",
+//     "UT",
+//     "VT",
+//     "VI",
+//     "VA",
+//     "WA",
+//     "WV",
+//     "WI",
+//     "WY",
+//   ];
+
 class FindChapter extends Component<FindChapterProps, FindChapterState> {
     constructor(props: FindChapterProps) {
         super(props)
         this.state ={
             chapters: [], 
             dropdownOpen: false,
-            states: null    
+            states: null  
         }
     }
 
@@ -69,7 +132,7 @@ class FindChapter extends Component<FindChapterProps, FindChapterState> {
         })
     }
     //     statesListMapper = (): JSX.Element[] => {
-    //         return this.state.statesArray.map((usState: string, index: number) => {
+    //         return this.props.statesArray.map((usState: string, index: number) => {
     //         return (
     //             <DropdownItem>{usState}</DropdownItem>
     //         )
@@ -83,28 +146,33 @@ class FindChapter extends Component<FindChapterProps, FindChapterState> {
     render() {
         return (
             <>
-                <h3>Find a Chapter Near You</h3>
-                <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
-                    <DropdownToggle caret>Pick a State</DropdownToggle>
-                    <DropdownMenu>
-                        {/* {this.statesListMapper()} */}
-                    </DropdownMenu>
-                </Dropdown>
-                <h3>Chapter List</h3>
-                <hr />
-                <Table striped>
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Chapter Name</th>
-                        <th>State</th>
-                        <th>City</th>
-                        <th>Phone</th>
-                        <th>Website</th>
-                    </tr>
-                </thead>
-                <tbody>{this.chapterMapper()}</tbody>
-                </Table>
+            <Card className='card'>
+                <CardImg className='all-cards' top width="100%" src={logo} alt="Card image cap" />
+                <CardBody className='all-cards'>
+                    <CardTitle className='card-img-overlay' tag="h1">Find a Chapter Near You</CardTitle>
+                </CardBody>
+            </Card>
+            <Dropdown isOpen={this.state.dropdownOpen} toggle={this.toggle}>
+                <DropdownToggle caret>Pick a State</DropdownToggle>
+                <DropdownMenu>
+                    {/* {this.statesListMapper()} */}
+                </DropdownMenu>
+            </Dropdown>
+            <h3>Chapter List</h3>
+            <hr />
+            <Table responsive striped>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Chapter Name</th>
+                    <th>State</th>
+                    <th>City</th>
+                    <th>Phone</th>
+                    <th>Website</th>
+                </tr>
+            </thead>
+            <tbody>{this.chapterMapper()}</tbody>
+            </Table>
             </>
         )
     }
