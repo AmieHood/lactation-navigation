@@ -5,7 +5,6 @@ import APIURL from "../../utils/Environment";
 import { User } from '../../types'
 import UserEdit from './UserEdit'
 import UserTable from './UserTable'
-import ProfileEdit from './ProfileEdit'
 import { Redirect } from 'react-router-dom'
 import logo from '../../assets/info.jpg'
 

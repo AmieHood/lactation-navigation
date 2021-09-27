@@ -1,42 +1,11 @@
 import React from "react";
 import { Component } from "react";
-import { Container, Col, Row, Media } from 'reactstrap';
 import { Chapter } from '../../types'
 import ChapterCreate from './ChapterCreate'
 import ChapterEdit from './ChapterEdit'
 import ChapterTable from './ChapterTable'
 import APIURL from '../../utils/Environment'
 import { Redirect } from "react-router";
-import styled from 'styled-components'
-import ChapterView from '../../assets/chapterview.jpg'
-
-const Background = styled.div`
-    background-image: url(${ChapterView});
-    background-size: cover;
-    background-repeat: no-repeat;
-    height: 100vh;
-    width: 100vw;
-    margin: auto;
-    justify-content: center;
-    align-items: center;
-
-    // @media screen and (max-width: 768px) {
-    //     background-image: url(${ChapterView});
-    // }
-
-
-`
-
-const Text = styled.div`
-    margin: auto;
-    margin-top: 30em;
-    width: 50vw;
-    padding: 1em;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    
-`
 
 type ChapterIndexProps = {
     token: string
@@ -120,11 +89,11 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
                     this.setState({ failed: false})
                     this.fetchChapters()
                 }
-} catch (error) {
-    console.error(error)
-    this.setState({ failed: true})
-}
-}
+        } catch (error) {
+            console.error(error)
+            this.setState({ failed: true})
+        }
+    }
 
     
     render(){
@@ -136,20 +105,11 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
             <Redirect to='/' />
             :
             <>
-            {/* <Container>
-            <Row>
-            <Col md='9' xs='12'> */}
             <ChapterCreate
             fetchChapters={this.fetchChapters}
             token={this.props.token}
             />
-            {/* </Col>
-            </Row>
-            </Container>
-
-            <Container>
-            <Row>
-            <Col md='9' xs='12'> */}
+           
             <ChapterTable
             chapters={this.state.chapters}
             editUpdateChapter={this.editUpdateChapter}
@@ -158,7 +118,6 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
             token={this.props.token}
             />
             
-            {/* </Col> */}
             {this.state.updateActive && this.state.chapterToUpdate ? (
                 <ChapterEdit
                 chapterToUpdate={this.state.chapterToUpdate}
@@ -169,8 +128,6 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
                 ) : (
                     <></>
                     )}
-                    {/* </Row>
-                    </Container> */}
                     </>
                 }   
             </> 

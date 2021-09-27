@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/reverselogo.png";
+import APIURL from "../../utils/Environment";
 
 import {
     Collapse,
@@ -24,6 +25,8 @@ type SitebarProps = {
 type SitebarState = {
     isOpen: boolean;
     click: boolean;
+    failed: boolean,
+    role: string | null
 };
 
 class Sitebar extends Component<SitebarProps, SitebarState> {
@@ -32,6 +35,8 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
         this.state = {
         isOpen: false,
         click: false,
+        failed: false,
+        role: ''
         };
         this.toggle = this.toggle.bind(this);
     }
@@ -43,32 +48,51 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
         this.setState({ click: !this.state.click });
     };
 
+    fetchCounselor = async (): Promise<void> => {
+        console.info('working?')
+        console.info(`${APIURL}/counselor`)
+        try {
+            let res = await fetch(`${APIURL}/counselor/validate`, {
+                headers: new Headers ({
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${this.props.token}`
+                })
+            })
+                let Counselor = await res.json()
+                // let Counselor = json
+                console.info(Counselor)
+                // console.info(json)
+            if (Counselor === null){
+                this.setState({failed: true})
+                return
+            } else {
+                this.setState({ failed: false})
+        }
+        } catch (error) {
+        console.error(error)
+        this.setState({ failed: true})
+        }
+    }
+    
+    componentDidMount(){
+            this.fetchCounselor()
+    }
+
     render() {
         return (
-        <>
+        <div>
             <Navbar className="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 " expand="lg">
             <NavbarBrand href='/'><img style={logoStyle} src={logo} alt=''/></NavbarBrand>
             
             <NavbarToggler onClick={this.toggle} className="mr-2">
                 <div id="close-icon" className={!this.state.isOpen ? "" : "open"}>
                 <span className='navbar-toggler-icon'></span>
-                {/* <span></span>
-                <span></span> */}
                 </div>
             </NavbarToggler>
             <Collapse isOpen={!this.state.isOpen} navbar>
-                <Nav className="mr-auto sitebar" navbar>
-                {/* <NavItem>
-                    <NavLink to="/" onClick={this.toggle}>
-                    <Link to="/" className='nav-link text-white nav-item' >Home</Link>
-                    </NavLink>
-                </NavItem> */}
-                <NavItem>
-                    <NavLink to="/findchapter" onClick={this.toggle}>
-                    <Link to="/findchapter" className='nav-link text-white nav-item'>Find Support</Link>
-                    </NavLink>
-                </NavItem>
-                {this.props.token ? (
+                <Nav className="mr-auto sitebar" navbar> 
+                              
+                {this.props.token && !this.state.failed ? (
                     <>
                     <NavItem>
                         <NavLink to="/user" onClick={this.toggle}>
@@ -91,9 +115,39 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
                         </NavLink>
                     </NavItem>
                     </>
-                ) : (
+                ) : this.props.token && this.state.failed ?
+                (
                     <>
-                    
+                    <NavItem>
+                        <NavLink to="/user" onClick={this.toggle}>
+                        <Link to="/user" className='nav-link text-white nav-item' >Profile</Link>
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink to="/counselor" onClick={this.toggle}>
+                        <Link to="/counselor" className='nav-link text-white nav-item' >Counselor</Link>
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink to="/" onClick={this.props.clickLogout}>
+                        <Link to="/" className='nav-link text-white nav-item' onClick={this.toggle}>Log Out</Link>
+                        </NavLink>
+                    </NavItem>
+                    </>
+                )
+                :
+                (
+                    <>
+                     <NavItem>
+                    <NavLink to="/findchapter" onClick={this.toggle}>
+                    <Link to="/findchapter" className='nav-link text-white nav-item'>Find Support</Link>
+                    </NavLink>
+                </NavItem>
+                     <NavItem>
+                    <NavLink to="/donate" onClick={this.toggle}>
+                    <Link to="/donate" className='nav-link text-white nav-item'>Find Support</Link>
+                    </NavLink>
+                </NavItem>
                 <NavItem>
                     <NavLink to="/portal" onClick={this.toggle}>
                     <Link to="/portal" className='nav-link text-white nav-item'>Log In</Link>
@@ -104,7 +158,7 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
                 </Nav>
             </Collapse>
             </Navbar>
-        </>
+        </div>
         );
     }
 }

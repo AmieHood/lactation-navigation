@@ -18,6 +18,7 @@ import {
   Switch,
 } from "react-router-dom";
 import FindChapter from "./components/Unprotected/FindChapter";
+import Donate from './components/Unprotected/Donate'
 
 type AppState = {
   token: string;
@@ -55,6 +56,9 @@ class App extends Component<{}, AppState> {
       </Route>
       <Route exact path="/findchapter">
         <FindChapter />
+      </Route>
+      <Route exact path="/donate">
+        <Donate />
       </Route>
       <Route exact path="/chapter">
         <ChapterIndex

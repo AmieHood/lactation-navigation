@@ -121,7 +121,7 @@ class FindChapter extends Component<FindChapterProps, FindChapterState> {
             return this.state.chapters.map((chapter: Chapter, index: number) => {
             return (
                 <tr key={index}>
-                <th scope='row'>{chapter.id}</th>
+                {/* <th scope='row'>{chapter.id}</th> */}
                 <td>{chapter.chapterName}</td>
                 <td>{chapter.chapterCity}</td>
                 <td>{chapter.chapterState}</td>
@@ -163,10 +163,10 @@ class FindChapter extends Component<FindChapterProps, FindChapterState> {
             <Table responsive striped>
             <thead>
                 <tr>
-                    <th>#</th>
+                    {/* <th>#</th> */}
                     <th>Chapter Name</th>
-                    <th>State</th>
                     <th>City</th>
+                    <th>State</th>
                     <th>Phone</th>
                     <th>Website</th>
                 </tr>

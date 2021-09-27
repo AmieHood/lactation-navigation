@@ -72,8 +72,8 @@ class ChapterTable extends Component<ChapterTableProps, {}> {
                     <tr>
                         <th>#</th>
                         <th>Chapter Name</th>
-                        <th>State</th>
                         <th>City</th>
+                        <th>State</th>
                         <th>Phone</th>
                         <th>Website</th>
                     </tr>

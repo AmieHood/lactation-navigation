@@ -1,6 +1,5 @@
 import React from "react";
 import { Component } from "react";
-import { Container, Col, Row } from 'reactstrap';
 import APIURL from "../../utils/Environment";
 import { Redirect } from 'react-router-dom'
 import { Counselor } from '../../types'
@@ -102,44 +101,32 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
     render(){
         return(
             <div>
-            {/* <Container> */}
-                {/* <Row>
-                    <Col md='9'> */}
-                        <CounselorCreate
-                            fetchCounselors={this.fetchCounselors}
-                            token={this.props.token}
-                            />
-                    {/* </Col>
-                </Row> */}
-            {/* </Container> */}
+                <CounselorCreate
+                    fetchCounselors={this.fetchCounselors}
+                    token={this.props.token}
+                    />
         {                   
             this.state.failed
             ? <Redirect to="/counselor" /> 
             :  
             <> 
-             {/* <Container> */}
-                {/* <Row> */}
-                    {/* <Col md='9'> */}
-                        <CounselorTable
-                            counselors={this.state.counselors}
-                            editUpdateCounselor={this.editUpdateCounselor}
-                            updateOn={this.updateOn}
-                            fetchCounselors={this.fetchCounselors}
-                            token={this.props.token}
-                        />
-                    {/* </Col> */}
-                    {this.state.updateActive && this.state.counselorToUpdate ? (
-                        <CounselorEdit
-                            counselorToUpdate={this.state.counselorToUpdate}
-                            updateOff={this.updateOff}
-                            token={this.props.token}
-                            fetchCounselors={this.fetchCounselors}
-                        />
-                    ) : (
-                        <></>
-                    )}
-                {/* </Row> */}
-            {/* </Container> */}
+                <CounselorTable
+                    counselors={this.state.counselors}
+                    editUpdateCounselor={this.editUpdateCounselor}
+                    updateOn={this.updateOn}
+                    fetchCounselors={this.fetchCounselors}
+                    token={this.props.token}
+                />
+                {this.state.updateActive && this.state.counselorToUpdate ? (
+                    <CounselorEdit
+                        counselorToUpdate={this.state.counselorToUpdate}
+                        updateOff={this.updateOff}
+                        token={this.props.token}
+                        fetchCounselors={this.fetchCounselors}
+                    />
+            ) : (
+            <></>
+            )}
             </>
         }
             </div>
