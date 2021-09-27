@@ -14,9 +14,9 @@ export const GlobalStyle = createGlobalStyle`
         background-color: #999999;
     }
 
-    .container {
-        margin: 3em;
-    }
+    // .container {
+    //     margin: 3em;
+    // }
 
     .card {
         background-color: transparent !important;
@@ -30,6 +30,11 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: center
     }
 
+    .sitebar {
+        background-color: transparent !important;
+        position: fixed
+    }
+
     .modal-header {
         background-color: #999999 !important;
     }
@@ -41,7 +46,9 @@ export const GlobalStyle = createGlobalStyle`
     button {
         margin: 1em;
         background-color: transparent !important;
-        border: 1px solid white !important
+        border: 1px solid white !important;
+        border-radius: 20px !important;
+
     }
 
     button:hover {
@@ -90,6 +97,17 @@ export const GlobalStyle = createGlobalStyle`
     .chapter {
         filter: brightness(50%) !important;
     }
+
+    // .container {
+    //     margin-top: 5em;
+    // }
+
+    @media (min-width: 656px) {
+        .table-responsive {
+            overflow: visible
+        }
+    }
+
 `
 
 export const Container = styled.div`

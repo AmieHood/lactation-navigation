@@ -55,6 +55,8 @@ class ProfileEdit extends Component <ProfileEditProps, ProfileEditState> {
         }
 
         console.log(`updatedUserData --> ${updatedUserData.firstName} ${updatedUserData.lastName}`);
+        console.log(this.props.userToUpdate.id);
+        
 
         fetch(`http://localhost:3000/user/${this.props.userToUpdate.id}`, {
                     method: 'PUT',

@@ -46,57 +46,52 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
     render() {
         return (
         <>
-            <Navbar className="sitebar" expand="md">
+            <Navbar className="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 " expand="lg">
             <img style={logoStyle} src={logo} alt=''/>
-            <NavbarBrand href="/" className="mr-auto sitebar">
-                Lactation Navigation
-            </NavbarBrand>
             <NavbarToggler onClick={this.toggle} className="mr-2">
                 <div id="close-icon" className={!this.state.isOpen ? "" : "open"}>
-                <span></span>
-                <span></span>
-                <span></span>
+                <span className='navbar-toggler-icon'></span>
+                {/* <span></span>
+                <span></span> */}
                 </div>
             </NavbarToggler>
             <Collapse isOpen={!this.state.isOpen} navbar>
                 <Nav className="mr-auto sitebar" navbar>
                 <NavItem>
-                    <NavLink onClick={this.toggle}>
-                    <Link to="/" className="navbar-logo sitebar">
-                        Home
-                    </Link>
+                    <NavLink to="/" onClick={this.toggle}>
+                    <Link to="/" className='nav-link text-white nav-item' >Home</Link>
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink to="/portal" onClick={this.toggle}>
-                    <Link to="/portal">Log In</Link>
+                    <Link to="/portal" className='nav-link text-white nav-item'>Log In</Link>
                     </NavLink>
                 </NavItem>
                 <NavItem>
                     <NavLink to="/findchapter" onClick={this.toggle}>
-                    <Link to="/findchapter">Find Support</Link>
+                    <Link to="/findchapter" className='nav-link text-white nav-item'>Find Support</Link>
                     </NavLink>
                 </NavItem>
                 {this.props.token ? (
                     <>
                     <NavItem>
                         <NavLink to="/user" onClick={this.toggle}>
-                        <Link to="/user">Profile</Link>
+                        <Link to="/user" className='nav-link text-white nav-item' >Profile</Link>
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink to="/chapter" onClick={this.toggle}>
-                        <Link to="/chapter">Chapter</Link>
+                        <Link to="/chapter" className='nav-link text-white nav-item'>Chapter</Link>
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink to="/counselor" onClick={this.toggle}>
-                        <Link to="/counselor">Counselor</Link>
+                        <Link to="/counselor" className='nav-link text-white nav-item' >Counselor</Link>
                         </NavLink>
                     </NavItem>
                     <NavItem>
                         <NavLink to="/" onClick={this.props.clickLogout}>
-                        <Link to="/">Log Out</Link>
+                        <Link to="/" className='nav-link text-white nav-item' onClick={this.toggle}>Log Out</Link>
                         </NavLink>
                     </NavItem>
                     </>

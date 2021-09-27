@@ -6,6 +6,7 @@ import { Redirect } from 'react-router-dom'
 
 type SignupProps = {
     updateToken: (newToken: string) => void
+
 }
 
 export type SignupState = {

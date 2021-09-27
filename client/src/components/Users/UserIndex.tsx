@@ -1,12 +1,13 @@
 import React from "react";
 import { Component } from "react";
-import { Container, Col, Row } from 'reactstrap';
+import { Container, Col, Row, Card, CardImg, CardBody, CardTitle } from 'reactstrap';
 import APIURL from "../../utils/Environment";
 import { User } from '../../types'
 import UserEdit from './UserEdit'
 import UserTable from './UserTable'
 import ProfileEdit from './ProfileEdit'
 import { Redirect } from 'react-router-dom'
+import logo from '../../assets/info.jpg'
 
 type UserIndexProps = {
     token: string
@@ -109,7 +110,13 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
     render(){
         return(
             <div>
-            <Container>
+                <Card className='card'>
+                    <CardImg className='all-cards' top width="100%" src={logo} alt="Card image cap" />
+                    <CardBody className='all-cards'>
+                        <CardTitle className='card-img-overlay' tag="h1">User Profiles</CardTitle>
+                    </CardBody>
+                </Card>
+            {/* <Container>
                 <Row>
                     <Col md='9'>
                         <ProfileEdit
@@ -118,7 +125,7 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                             />
                     </Col>
                 </Row>
-            </Container>
+            </Container> */}
             {this.state.failed
             ? <Redirect to="/user" />
             :

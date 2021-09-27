@@ -48,7 +48,7 @@ router.put('/:id', validateJWT, async(req, res) => {
 })
 
 // get all Chapters (working)
-router.get('/all', validateJWT, async (req, res) => {
+router.get('/all', async (req, res) => {
     try {
         const all = await Chapter.findAll()
         res.json(all)

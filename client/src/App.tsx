@@ -27,7 +27,7 @@ class App extends Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
-      token: localStorage.getItem("token") || "" 
+      token: localStorage.getItem("token") || "",
     };
   }
 

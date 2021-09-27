@@ -36,7 +36,7 @@ type Props = {
             {this.state.showLogin ? (
             <>
             <Col md="6" className="login-col">
-            <Login updateToken={this.props.updateToken} />
+            <Login updateToken={this.props.updateToken}  />
             </Col>
             <Link to="/portal"><Button onClick={this.toggle}>Sign Up Here</Button></Link>
             </>

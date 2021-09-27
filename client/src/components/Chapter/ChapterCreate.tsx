@@ -1,7 +1,7 @@
 import React from "react";
 import { Component } from "react";
 // import {SignupState} from '../Auth/Signup'
-import { Form, Button, FormGroup, Label, Input, Card, CardImg, CardBody, CardTitle } from 'reactstrap';
+import { Form, Button, FormGroup, Label, Input, Card, CardImg, CardBody, CardTitle, CardImgOverlay } from 'reactstrap';
 import logo from '../../assets/createChapter.jpg'
 import { Chapter } from '../../types'
 
@@ -80,10 +80,12 @@ class ChapterCreate extends Component <ChapterProps, Chapter> {
         return(
             <>
                 <div>
-                <Card className='card'>
-                        <CardImg className='all-cards chapter' top width="100%" src={logo} alt="Card image cap" />
+                <Card inverse>
+                        <CardImg className='chapter' width="100%" src={logo} alt="Card image cap" />
+                        <CardImgOverlay>
+                            <CardTitle tag="h1">Create New Chapter</CardTitle>
+                        </CardImgOverlay>
                         <CardBody className='all-cards'>
-                            <CardTitle className='card-img-overlay' tag="h1">Create New Chapter</CardTitle>
                         </CardBody>
                     </Card>
                     <Form onSubmit={this.handleSubmit}>

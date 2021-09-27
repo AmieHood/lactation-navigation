@@ -67,7 +67,7 @@ class ChapterTable extends Component<ChapterTableProps, {}> {
             <>
                 <h3>Chapter List</h3>
                 <hr />
-                <Table striped>
+                <Table className='table-responsive' responsive hover>
                 <thead>
                     <tr>
                         <th>#</th>
