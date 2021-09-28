@@ -23,16 +23,18 @@ router.post('/create', validateJWT, async (req, res) => {
     }
 })
 
+//validate Counselor role 
 router.get('/validate', validateJWT, async (req, res) => {
     try {
         let validatedUser = await Counselor.findOne({ where: { UserId: req.user.id}})
         if (validatedUser) res.send(validatedUser)
+        console.log(validatedUser);
     } catch (error) {
         res.json({error})
     }
 })
 
-//update Counselor //!working but have to add counselor id to endpoint. Need to figure out how to just reference token
+//update Counselor
 router.put('/:id', validateJWT, async(req, res) => {
     const { dateAccredited } = req.body
     // const {id} = req.params
@@ -50,6 +52,16 @@ router.put('/:id', validateJWT, async(req, res) => {
     }
 })
 
+//get all Counselors by UserId
+// router.get('/byuser', async (req, res) => {
+//     try {
+//         const all = await Counselor.findAll({ where: { UserId: req.user.id}})
+//         res.json(all)
+//     } catch (error) {
+//         res.json({ error})
+//     }
+// })
+
 // get all Counselors (working)
 router.get('/all', async (req, res) => {
     try {
@@ -64,14 +76,14 @@ router.get('/all', async (req, res) => {
 //!Note for the UserId below: although sequelize docs indicate userId would be camel case, pg admin creates them in pascal casing. 
 //!If you are having sequelize errors, consider switching to camel case. 
 
-// router.get('/user/:id', async(req, res) => {
-//     try {
-//         const counselor = await Counselor.findOne({where: {UserId: req.params.id}})
-//         res.json(counselor)
-//     } catch (error) {
-//         res.json({ error})
-//     }
-// })
+router.get('/user/:id', async(req, res) => {
+    try {
+        const counselor = await Counselor.findOne({where: {role: Counselor}})
+        res.json(counselor)
+    } catch (error) {
+        res.json({ error})
+    }
+})
 
 //get one Counselor (working)
 router.get('/:id', async(req, res) => {
