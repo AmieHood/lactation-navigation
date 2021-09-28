@@ -37,7 +37,7 @@ class ChapterTable extends Component<ChapterTableProps, {}> {
                 <td>{chapter.chapterCity}</td>
                 <td>{chapter.chapterState}</td>
                 <td>{chapter.chapterPhone}</td>
-                <td>{chapter.chapterWebsite}</td>
+                {/* <td>{chapter.chapterWebsite}</td> */}
                 <td>
                     <Button
                         color='warning'
@@ -75,7 +75,7 @@ class ChapterTable extends Component<ChapterTableProps, {}> {
                         <th>City</th>
                         <th>State</th>
                         <th>Phone</th>
-                        <th>Website</th>
+                        {/* <th>Website</th> */}
                     </tr>
                 </thead>
                 <tbody>{this.chapterMapper()}</tbody>

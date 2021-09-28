@@ -20,6 +20,7 @@ const logoStyle = {
 type SitebarProps = {
     clickLogout: () => void;
     token: string;
+    isCounselor: boolean
 };
 
 type SitebarState = {
@@ -48,34 +49,34 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
         this.setState({ click: !this.state.click });
     };
 
-    fetchCounselor = async (): Promise<void> => {
-        console.info('working?')
-        console.info(`${APIURL}/counselor`)
-        try {
-            let res = await fetch(`${APIURL}/counselor/validate`, {
-                headers: new Headers ({
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${this.props.token}`
-                })
-            })
-                let Counselor = await res.json()
-                // let Counselor = json
-                console.info(Counselor)
-                // console.info(json)
-            if (Counselor === null){
-                this.setState({failed: true})
-                return
-            } else {
-                this.setState({ failed: false})
-        }
-        } catch (error) {
-        console.error(error)
-        this.setState({ failed: true})
-        }
-    }
+    // fetchCounselor = async (): Promise<void> => {
+    //     console.info('working?')
+    //     console.info(`${APIURL}/counselor`)
+    //     try {
+    //         let res = await fetch(`${APIURL}/counselor/validate`, {
+    //             headers: new Headers ({
+    //                 'Content-Type': 'application/json',
+    //                 Authorization: `Bearer ${this.props.token}`
+    //             })
+    //         })
+    //             let Counselor = await res.json()
+    //             // let Counselor = json
+    //             console.info(Counselor)
+    //             // console.info(json)
+    //         if (Counselor === null){
+    //             this.setState({failed: true})
+    //             return
+    //         } else {
+    //             this.setState({ failed: false})
+    //     }
+    //     } catch (error) {
+    //     console.error(error)
+    //     this.setState({ failed: true})
+    //     }
+    // }
     
     componentDidMount(){
-            this.fetchCounselor()
+            
     }
 
     render() {
@@ -91,8 +92,8 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
             </NavbarToggler>
             <Collapse isOpen={!this.state.isOpen} navbar>
                 <Nav className="mr-auto sitebar" navbar> 
-                              
-                {this.props.token && !this.state.failed ? (
+
+                {this.props.token && this.props.isCounselor ? (
                     <>
                     <NavItem>
                         <NavLink to="/user" onClick={this.toggle}>
@@ -115,17 +116,12 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
                         </NavLink>
                     </NavItem>
                     </>
-                ) : this.props.token && this.state.failed ?
+                ) : this.props.token && !this.props.isCounselor ?
                 (
                     <>
                     <NavItem>
                         <NavLink to="/user" onClick={this.toggle}>
                         <Link to="/user" className='nav-link text-white nav-item' >Profile</Link>
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink to="/counselor" onClick={this.toggle}>
-                        <Link to="/counselor" className='nav-link text-white nav-item' >Counselor</Link>
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -138,14 +134,9 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
                 :
                 (
                     <>
-                     <NavItem>
+                    <NavItem>
                     <NavLink to="/findchapter" onClick={this.toggle}>
                     <Link to="/findchapter" className='nav-link text-white nav-item'>Find Support</Link>
-                    </NavLink>
-                </NavItem>
-                     <NavItem>
-                    <NavLink to="/donate" onClick={this.toggle}>
-                    <Link to="/donate" className='nav-link text-white nav-item'>Find Support</Link>
                     </NavLink>
                 </NavItem>
                 <NavItem>

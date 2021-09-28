@@ -9,6 +9,8 @@ import { Redirect } from "react-router";
 
 type ChapterIndexProps = {
     token: string
+    isCounselor: boolean
+
 }
 
 type ChapterIndexState = {
@@ -64,52 +66,49 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
         this.setState({ updateActive: false })
     }
 
-    // componentDidMount = (): void => {
-    //     this.fetchChapters()
-    // }
-
-    async componentDidMount(){
-        console.info('working?')
-        console.info(`${APIURL}/counselor`)
-        try {
-                let res = await fetch(`${APIURL}/counselor/validate`, {
-                    headers: new Headers ({
-                        'Content-Type': 'application/json',
-                        Authorization: `Bearer ${this.props.token}`
-                    })
-                })
-                    let json = await res.json()
-                    let Counselor = json
-                    console.info(Counselor)
-                    console.info(json)
-                if (Counselor == null){
-                    this.setState({failed: true})
-                    return
-                } else {
-                    this.setState({ failed: false})
-                    this.fetchChapters()
-                }
-        } catch (error) {
-            console.error(error)
-            this.setState({ failed: true})
-        }
+    componentDidMount = (): void => {
+        this.fetchChapters()
     }
+
+    // async componentDidMount(){
+    //     console.info('working?')
+    //     console.info(`${APIURL}/counselor`)
+    //     try {
+    //             let res = await fetch(`${APIURL}/counselor/validate`, {
+    //                 headers: new Headers ({
+    //                     'Content-Type': 'application/json',
+    //                     Authorization: `Bearer ${this.props.token}`
+    //                 })
+    //             })
+    //                 let json = await res.json()
+    //                 let Counselor = json
+    //                 console.info(Counselor)
+    //                 console.info(json)
+    //             if (Counselor == null){
+    //                 this.setState({failed: true})
+    //                 return
+    //             } else {
+    //                 this.setState({ failed: false})
+    //                 this.fetchChapters()
+    //             }
+    //     } catch (error) {
+    //         console.error(error)
+    //         this.setState({ failed: true})
+    //     }
+    // }
 
     
     render(){
         return(
             
             <>
-            {this.state.failed
+            {this.props.token && this.props.isCounselor
             ?
-            <Redirect to='/' />
-            :
             <>
             <ChapterCreate
             fetchChapters={this.fetchChapters}
             token={this.props.token}
             />
-           
             <ChapterTable
             chapters={this.state.chapters}
             editUpdateChapter={this.editUpdateChapter}
@@ -128,7 +127,9 @@ class ChapterIndex extends Component <ChapterIndexProps, ChapterIndexState> {
                 ) : (
                     <></>
                     )}
-                    </>
+            </>
+            :
+            <></>
                 }   
             </> 
             

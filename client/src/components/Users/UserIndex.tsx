@@ -10,6 +10,7 @@ import logo from '../../assets/info.jpg'
 
 type UserIndexProps = {
     token: string
+    isCounselor: boolean
 }
 
 type UserIndexState = {
@@ -125,8 +126,8 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                     </Col>
                 </Row>
             </Container> */}
-            {this.state.failed
-            ? <Redirect to="/user" />
+            {!this.props.isCounselor
+            ? <Redirect to="/" />
             :
             <Container>
                 <Row>

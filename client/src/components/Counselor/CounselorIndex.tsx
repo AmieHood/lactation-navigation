@@ -9,6 +9,8 @@ import CounselorTable from './CounselorTable'
 
 type CounselorIndexProps = {
     token: string
+    isCounselor: boolean
+
 }
 
 type CounselorIndexState = {
@@ -65,35 +67,35 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
         this.setState({ updateActive: false })
     }
 
-    fetchCounselor = async (): Promise<void> => {
-        console.info('working?')
-        console.info(`${APIURL}/counselor`)
-        try {
-            let res = await fetch(`${APIURL}/counselor/validate`, {
-                headers: new Headers ({
-                    'Content-Type': 'application/json',
-                    Authorization: `Bearer ${this.props.token}`
-                })
-            })
-                let Counselor = await res.json()
-                // let Counselor = json
-                console.info(Counselor)
-                // console.info(json)
-            if (Counselor === null){
-                this.setState({failed: true})
-                return
-            } else {
-                this.setState({ failed: false})
-                this.fetchCounselors()
-        }
-        } catch (error) {
-        console.error(error)
-        this.setState({ failed: true})
-        }
-    }
+    // fetchCounselor = async (): Promise<void> => {
+    //     console.info('working?')
+    //     console.info(`${APIURL}/counselor`)
+    //     try {
+    //         let res = await fetch(`${APIURL}/counselor/validate`, {
+    //             headers: new Headers ({
+    //                 'Content-Type': 'application/json',
+    //                 Authorization: `Bearer ${this.props.token}`
+    //             })
+    //         })
+    //             let Counselor = await res.json()
+    //             // let Counselor = json
+    //             console.info(Counselor)
+    //             // console.info(json)
+    //         if (Counselor === null){
+    //             this.setState({failed: true})
+    //             return
+    //         } else {
+    //             this.setState({ failed: false})
+    //             this.fetchCounselors()
+    //     }
+    //     } catch (error) {
+    //     console.error(error)
+    //     this.setState({ failed: true})
+    //     }
+    // }
     
     componentDidMount(){
-            this.fetchCounselor()
+            this.fetchCounselors()
     }
 
 
@@ -101,15 +103,14 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
     render(){
         return(
             <div>
+        {                   
+          this.props.token && this.props.isCounselor
+            ? 
+            <>
                 <CounselorCreate
                     fetchCounselors={this.fetchCounselors}
                     token={this.props.token}
                     />
-        {                   
-            this.state.failed
-            ? <Redirect to="/counselor" /> 
-            :  
-            <> 
                 <CounselorTable
                     counselors={this.state.counselors}
                     editUpdateCounselor={this.editUpdateCounselor}
@@ -128,6 +129,8 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
             <></>
             )}
             </>
+            : 
+            <></>
         }
             </div>
         )
