@@ -1,4 +1,5 @@
 import styled, { createGlobalStyle } from 'styled-components'
+import logo from './assets/logo.jpg'
 
 export const GlobalStyle = createGlobalStyle`
     html {
@@ -171,6 +172,30 @@ export const GlobalStyle = createGlobalStyle`
     }
     
     tr:nth-child(even){background-color: #f2f2f2}
+
+    .cardsContainer {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+
+        @media only screen and (max-width: 600px){
+            max-width: 100vw
+        }
+
+    }
+
+    .chapter-cards {
+        background-color: #218e8a !important;
+        // background-image: url(${logo}) !important;
+        // background-size: cover;
+        // background-repeat: no-repeat;
+        // height: 100vh;
+        // width: 100vw;
+        margin: auto;
+        justify-content: center;
+        align-items: center;
+        margin: 1em
+    }
 
 `
 

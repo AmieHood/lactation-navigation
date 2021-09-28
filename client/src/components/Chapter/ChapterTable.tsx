@@ -32,12 +32,8 @@ class ChapterTable extends Component<ChapterTableProps, {}> {
         return this.props.chapters.map((chapter: Chapter, index: number) => {
             return (
                 <tr key={index}>
-                <th scope='row'>{chapter.id}</th>
                 <td>{chapter.chapterName}</td>
-                <td>{chapter.chapterCity}</td>
                 <td>{chapter.chapterState}</td>
-                <td>{chapter.chapterPhone}</td>
-                {/* <td>{chapter.chapterWebsite}</td> */}
                 <td>
                     <Button
                         color='warning'
@@ -70,12 +66,8 @@ class ChapterTable extends Component<ChapterTableProps, {}> {
                 <Table responsive hover>
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>Chapter Name</th>
-                        <th>City</th>
                         <th>State</th>
-                        <th>Phone</th>
-                        {/* <th>Website</th> */}
                     </tr>
                 </thead>
                 <tbody>{this.chapterMapper()}</tbody>

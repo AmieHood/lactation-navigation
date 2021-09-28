@@ -36,7 +36,6 @@ class CounselorTable extends Component<CounselorTableProps, {}> {
         return this.props.counselors.map((counselor: Counselor, index: number) => {
             return (
                 <tr key={index}>
-                <th scope='row'>{counselor.id}</th>
                 <td>{counselor.dateAccredited}</td>
                 <td>{counselor.role}</td>
                 <td>
@@ -63,48 +62,16 @@ class CounselorTable extends Component<CounselorTableProps, {}> {
         })
     }
 
-//     async componentDidMount(){
-//         console.info('working?')
-//         console.info(`${APIURL}/counselor`)
-//         try {
-//                 let res = await fetch(`${APIURL}/counselor/validate`, {
-//                     headers: new Headers ({
-//                         'Content-Type': 'application/json',
-//                         Authorization: `Bearer ${this.props.token}`
-//                     })
-//                 })
-//                     let json = await res.json()
-//                     let Counselor = json
-//                     console.info(Counselor)
-//                     console.info(json)
-//                 if (Counselor == null){
-//                     this.setState({failed: true})
-//                     return
-//                 } else {
-//                     this.setState({ failed: false})
-//                     this.counselorMapper()
-//     }
-// } catch (error) {
-//     console.error(error)
-//     this.setState({ failed: true})
-// }
-// }
-
 
     render() {
 
-        return (
-            // {
-            //  this.state.failed
-            // ? <> </> 
-            // :   
+        return (   
             <>
             <h3>Counselor List</h3>
             <hr />
-            <Table striped>
+            <Table responsive hover>
             <thead>
             <tr>
-            <th>#</th>
             <th>Date Accredited</th>
             <th>Role</th>
             </tr>

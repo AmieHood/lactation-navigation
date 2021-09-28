@@ -26,10 +26,8 @@ class UserTable extends Component<UserTableProps, {}> {
         return this.props.users.map((user: User, index: number) => {
             return (
                 <tr key={index}>
-                <th scope='row'>{user.id}</th>
                 <td>{user.firstName}</td>
                 <td>{user.lastName}</td>
-                <td>{user.email}</td>
                 <td>
                     <Button
                         color='warning'
@@ -59,13 +57,11 @@ class UserTable extends Component<UserTableProps, {}> {
             <>
                 <h3>User List</h3>
                 <hr />
-                <Table striped>
+                <Table responsive hover>
                 <thead>
                     <tr>
-                        <th>#</th>
                         <th>First Name</th>
                         <th>Last Name</th>
-                        <th>Email</th>
                     </tr>
                 </thead>
                 <tbody>{this.userMapper()}</tbody>

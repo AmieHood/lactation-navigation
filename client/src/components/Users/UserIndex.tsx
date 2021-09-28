@@ -116,16 +116,6 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                         <CardTitle className='card-img-overlay' tag="h1">User Profiles</CardTitle>
                     </CardBody>
                 </Card>
-            {/* <Container>
-                <Row>
-                    <Col md='9'>
-                        <ProfileEdit
-                            userToUpdate={this.state.userToUpdate}
-                            token={this.props.token}
-                            />
-                    </Col>
-                </Row>
-            </Container> */}
             {!this.props.isCounselor
             ? <Redirect to="/" />
             :

@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
-import { Input, Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, Card, CardImg, CardBody, CardTitle } from 'reactstrap'
+import { Input, Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, CardDeck, Card, CardImg, CardBody, CardTitle, CardText, CardImgOverlay, CardColumns } from 'reactstrap'
 import { Chapter } from '../../types'
 import { States } from '../../types'
 import logo from '../../assets/findchapter.jpg'
+import { findByLabelText } from '@testing-library/dom'
+import bfusalogo from '../../assets/logo.png'
 
 type FindChapterProps = {
     // chapters: Chapter[]
@@ -15,8 +17,6 @@ type FindChapterState = {
     states: States | null
     allChapters: Chapter[]
 }
-
-
 
 class FindChapter extends Component<FindChapterProps, FindChapterState> {
     constructor(props: FindChapterProps) {
@@ -66,14 +66,16 @@ class FindChapter extends Component<FindChapterProps, FindChapterState> {
     chapterMapper = (): JSX.Element[] => {
         return this.state.chapters.map((chapter: Chapter, index: number) => {
         return (
-            <tr key={index}>
-            {/* <th scope='row'>{chapter.id}</th> */}
-            <td>{chapter.chapterName}</td>
-            <td>{chapter.chapterCity}</td>
-            <td>{chapter.chapterState}</td>
-            <td>{chapter.chapterPhone}</td>
-            {/* <td>{chapter.chapterWebsite}</td> */}
-            </tr>
+            <Card size='xs' className='chapter-cards' key={index}>
+                <CardImg top width="25%" src={bfusalogo} />
+                <CardBody>
+                    <CardTitle>{chapter.chapterName}</CardTitle>
+                    <CardText>{chapter.chapterCity}</CardText>
+                    <CardText>{chapter.chapterState}</CardText>
+                    <CardText>{chapter.chapterPhone}</CardText>
+                    <CardText>{chapter.chapterWebsite}</CardText>
+                </CardBody>
+            </Card>
         )
         })
     }
@@ -93,8 +95,8 @@ class FindChapter extends Component<FindChapterProps, FindChapterState> {
     
     render() {
         return (
-            <>
-            <Card className='card'>
+            <div>
+            <Card>
                 <CardImg className='all-cards' top width="100%" src={logo} alt="Card image cap" />
                 <CardBody className='all-cards'>
                     <CardTitle className='card-img-overlay' tag="h1">Find a Chapter Near You</CardTitle>
@@ -110,30 +112,11 @@ class FindChapter extends Component<FindChapterProps, FindChapterState> {
             <hr />
             <div>
                 <Input placeholder="Search by State Abbreviation" onChange={this.filterChapters} />
-
-
-                {/* <ResourceCards
-                    resources={this.state.resources}
-                    editResource={this.editResource}
-                    token={this.props.token}
-                    updateOn={this.updateOn}
-                    fetchResources={this.fetchResources}
-                /> */}
             </div>
-            <Table responsive>
-            <thead>
-                <tr>
-                    {/* <th>#</th> */}
-                    <th>Chapter Name</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>Phone</th>
-                    {/* <th>Website</th> */}
-                </tr>
-            </thead>
-            <tbody>{this.chapterMapper()}</tbody>
-            </Table>
-            </>
+            <div className='cardsContainer'>
+                        {this.chapterMapper()}
+            </div>
+            </div>
         )
     }
 }

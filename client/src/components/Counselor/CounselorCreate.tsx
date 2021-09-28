@@ -3,6 +3,10 @@ import { Form, Button, FormGroup, Label, Input, Card, CardBody, CardImg, CardTit
 import logo from '../../assets/beach.jpg'
 import { Counselor } from '../../types'
 
+let dateInput = {
+    width: '50%'
+}
+
 type CounselorProps = {
     fetchCounselors: () => void
     token: string
@@ -68,18 +72,17 @@ class CounselorCreate extends Component <CounselorProps, Counselor> {
                     <Card className='card'>
                         <CardImg className='all-cards' top width="100%" src={logo} alt="Card image cap" />
                         <CardBody className='all-cards'>
-                            <CardTitle className='card-img-overlay' tag="h1">Create New Counselor</CardTitle>
+                            <CardTitle className='card-img-overlay' tag="h1">Become a Breastfeeding USA Counselor</CardTitle>
                         </CardBody>
                     </Card>
                     <Form onSubmit={this.handleSubmit}>
                     <FormGroup>
                         <Label htmlFor="dateAccredited">Date Accredited</Label>
-                        <Input type='date' name='dateAccredited' onChange={this.handleChange} value={this.state.dateAccredited}/>
+                        <Input style={dateInput} type='date' name='dateAccredited' onChange={this.handleChange} value={this.state.dateAccredited}/>
                     </FormGroup>
                         <Button>Create Counselor</Button>
                     </Form>
                 </div> 
-            
             )
         }
     }

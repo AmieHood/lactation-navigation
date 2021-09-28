@@ -66,45 +66,16 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
     updateOff = (): void => {
         this.setState({ updateActive: false })
     }
-
-    // fetchCounselor = async (): Promise<void> => {
-    //     console.info('working?')
-    //     console.info(`${APIURL}/counselor`)
-    //     try {
-    //         let res = await fetch(`${APIURL}/counselor/validate`, {
-    //             headers: new Headers ({
-    //                 'Content-Type': 'application/json',
-    //                 Authorization: `Bearer ${this.props.token}`
-    //             })
-    //         })
-    //             let Counselor = await res.json()
-    //             // let Counselor = json
-    //             console.info(Counselor)
-    //             // console.info(json)
-    //         if (Counselor === null){
-    //             this.setState({failed: true})
-    //             return
-    //         } else {
-    //             this.setState({ failed: false})
-    //             this.fetchCounselors()
-    //     }
-    //     } catch (error) {
-    //     console.error(error)
-    //     this.setState({ failed: true})
-    //     }
-    // }
     
     componentDidMount(){
             this.fetchCounselors()
     }
 
-
-    
     render(){
         return(
             <div>
         {                   
-          this.props.token && this.props.isCounselor
+            this.props.token && this.props.isCounselor
             ? 
             <>
                 <CounselorCreate
