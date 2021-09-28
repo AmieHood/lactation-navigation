@@ -75,14 +75,13 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
         return(
             <div>
         {                   
-            this.props.token && this.props.isCounselor
-            ? 
+            this.props.token ? 
             <>
                 <CounselorCreate
                     fetchCounselors={this.fetchCounselors}
                     token={this.props.token}
                     />
-                <CounselorTable
+                {/* <CounselorTable
                     counselors={this.state.counselors}
                     editUpdateCounselor={this.editUpdateCounselor}
                     updateOn={this.updateOn}
@@ -98,7 +97,7 @@ class CounselorIndex extends Component <CounselorIndexProps, CounselorIndexState
                     />
             ) : (
             <></>
-            )}
+            )} */}
             </>
             : 
             <></>

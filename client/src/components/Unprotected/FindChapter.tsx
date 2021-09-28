@@ -69,11 +69,11 @@ class FindChapter extends Component<FindChapterProps, FindChapterState> {
             <Card size='xs' className='chapter-cards' key={index}>
                 <CardImg top width="25%" src={bfusalogo} />
                 <CardBody>
-                    <CardTitle>{chapter.chapterName}</CardTitle>
+                    <CardTitle tag='h2'>{chapter.chapterName}</CardTitle>
                     <CardText>{chapter.chapterCity}</CardText>
                     <CardText>{chapter.chapterState}</CardText>
                     <CardText>{chapter.chapterPhone}</CardText>
-                    <CardText>{chapter.chapterWebsite}</CardText>
+                    <CardText><a href={chapter.chapterWebsite} target='_blank'>{chapter.chapterWebsite}</a></CardText>
                 </CardBody>
             </Card>
         )
@@ -114,7 +114,7 @@ class FindChapter extends Component<FindChapterProps, FindChapterState> {
                 <Input placeholder="Search by State Abbreviation" onChange={this.filterChapters} />
             </div>
             <div className='cardsContainer'>
-                        {this.chapterMapper()}
+                {this.chapterMapper()}
             </div>
             </div>
         )

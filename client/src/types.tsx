@@ -6,6 +6,14 @@ export type Counselor = {
     id?: number,
 }
 
+export type Counselor2 = {
+    dateAccredited: string
+    role: string | null
+    token: string
+    id?: number,
+    UserId: number
+}
+
 export interface Chapter {
     chapterName: string
     chapterCity: string
@@ -22,8 +30,19 @@ export interface User {
     password: string,
     confirmPassword: string,
     emailValid: boolean, 
-    message: string
+    message: string,
     id?: number
+}
+
+export interface User2 {
+    firstName: string,
+    lastName: string, 
+    email: string, 
+    password: string,
+    confirmPassword: string,
+    emailValid: boolean, 
+    message: string,
+    id: number
 }
 
 export interface States {

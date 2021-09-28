@@ -177,6 +177,7 @@ export const GlobalStyle = createGlobalStyle`
         display: flex;
         justify-content: space-around;
         flex-wrap: wrap;
+        align-items: center;
 
         @media only screen and (max-width: 600px){
             max-width: 100vw
@@ -185,7 +186,7 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     .chapter-cards {
-        background-color: #218e8a !important;
+        background-color: #3b054f !important;
         // background-image: url(${logo}) !important;
         // background-size: cover;
         // background-repeat: no-repeat;
@@ -194,7 +195,8 @@ export const GlobalStyle = createGlobalStyle`
         margin: auto;
         justify-content: center;
         align-items: center;
-        margin: 1em
+        margin: 1em;
+        border-radius: 10px
     }
 
 `

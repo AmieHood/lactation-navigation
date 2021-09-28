@@ -48,32 +48,6 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
     handleClick = () => {
         this.setState({ click: !this.state.click });
     };
-
-    // fetchCounselor = async (): Promise<void> => {
-    //     console.info('working?')
-    //     console.info(`${APIURL}/counselor`)
-    //     try {
-    //         let res = await fetch(`${APIURL}/counselor/validate`, {
-    //             headers: new Headers ({
-    //                 'Content-Type': 'application/json',
-    //                 Authorization: `Bearer ${this.props.token}`
-    //             })
-    //         })
-    //             let Counselor = await res.json()
-    //             // let Counselor = json
-    //             console.info(Counselor)
-    //             // console.info(json)
-    //         if (Counselor === null){
-    //             this.setState({failed: true})
-    //             return
-    //         } else {
-    //             this.setState({ failed: false})
-    //     }
-    //     } catch (error) {
-    //     console.error(error)
-    //     this.setState({ failed: true})
-    //     }
-    // }
     
     componentDidMount(){
             
