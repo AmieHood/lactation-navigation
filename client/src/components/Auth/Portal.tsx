@@ -31,27 +31,27 @@ type Props = {
     render() {
         return (
         <>
-        <Container>
-        <Row>
+        {/* <Container>
+        <Row> */}
             {this.state.showLogin ? (
             <>
-            <Col md="6" className="login-col">
+            {/* <Col md="6" className="login-col"> */}
             <Login updateToken={this.props.updateToken} setUser={this.props.setUser} />
-            </Col>
+            {/* </Col> */}
             <Link to="/portal"><Button onClick={this.toggle}>Sign Up Here</Button></Link>
             </>
             ) : (
             <>
-            <Col md="6" className="auth-container">
+            {/* <Col md="6" className="auth-container"> */}
             <Signup updateToken={this.props.updateToken} setUser={this.props.setUser}/>
-            </Col>
+            {/* </Col> */}
             <p>Already have an account?</p> 
             <Link to="/portal"><Button onClick={this.toggle}>Log In here.</Button>
             </Link>
             </>
             )}
-        </Row>
-        </Container>
+        {/* </Row> */}
+        {/* </Container> */}
         </>
         );
     }

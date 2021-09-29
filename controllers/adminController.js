@@ -1,3 +1,5 @@
+//?Keep this Model and controller for future updates
+
 // let express = require('express')
 // let router = express.Router()
 // const { User, Counselor, Chapter, Admin } = require('../models')
@@ -49,8 +51,7 @@
 // })
 
 // //get one Admin with User id
-// //!Note for the UserId below: although sequelize docs indicate userId would be camel case, pg admin creates them in pascal casing. 
-// //!If you are having sequelize errors, consider switching to camel case. 
+
 
 // // router.get('/user/:id', async(req, res) => {
 // //     try {

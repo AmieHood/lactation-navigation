@@ -9,7 +9,6 @@ const validateJWT = async (req, res, next) => {
             req.headers.authorization.includes("Bearer")
         ) {
             const { authorization } = req.headers; 
-            console.log("authorization -->", authorization);
             const payload = authorization 
                 ? jwt.verify(  
                     authorization.includes("Bearer") 
@@ -19,24 +18,16 @@ const validateJWT = async (req, res, next) => {
                 )
                 : undefined;
 
-            console.log("payload -->", payload);
-
 
             if (payload) { 
-                // if (payload.Role === 'User') {
                     let foundUser = await User.findOne({ where: { id: payload.id} }); 
-                    // console.log("foundUser -->", foundUser);
 
                     if (foundUser) { 
-                        // console.log("request -->", req);
                         req.user = foundUser;   
                         next(); 
                     } else {
                         res.status(400).send({ message: "Not Authorized" });
                     }
-                // } else if (payload.Role === 'Admin') {
-                //     let foundUser = await Admin.findOne( where: {id: payload.id })
-                // }
             } else {
                 res.status(401).send({ message: "Invalid token" });
             }

@@ -14,15 +14,13 @@ const Admin = DefineAdmin(sequelize, DataTypes)
 const Member = DefineMember(sequelize, DataTypes)
 
 User.hasOne(Counselor, {
-    //? probably don't want cascade here because it could delete Chapters
-    // onDelete: 'CASCADE'
 });
 Counselor.belongsTo(User);
 
 Chapter.hasMany(Counselor);
 Counselor.belongsTo(Chapter);
 
-//ignore
+//Set up for future updates
 User.hasOne(Admin, {
     onDelete: 'CASCADE'
 });
@@ -36,6 +34,5 @@ User.hasOne(Member, {
 });
 Member.belongsTo(User);
 
-// syncDb(sequelize, {alter: true})
 
 module.exports = { User, Counselor, Chapter, Admin, Member }

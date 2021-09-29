@@ -107,6 +107,7 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
             <div>
                 <Card className='card'>
                     <CardImg className='all-cards' top width="100%" src={logo} alt="Card image cap" />
+                    <p>Photo by Thea on Unsplash</p>
                     <CardBody className='all-cards'>
                         <CardTitle className='card-img-overlay' tag="h1">User Profiles</CardTitle>
                     </CardBody>

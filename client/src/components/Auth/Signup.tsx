@@ -85,8 +85,9 @@ class Signup extends Component <SignupProps, SignupState>{
         return(
             <>
             <div>
-                <Card className='card'>
+                <Card>
                     <CardImg className='all-cards' top width="100%" src={logo} alt="Card image cap" />
+                    <p>Photo by Kelly Sikkema on Unsplash</p>
                     <CardBody className='all-cards'>
                         <CardTitle className='card-img-overlay' tag="h1">Sign Up</CardTitle>
                     </CardBody>

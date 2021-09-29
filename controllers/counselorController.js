@@ -7,37 +7,36 @@ let validateJWT = require("../middleware/validate-jwt")
 router.post('/create', validateJWT, async (req, res) => {
     const userId = req.user.id
     const userRole = 'Counselor'
-
-    console.log(userId);
     try {
         let currentUser = await User.findOne({where: { id: userId}})
-        console.log(currentUser);
         let result = await currentUser.createCounselor({
             dateAccredited: req.body.dateAccredited, 
             role: userRole
         })
         res.json(result)
     } catch (error) {
-        console.log(error);
         res.json({ error })
     }
 })
 
 //validate Counselor role 
-router.get('/validate', validateJWT, async (req, res) => {
-    try {
-        let validatedUser = await Counselor.findOne({ where: { UserId: req.user.id}})
-        if (validatedUser) res.send(validatedUser)
-        console.log(validatedUser);
-    } catch (error) {
-        res.json({error})
-    }
-})
+// router.get('/validate', validateJWT, async (req, res) => {
+//     try {
+//         let validatedUser = await Counselor.findOne({ where: { UserId: req.user.id}})
+//         if (validatedUser) {
+//             res.status(200).json(validatedUser)
+//         } else {
+//             res.status(500).json({message: 'not found'})
+//         }
+
+//     } catch (error) {
+//         res.json({error})
+//     }
+// })
 
 //update Counselor
 router.put('/:id', validateJWT, async(req, res) => {
     const { dateAccredited } = req.body
-    // const {id} = req.params
     try {
     
     const updatedCounselor = {
@@ -47,22 +46,13 @@ router.put('/:id', validateJWT, async(req, res) => {
         const update = await Counselor.update(updatedCounselor, query)
         res.json(update)
     } catch (error) {
-        console.error(error)
         res.json({ error})
     }
 })
 
-//get all Counselors by UserId
-// router.get('/byuser', async (req, res) => {
-//     try {
-//         const all = await Counselor.findAll({ where: { UserId: req.user.id}})
-//         res.json(all)
-//     } catch (error) {
-//         res.json({ error})
-//     }
-// })
 
-// get all Counselors (working)
+
+// get all Counselors
 router.get('/all', async (req, res) => {
     try {
         const all = await Counselor.findAll()
@@ -85,7 +75,7 @@ router.get('/user/:id', async(req, res) => {
     }
 })
 
-//get one Counselor (working)
+//get one Counselor
 router.get('/:id', async(req, res) => {
     try {
         const one = await Counselor.findOne({where: { id: req.params.id}})
@@ -95,7 +85,7 @@ router.get('/:id', async(req, res) => {
     }
 })
 
-//Delete Counselor (working)
+//Delete Counselor
 router.delete('/:id', validateJWT, async(req, res) => {
     try {
         const deleteCounselor = await Counselor.destroy({where: { id: req.params.id}})

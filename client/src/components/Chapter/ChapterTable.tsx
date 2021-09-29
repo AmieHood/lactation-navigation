@@ -33,33 +33,6 @@ class ChapterTable extends Component<ChapterTableProps, ChapterTableState> {
             .then(() => this.props.fetchChapters())
     }
 
-    // deleteConfirmation = (e: React.FormEvent<HTMLFormElement>, chapter: Chapter) => {
-    //     e.preventDefault()
-
-    //     // fetch(`http://localhost:3000/chapter/${chapter.id}`, {
-    //     //     method: 'DELETE',
-    //     //     headers: new Headers({
-    //     //         'Content-Type': 'application/json',
-    //     //         Authorization: `Bearer ${this.props.token}`,
-    //     //     }),
-    //     // })
-    //     //     .then(() => this.props.fetchChapters())
-
-    //     return(
-    //         <>
-    //         <Modal isOpen={this.state.modal} toggle={this.toggle}>
-    //             <ModalHeader>Do you want to delete this Chapter?</ModalHeader>
-    //             <ModalFooter>
-    //                 <Button color="primary" onClick={this.deleteChapter}>Delete Chapter</Button>
-    //                 <Button color="secondary" onClick={this.toggle}>Cancel</Button>
-    //             </ModalFooter>
-
-
-    //         </Modal>
-    //         </>
-    //     )
-    // }
-
     toggle = () => {
         this.setState({modal: !this.state.modal})
     }
@@ -85,7 +58,6 @@ class ChapterTable extends Component<ChapterTableProps, ChapterTableState> {
                         outline color="danger"
                         onClick={() => {
                             this.deleteChapter(chapter)
-                            // this.deleteConfirmation()
                         }}
                     >
                         Delete

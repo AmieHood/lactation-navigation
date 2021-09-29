@@ -24,7 +24,8 @@ export const GlobalStyle = createGlobalStyle`
     .card-img-overlay {
         display: flex;
         align-items: center;
-        justify-content: center
+        justify-content: center;
+        padding: 1em;
     }
 
     .sitebar {
@@ -138,6 +139,16 @@ export const GlobalStyle = createGlobalStyle`
     .container {
         position: relative;
         text-align: center;
+        border-radius: 10px;
+        background-color: #cdcdcd;
+        box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+        cursor: pointer;
+    }
+
+    .container:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
     }
 
     .centered {
@@ -184,6 +195,16 @@ export const GlobalStyle = createGlobalStyle`
         align-items: center;
         margin: 1em;
         border-radius: 10px
+        background: #fff;
+        box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+        transition: .3s transform cubic-bezier(.155,1.105,.295,1.12),.3s box-shadow,.3s -webkit-transform cubic-bezier(.155,1.105,.295,1.12);
+        padding: 14px 80px 18px 36px;
+        cursor: pointer;
+    }
+
+    .chapter-cards:hover{
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
     }
 
     .form-styling {
@@ -194,6 +215,7 @@ export const GlobalStyle = createGlobalStyle`
         // justify-content: space-between;
         // padding-left: 5em
     }
+    
 
 
 `

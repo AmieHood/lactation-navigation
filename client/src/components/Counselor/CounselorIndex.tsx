@@ -3,8 +3,6 @@ import { Component } from "react";
 import { Counselor } from "../../types";
 import CounselorCreate from "./CounselorCreate";
 import { User } from "../../types";
-import { Redirect } from "react-router";
-import { Alert } from 'reactstrap'
 
 type CounselorIndexProps = {
     token: string;
@@ -65,7 +63,6 @@ class CounselorIndex extends Component<CounselorIndexProps, CounselorIndexState>
     }
 
     render() {
-        //! counselor role not working
         return (
         <div>
             {this.props.token ? (

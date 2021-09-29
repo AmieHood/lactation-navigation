@@ -65,6 +65,7 @@ class Login extends Component<LoginProps, SignupState> {
             <div>
                 <Card className='card'>
                     <CardImg className='all-cards' top width="100%" src={logo} alt="Card image cap" />
+                    <p>Photo by Kelly Sikkema on Unsplash</p>
                     <CardBody className='all-cards'>
                         <CardTitle className='card-img-overlay' tag="h1">Log In</CardTitle>
                     </CardBody>

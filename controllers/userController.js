@@ -1,6 +1,7 @@
 let express = require('express')
 let router = express.Router()
 const {User} = require('../models')
+const { Counselor } = require('../models')
 const { UniqueConstraintError } = require("sequelize/lib/errors")
 const jwt = require("jsonwebtoken")
 const bcrypt = require("bcryptjs")
@@ -8,9 +9,7 @@ const validateJWT = require('../middleware/validate-jwt')
 
 //Signup User account
 router.post("/signup", async (req, res) => {
-    const { email, password, firstName, lastName, userCity, userState, userPhone } = req.body
-    // const userRole = 'Admin'
-     
+    const { email, password, firstName, lastName, userCity, userState, userPhone } = req.body     
     try {
         const user = await User.create({
             email,
@@ -20,14 +19,10 @@ router.post("/signup", async (req, res) => {
             userCity,
             userState,
             userPhone,
-            // role: userRole
         })
-        console.log("user created" );
 
         let token = jwt.sign({id: user.id, email: user.email}, 
             process.env.JWT_SECRET, { expiresIn: 60 * 60 * 24})
-
-            console.log(token);
 
         res.status(201).json({
             message: "User successfully registered", 
@@ -36,7 +31,6 @@ router.post("/signup", async (req, res) => {
         })
 
     } catch(err) {
-        console.error(err); //! delete before submission
         if (err instanceof UniqueConstraintError){
             res.status(409).json({
                 message: "username already in use",
@@ -44,7 +38,6 @@ router.post("/signup", async (req, res) => {
         } else {
             res.status(500).json({
                 message: "Failed to register user",
-                error: err.message //! delete before submission
             })
         }
     }
@@ -58,7 +51,10 @@ router.post("/login", async (req, res) => {
         const loginUser = await User.findOne({
             where: {
                 email: email
-            }
+            },
+            include: 
+                Counselor
+            
         })
         if(loginUser){
             
@@ -91,7 +87,7 @@ router.post("/login", async (req, res) => {
 })
     
 
-//get all users (working)
+//get all users 
 router.get('/all', validateJWT, async (req, res) => {
     try{
         const all = await User.findAll()
@@ -101,7 +97,7 @@ router.get('/all', validateJWT, async (req, res) => {
     }
 })
 
-//get one user (working)
+//get one user
 
 router.get('/:id', validateJWT, async (req, res) => {
     try{
@@ -132,12 +128,11 @@ router.put('/:id', validateJWT, async(req, res) => {
         const update = await User.update(updatedUser, query)
         res.json(update)
     } catch (error) {
-        console.error(error)
         res.json({ error})
     }
 })
 
-//Delete User (working)
+//Delete User
 router.delete('/:id', validateJWT, async(req, res) => {
     try {
         const deleteUser = await User.destroy({where: { id: req.params.id}})

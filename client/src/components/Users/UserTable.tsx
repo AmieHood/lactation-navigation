@@ -74,7 +74,7 @@ type UserTableProps = {
             </td>
             <td>
                 <Button
-                color="warning"
+                outline color="success"
                 onClick={() => {
                     this.props.editUpdateUser(user);
                     this.props.updateOn();
@@ -83,7 +83,7 @@ type UserTableProps = {
                 Update
                 </Button>
                 <Button
-                color="danger"
+                outline color="danger"
                 onClick={() => {
                     this.deleteUser(user);
                 }}

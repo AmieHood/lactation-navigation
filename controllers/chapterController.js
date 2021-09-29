@@ -28,7 +28,6 @@ router.post("/create", validateJWT, async (req, res) => {
 //update Chapter //!Works if add ChapterId to endpoint
 router.put('/:id', validateJWT, async(req, res) => {
     const { chapterName, chapterCity, chapterState, chapterPhone, chapterWebsite } = req.body
-    // const userId = req.user.id
 
     const updatedChapter = {
         chapterName,
@@ -42,7 +41,6 @@ router.put('/:id', validateJWT, async(req, res) => {
         const update = await Chapter.update(updatedChapter, query)
         res.json(update)
     } catch (error) {
-        console.error(error)
         res.json({ error})
     }
 })

@@ -111,8 +111,8 @@ class UserEdit extends Component <UserEditProps, User> {
                                     <Input type='text' name='userPhone' onChange={this.handleChange} value={this.state.userPhone}/>
                                 </FormGroup>
                                 <FormGroup>
-                                    <Button type='submit'>Update Profile</Button>
-                                    <Button onClick={this.handleCancel}>Cancel</Button>
+                                    <Button outline color="success" type='submit'>Update Profile</Button>
+                                    <Button outline color="danger" onClick={this.handleCancel}>Cancel</Button>
                                 </FormGroup>
                                 </Form>
 

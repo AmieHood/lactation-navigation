@@ -14,8 +14,6 @@ import statement from '../assets/statement.jpg'
 import sleepresources from '../assets/sleepresources.jpg'
 import supplementation from '../assets/supplementation.jpg'
 import biologicalnorm from '../assets/biologicalnorm.jpeg'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fas } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
@@ -32,6 +30,10 @@ const Background = styled.div`
     @media screen and (max-width: 768px) {
         background-image: url(${BGImage});
     }
+
+    @media only screen and (min-width: 768px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1){
+        background-image: url(${BGImage});
+    }
 `
 
 const Text = styled.div`
@@ -44,7 +46,21 @@ const Text = styled.div`
     text-align: center;
     
 `
+const Icon = styled.div`
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100vw;
+    font-size: 5em;
+    
+    @media only screen and (min-width: 768px) and (max-width: 1024px) and (-webkit-min-device-pixel-ratio: 1){
+        margin-top: 5em
+    }
 
+    @media only screen and (min-width: 1200px){
+        margin-top: 6em
+    }
+`
 
 class Home extends Component {
 
@@ -60,7 +76,9 @@ class Home extends Component {
                         <h1>Support Begins Here</h1>
                         <Link to='/findchapter'><Button type='button'>Find a Local Chapter</Button></Link>
                     </Text>
-                        <FontAwesomeIcon style={{justifyContent: 'center', alignItems: 'center', textAlign: 'center', width: '100vw'}} icon={faChevronDown} />
+                        <Icon>
+                        <FontAwesomeIcon icon={faChevronDown} />
+                        </Icon>
                 </Background>
             </Container1>
             
@@ -82,7 +100,7 @@ class Home extends Component {
                 <div className='column'>
                     <div className='container'>
                         <img className='darken' src={becomecounselor} alt='Woman helping another woman breastfeed twins'/>
-                        <div className="centered"><Link to='/' target=''><h1>Become a Breastfeeding Counselor</h1></Link></div>
+                        <div className="centered"><Link to='/counselor' target=''><h1>Become a Breastfeeding Counselor</h1></Link></div>
                     </div>
                     <div className='container'>
                         <img className='darken' src={statement} alt='Person breastfeeding in field of flowers'/>

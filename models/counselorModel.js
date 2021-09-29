@@ -9,19 +9,3 @@ module.exports = (sequelize, DataTypes) => {
     })
     return Counselor
 }
-
-// const { DataTypes } = require('sequelize')
-// const { sequelize } = require('../db')
-
-
-// const Counselor = sequelize.define('Counselor', {
-    // dateAccredited: {
-    //     type: DataTypes.DATEONLY
-    // }
-// });
-
-// Counselor.belongsTo(User);
-
-// Counselor.belongsTo(Chapter);
-
-// module.exports = Counselor

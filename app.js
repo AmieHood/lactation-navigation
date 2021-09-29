@@ -9,15 +9,12 @@ app.use(express.json())
 
 app.use(require('./middleware/headers'))
 
-// const user = require('./controllers/userController')
 app.use('/user', controllers.userController)
 app.use('/counselor', controllers.counselorController)
 // ! place validate server here
 app.use('/chapter', controllers.chapterController)
 
-// app.use('/test', (req, res) => {
-//     res.send('This is a test.')
-// })
+
 
 sequelize.authenticate()
 .then(() => sequelize.sync())
@@ -30,25 +27,3 @@ sequelize.authenticate()
 .catch((err) => {
     console.log(`[Server]: Server crashed. Error = ${err}`);
 })
-
-// sequelize.sync({force: true})
-
-
-// app.listen(port, () => {
-//     console.log(`App listening at http://localhost:${port}`);
-// })
-// ;(async() => {
-    // try{
-    //     await syncDb()
-    //     console.log('connection established successfully');
-    // } catch (error){
-    //     console.error(error)
-    // }
-
-    // app.get('/', (req, res) => {
-    //     res.send('Hello World!')
-    // })
-    // app.listen(port, () => {
-    //     console.log(`App listening at http://localhost:${port}`);
-    // })
-// })()

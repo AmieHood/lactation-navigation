@@ -17,6 +17,12 @@ This project is made for [Breastfeeding USA](https://breastfeedingusa.org/), a 5
 7. npm install in the client directory
 8. npm start on localhost:3001
 
+## Coming in Version 2.0
+- Some files are already included and staged for version 2.0
+- Administration Screen
+- Membership
+- Counselors will be created by Administrators rather than users giving themselves Counselor status
+
 
 
 # Getting Started with Create React App

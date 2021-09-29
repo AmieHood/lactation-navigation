@@ -80,6 +80,7 @@ class ChapterCreate extends Component <ChapterProps, Chapter> {
                         <CardImgOverlay>
                             <CardTitle tag="h1">Create New Chapter</CardTitle>
                         </CardImgOverlay>
+                            <p>Photo by Kylie Lugo on Unsplash</p>
                         <CardBody className='all-cards'>
                         </CardBody>
                     </Card>
