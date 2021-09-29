@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
 import { Card, CardImg, CardBody, CardTitle } from 'reactstrap'
-import { Chapter } from '../../types'
-import { States } from '../../types'
 import logo from '../../assets/colorlogo.png'
+
 
 type AboutUsProps = {
 }
@@ -34,5 +33,6 @@ class AboutUs extends Component<AboutUsProps, AboutUsState> {
         )
     }
 }
+
 
 export default AboutUs

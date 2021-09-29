@@ -10,10 +10,6 @@ type CounselorTableProps = {
     fetchCounselors: () => void
 }
 
-// type CounselorTableState = {
-//     failed: boolean
-// };
-
 class CounselorTable extends Component<CounselorTableProps, {}> {
     constructor(props: CounselorTableProps){
         super(props)
@@ -79,7 +75,6 @@ class CounselorTable extends Component<CounselorTableProps, {}> {
             <tbody>{this.counselorMapper()}</tbody>
             </Table>
             </>
-            // }
             )
     }
     }

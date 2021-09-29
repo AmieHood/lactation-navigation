@@ -4,9 +4,11 @@ import { Button, Form, FormGroup, Input, Label, Card, CardImg, CardBody, CardTit
 import { SignupState } from "./Signup";
 import logo from '../../assets/dad.jpg'
 import { Redirect } from "react-router-dom";
+import { User } from '../../types'
 
 type LoginProps = {
     updateToken: (newToken: string) => void
+    setUser(u: User): void
 }
 
 
@@ -51,9 +53,9 @@ class Login extends Component<LoginProps, SignupState> {
             .then(res => res.json())
             .then(data => {
             this.props.updateToken(data.sessionToken)
+            this.props.setUser(data.user)
             this.setState({ loggedIn: true})
-            // this.success()
-            console.log(data)
+            console.log(data.user)
         })
         .catch(err => console.info(err))
     }

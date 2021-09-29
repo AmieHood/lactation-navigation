@@ -48,13 +48,11 @@ class CounselorEdit extends Component<CounselorEditProps, Counselor> {
         )
         .then((res) => res.json())
         .then((data) => {
-            console.info(data);
             this.props.fetchCounselors()
             this.props.updateOff()
         })
         .catch((err) => {
             console.error(err);
-            console.info(err);
         });
     };
 

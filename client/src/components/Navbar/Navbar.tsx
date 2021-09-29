@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/reverselogo.png";
-import APIURL from "../../utils/Environment";
+import { User } from '../../types'
 
 import {
     Collapse,
@@ -20,14 +20,13 @@ const logoStyle = {
 type SitebarProps = {
     clickLogout: () => void;
     token: string;
-    isCounselor: boolean
+    user: User
 };
 
 type SitebarState = {
     isOpen: boolean;
     click: boolean;
     failed: boolean,
-    role: string | null
 };
 
 class Sitebar extends Component<SitebarProps, SitebarState> {
@@ -37,7 +36,6 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
         isOpen: false,
         click: false,
         failed: false,
-        role: ''
         };
         this.toggle = this.toggle.bind(this);
     }
@@ -48,12 +46,9 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
     handleClick = () => {
         this.setState({ click: !this.state.click });
     };
-    
-    componentDidMount(){
-            
-    }
 
     render() {
+        console.log(this.props)
         return (
         <div>
             <Navbar className="navbar fixed-top navbar-expand-lg navbar-dark p-md-3 " expand="lg">
@@ -67,16 +62,11 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
             <Collapse isOpen={!this.state.isOpen} navbar>
                 <Nav className="mr-auto sitebar" navbar> 
 
-                {this.props.token && this.props.isCounselor ? (
+                {this.props.token && this.props?.user?.Counselor?.role == 'Counselor' ? (
                     <>
                     <NavItem>
                         <NavLink to="/user" onClick={this.toggle}>
                         <Link to="/user" className='nav-link text-white nav-item' >Profile</Link>
-                        </NavLink>
-                    </NavItem>
-                    <NavItem>
-                        <NavLink to="/counselor" onClick={this.toggle}>
-                        <Link to="/counselor" className='nav-link text-white nav-item' >Counselor</Link>
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -90,12 +80,18 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
                         </NavLink>
                     </NavItem>
                     </>
-                ) : this.props.token && !this.props.isCounselor ?
+                ) : this.props.token && this.props?.user?.Counselor?.role !== 'Counselor' ?
                 (
                     <>
+                    
                     <NavItem>
-                        <NavLink to="/user" onClick={this.toggle}>
-                        <Link to="/user" className='nav-link text-white nav-item' >Profile</Link>
+                        <NavLink to="/counselor" onClick={this.toggle}>
+                        <Link to="/counselor" className='nav-link text-white nav-item'>Become a Counselor</Link>
+                        </NavLink>
+                    </NavItem>
+                    <NavItem>
+                        <NavLink to="/findchapter" onClick={this.toggle}>
+                        <Link to="/findchapter" className='nav-link text-white nav-item'>Find Support</Link>
                         </NavLink>
                     </NavItem>
                     <NavItem>
@@ -108,7 +104,7 @@ class Sitebar extends Component<SitebarProps, SitebarState> {
                 :
                 (
                     <>
-                    <NavItem>
+                <NavItem>
                     <NavLink to="/findchapter" onClick={this.toggle}>
                     <Link to="/findchapter" className='nav-link text-white nav-item'>Find Support</Link>
                     </NavLink>

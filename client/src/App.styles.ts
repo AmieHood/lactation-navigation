@@ -12,12 +12,8 @@ export const GlobalStyle = createGlobalStyle`
         display: flex;
         justify-content: center;
         color: white;
-        background-color: #999999;
+        background-color: #cdcdcd;
     }
-
-    // .container {
-    //     margin: 3em;
-    // }
 
     .card {
         background-color: transparent !important;
@@ -99,16 +95,12 @@ export const GlobalStyle = createGlobalStyle`
         filter: brightness(50%) !important;
     }
 
-    // .container {
-    //     margin-top: 5em;
-    // }
-
     .row {
         display: flex;
         flex-wrap: wrap;
         padding: 0 4px;
     }
-    
+
     // Home page image grid layout
     .column {
     flex: 33%;
@@ -187,17 +179,22 @@ export const GlobalStyle = createGlobalStyle`
 
     .chapter-cards {
         background-color: #3b054f !important;
-        // background-image: url(${logo}) !important;
-        // background-size: cover;
-        // background-repeat: no-repeat;
-        // height: 100vh;
-        // width: 100vw;
         margin: auto;
         justify-content: center;
         align-items: center;
         margin: 1em;
         border-radius: 10px
     }
+
+    .form-styling {
+        display: flex;
+        flex-direction: column;
+        // flex-wrap: wrap;
+        align-items: center;
+        // justify-content: space-between;
+        // padding-left: 5em
+    }
+
 
 `
 

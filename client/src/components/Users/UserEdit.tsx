@@ -20,10 +20,23 @@ class UserEdit extends Component <UserEditProps, User> {
             email: this.props.userToUpdate.email, 
             password: this.props.userToUpdate.password,
             confirmPassword: this.props.userToUpdate.confirmPassword,
+            userCity: this.props.userToUpdate.userCity,
+            userState: this.props.userToUpdate.userState,
+            userPhone: this.props.userToUpdate.userPhone,
             emailValid: true,
             message: '', 
+            Counselor: {
+                dateAccredited: '',
+                role: '',
+                token: '',
+                id: 0,
+              },
         }
         this.handleSubmit = this.handleSubmit.bind(this)
+    }
+
+    handleCancel = () => {
+        this.props.updateOff()
     }
 
     handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -43,11 +56,12 @@ class UserEdit extends Component <UserEditProps, User> {
             firstName: this.state.firstName,
             lastName: this.state.lastName, 
             email: this.state.email, 
+            userCity: this.state.userCity,
+            userState: this.state.userState,
+            userPhone: this.state.userPhone,
             password: this.state.password,
             confirmPassword: this.state.confirmPassword
         }
-
-        console.log(`updatedUserData --> ${updatedUserData.firstName} ${updatedUserData.lastName}`);
 
         fetch(`http://localhost:3000/user/${this.props.userToUpdate.id}`, {
                     method: 'PUT',
@@ -59,13 +73,11 @@ class UserEdit extends Component <UserEditProps, User> {
                 })
                 .then(res => res.json())
                 .then(data => {
-                    console.info(data)
                     this.props.fetchUsers()
                     this.props.updateOff()
                 })
                 .catch(err => {
                     console.error(err)
-                    console.info(err)
                 })
 
     }
@@ -87,7 +99,20 @@ class UserEdit extends Component <UserEditProps, User> {
                                     <Input type='text' name='lastName' onChange={this.handleChange} value={this.state.lastName}/>
                                 </FormGroup>
                                 <FormGroup>
+                                    <Label htmlFor="userCity">City</Label>
+                                    <Input type='text' name='userCity' onChange={this.handleChange} value={this.state.userCity}/>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="userState">State</Label>
+                                    <Input type='text' name='userState' onChange={this.handleChange} value={this.state.userState}/>
+                                </FormGroup>
+                                <FormGroup>
+                                    <Label htmlFor="userPhone">Phone</Label>
+                                    <Input type='text' name='userPhone' onChange={this.handleChange} value={this.state.userPhone}/>
+                                </FormGroup>
+                                <FormGroup>
                                     <Button type='submit'>Update Profile</Button>
+                                    <Button onClick={this.handleCancel}>Cancel</Button>
                                 </FormGroup>
                                 </Form>
 

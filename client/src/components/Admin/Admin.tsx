@@ -48,7 +48,6 @@ class Admin extends Component <AdminProps, AdminState> {
         let newCounselorData = {
             dateAccredited: this.state.dateAccredited
         }
-        console.log(`newCounselorData --> ${newCounselorData.dateAccredited}`);
 
         fetch(`http://localhost:3000/counselor/:id`, {
                     method: 'POST',
@@ -64,7 +63,6 @@ class Admin extends Component <AdminProps, AdminState> {
                 })
                 .catch(err => {
                     console.error(err)
-                    console.info(err)
                 })
 
     }

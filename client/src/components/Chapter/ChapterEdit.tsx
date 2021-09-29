@@ -31,6 +31,10 @@ class ChapterEdit extends Component<ChapterEditProps, Chapter> {
         };
     }
 
+    handleCancel = () => {
+        this.props.updateOff()
+    }
+
     handleSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         let updatedChapterData = {
@@ -53,13 +57,11 @@ class ChapterEdit extends Component<ChapterEditProps, Chapter> {
         )
         .then((res) => res.json())
         .then((data) => {
-            console.info(data);
             this.props.fetchChapters()
             this.props.updateOff()
         })
         .catch((err) => {
             console.error(err);
-            console.info(err);
         });
     };
 
@@ -119,6 +121,7 @@ class ChapterEdit extends Component<ChapterEditProps, Chapter> {
                 />
                 </FormGroup>
                 <Button type="submit">Update Chapter!</Button>
+                <Button onClick={this.handleCancel}>Cancel</Button>
             </Form>
             </ModalBody>
         </Modal>

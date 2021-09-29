@@ -1,6 +1,5 @@
 import React from "react";
 import { Component } from "react";
-// import {SignupState} from '../Auth/Signup'
 import { Form, Button, FormGroup, Label, Input, Card, CardImg, CardBody, CardTitle, CardImgOverlay } from 'reactstrap';
 import logo from '../../assets/createChapter.jpg'
 import { Chapter } from '../../types'
@@ -39,7 +38,6 @@ class ChapterCreate extends Component <ChapterProps, Chapter> {
         }
     
     handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-        console.info('fetch?')
         event.preventDefault()
         let newChapterData = {
             chapterName: this.state.chapterName,
@@ -48,7 +46,6 @@ class ChapterCreate extends Component <ChapterProps, Chapter> {
             chapterPhone: this.state.chapterPhone,
             chapterWebsite: this.state.chapterWebsite,
         }
-        console.log(`newChapterData --> ${newChapterData.chapterName} ${newChapterData.chapterState}`);
 
         fetch(`http://localhost:3000/chapter/create`, {
                     method: 'POST',
@@ -60,7 +57,6 @@ class ChapterCreate extends Component <ChapterProps, Chapter> {
                 })
                 .then(res => res.json())
                 .then(data => {
-                    console.info(data)
                     this.setState({
                         chapterName: '',
                         chapterCity: '',
@@ -72,7 +68,6 @@ class ChapterCreate extends Component <ChapterProps, Chapter> {
                 })
                 .catch(err => {
                     console.error(err)
-                    console.info(err)
                 })
     }
 

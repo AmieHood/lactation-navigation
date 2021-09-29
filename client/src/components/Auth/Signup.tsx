@@ -3,10 +3,13 @@ import { Component } from "react";
 import { Form, Input, Button, Label, FormGroup, Alert, Card, CardImg, CardBody, CardTitle } from 'reactstrap'
 import logo from '../../assets/dad.jpg'
 import { Redirect } from 'react-router-dom'
+import { User } from '../../types'
+
 
 type SignupProps = {
     updateToken: (newToken: string) => void
-    
+    setUser(u: User): void
+
 }
 
 export type SignupState = {
@@ -47,11 +50,9 @@ class Signup extends Component <SignupProps, SignupState>{
             SignupState,
             keyof SignupState
             >)            
-            // console.info(this.state)
         }
     
     handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
-        console.info('fetch?')
         event.preventDefault()
         let newUserData = {
             firstName: this.state.firstName,
@@ -59,7 +60,6 @@ class Signup extends Component <SignupProps, SignupState>{
             email: this.state.email,
             password: this.state.password,
         }
-        console.log(`newUserData --> ${newUserData.email} ${newUserData.password}`);
 
         fetch(`http://localhost:3000/user/signup`, {
                     method: 'POST',
@@ -71,8 +71,9 @@ class Signup extends Component <SignupProps, SignupState>{
                 .then(res => res.json())
                 .then(data => {
                     this.props.updateToken(data.sessionToken)
+                    this.props.setUser(data.user)
                     this.setState({ loggedIn: true})
-                    console.info(data)
+                    console.info(data.user)
                 })
                 .catch(err => {
                     console.error(err)
@@ -117,7 +118,7 @@ class Signup extends Component <SignupProps, SignupState>{
                     </Form>
                     {this.state.loggedIn ?
                     <>
-                    <Redirect push to='/'/>
+                    <Redirect push to='/counselor'/>
                     <Alert className='message'>'You are logged in!'</Alert>
                     </>
                     : <></>}

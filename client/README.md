@@ -1,3 +1,24 @@
+# Lactation Navigation App
+
+This project is made for [Breastfeeding USA](https://breastfeedingusa.org/), a 501(c)(3), whose mission is to provide evidence-based breastfeeding information and support, and to promote breastfeeding as the biological and cultural norm. They accomplish this through a network of accredited breastfeeding counselors and comprehensive resources for the benefit of lactating parents and babies, families, and communities. This application will connect these audiences to each other and to the available resources. 
+
+## To Use It
+1. Clone the repo and navigate into the directory
+2. npm install to install the packages
+3. Create .env file with:
+    DB_HOST=localhost
+    DB_DBNAME=lactation-navigation
+    DB_USER=postgres
+    DB_PASS=**insert your postgres password here**
+    JWT_SECRET=i_am_secret
+4. Add your .env file to your .gitignore
+5. npm nodemon to start the dev server
+6. In another terminal, navigate into the client directory
+7. npm install in the client directory
+8. npm start on localhost:3001
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

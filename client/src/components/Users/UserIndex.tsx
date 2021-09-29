@@ -10,7 +10,7 @@ import logo from '../../assets/info.jpg'
 
 type UserIndexProps = {
     token: string
-    isCounselor: boolean
+    user: User
 }
 
 type UserIndexState = {
@@ -35,7 +35,13 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                 confirmPassword: '',
                 emailValid: false, 
                 message: '',
-                id: 0
+                id: 0,
+                Counselor: {
+                    dateAccredited: '',
+                    role: '',
+                    token: '',
+                    id: 0,
+                  },
             },
             failed: false,
             role: ''
@@ -45,7 +51,6 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
     fetchUsers = (): void => {
         fetch(`http://localhost:3000/user/all`, {
                     method: 'GET',
-                    // body: JSON.stringify(newUserData),
                     headers: new Headers ({
                         'Content-Type': 'application/json',
                         Authorization: `Bearer ${this.props.token}`
@@ -54,18 +59,15 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                 .then(res => res.json())
                 .then(data => {
                     this.setState({ users: data})
-                    console.info(data)
                 })
                 .catch(err => {
                     console.error(err)
-                    console.info(err)
                 })
     }
 
 
     editUpdateUser = (user: User): void => {
         this.setState({ userToUpdate: user})
-        console.log(user);
     }
 
     updateOn = (): void => {
@@ -75,14 +77,8 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
     updateOff = (): void => {
         this.setState({ updateActive: false })
     }
-
-    // componentDidMount = (): void => {
-    //     this.fetchUsers()
-    // }
-
+    
     async componentDidMount(){
-        console.info('working?')
-        console.info(`${APIURL}/counselor`)
         try {
                 let res = await fetch(`${APIURL}/counselor/validate`, {
                     headers: new Headers ({
@@ -92,7 +88,6 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                 })
                     let json = await res.json()
                     let Counselor = json
-                    console.info(Counselor)
                     console.info(json)
                 if (Counselor == null){
                     this.setState({failed: true})
@@ -116,7 +111,7 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                         <CardTitle className='card-img-overlay' tag="h1">User Profiles</CardTitle>
                     </CardBody>
                 </Card>
-            {!this.props.isCounselor
+            {this.props?.user?.Counselor?.role !== 'Counselor'
             ? <Redirect to="/" />
             :
             <Container>
@@ -131,7 +126,7 @@ class UserIndex extends Component <UserIndexProps, UserIndexState> {
                             />
 
                     </Col>
-                    {this.state.updateActive && this.state.userToUpdate ? (
+                    {this.state.updateActive  ? (
                         <UserEdit
                         userToUpdate={this.state.userToUpdate}
                         updateOff={this.updateOff}

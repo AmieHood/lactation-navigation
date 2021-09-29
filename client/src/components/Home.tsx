@@ -14,8 +14,11 @@ import statement from '../assets/statement.jpg'
 import sleepresources from '../assets/sleepresources.jpg'
 import supplementation from '../assets/supplementation.jpg'
 import biologicalnorm from '../assets/biologicalnorm.jpeg'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons'
 
-// import { Redirect } from 'react-router-dom'
 const Background = styled.div`
     background-image: url(${BGImageDesktop});
     background-size: cover;
@@ -57,6 +60,7 @@ class Home extends Component {
                         <h1>Support Begins Here</h1>
                         <Link to='/findchapter'><Button type='button'>Find a Local Chapter</Button></Link>
                     </Text>
+                        <FontAwesomeIcon style={{justifyContent: 'center', alignItems: 'center', textAlign: 'center', width: '100vw'}} icon={faChevronDown} />
                 </Background>
             </Container1>
             

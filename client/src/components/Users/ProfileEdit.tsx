@@ -34,15 +34,7 @@ class ProfileEdit extends Component <ProfileEditProps, ProfileEditState> {
             password: this.props.userToUpdate.password,
             confirmPassword: this.props.userToUpdate.confirmPassword,
         }
-        // this.handleSubmit = this.handleSubmit.bind(this)
     }
-
-    // handleChange = (event: React.ChangeEvent<HTMLInputElement>, keyName: string) => {
-    //     let change = Object.assign(
-    //         this.props.userToUpdate, // old data
-    //         {[keyName]: event.target.value}) // new k:v pair
-    //     this.setState({ userToUpdate: change})// update state  
-    // }
 
     handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
         event.preventDefault()
@@ -52,11 +44,7 @@ class ProfileEdit extends Component <ProfileEditProps, ProfileEditState> {
             email: this.state.email, 
             password: this.state.password,
             confirmPassword: this.state.confirmPassword
-        }
-
-        console.log(`updatedUserData --> ${updatedUserData.firstName} ${updatedUserData.lastName}`);
-        console.log(this.props.userToUpdate.id);
-        
+        }        
 
         fetch(`http://localhost:3000/user/${this.props.userToUpdate.id}`, {
                     method: 'PUT',
@@ -72,7 +60,6 @@ class ProfileEdit extends Component <ProfileEditProps, ProfileEditState> {
                 })
                 .catch(err => {
                     console.error(err)
-                    console.info(err)
                 })
 
     }

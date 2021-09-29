@@ -20,18 +20,37 @@ import {
 import FindChapter from "./components/Unprotected/FindChapter";
 import Donate from './components/Unprotected/Donate'
 import APIURL from './utils/Environment'
+import { User, Counselor } from './types'
 
 type AppState = {
   token: string;
   isCounselor: boolean
+  user: User
 };
+
 
 class App extends Component<{}, AppState> {
   constructor(props: {}) {
     super(props);
     this.state = {
       token: localStorage.getItem("token") || "",
-      isCounselor: false
+      isCounselor: false,
+      user: {
+        firstName: '',
+        lastName: '', 
+        email: '', 
+        password: '',
+        confirmPassword: '',
+        emailValid: false, 
+        message: '',
+        Counselor: {
+          dateAccredited: '',
+          role: '',
+          token: '',
+          id: 0,
+        },
+        id: 0,
+      }
     };
   }
 
@@ -39,9 +58,12 @@ class App extends Component<{}, AppState> {
     localStorage.setItem("token", newToken);
     this.setState({ token: newToken });
     console.info(this.state.token);
+    // this.fetchCounselor()
   };
 
-
+  setUser = (u: User): void => {
+    this.setState({ user: u})
+  }
 
   clearToken = () => {
     localStorage.clear();
@@ -55,7 +77,7 @@ class App extends Component<{}, AppState> {
         <Home />
       </Route>
       <Route exact path="/portal">
-        <Portal updateToken={this.updateToken} />
+        <Portal updateToken={this.updateToken} setUser={this.setUser}/>
       </Route>
       <Route exact path="/findchapter">
         <FindChapter />
@@ -65,56 +87,25 @@ class App extends Component<{}, AppState> {
       </Route>
       <Route exact path="/chapter">
         <ChapterIndex
-          token={this.state.token} isCounselor={this.state.isCounselor}
+          token={this.state.token} user={this.state.user}
         />
       </Route>
       <Route exact path="/counselor">
-        <CounselorIndex token={this.state.token} isCounselor={this.state.isCounselor} />
+        <CounselorIndex token={this.state.token} user={this.state.user} />
       </Route>
       <Route exact path="/user">
-        <UserIndex token={this.state.token} isCounselor={this.state.isCounselor} />
+        <UserIndex token={this.state.token} user={this.state.user}  />
       </Route>
     </Switch>
     )
   }
-
-  fetchCounselor = async (): Promise<void> => {
-    console.info('working?')
-    console.info(`${APIURL}/counselor`)
-    try {
-        let res = await fetch(`${APIURL}/counselor/validate`, {
-            headers: new Headers ({
-                'Content-Type': 'application/json',
-                Authorization: `Bearer ${this.state.token}`
-            })
-        })
-            let Counselor = await res.json()
-            // let Counselor = json
-            console.info(Counselor)
-            // console.info(json)
-        if (Counselor.id){
-            this.setState({isCounselor: true})
-            return
-        } 
-    } catch (error) {
-    console.error(error)
-    this.setState({ isCounselor: false})
-    }
-}
-
-  componentDidUpdate = (prevProps: {}, prevState: AppState) => {
-    if (this.state.token != prevState.token) {
-      this.fetchCounselor()
-    }
-  }
   
   render() {
-    console.log({isCounselor: this.state.isCounselor})
     return (
       <>
         <GlobalStyle />
         <Router>
-          <Sitebar token={this.state.token} clickLogout={this.clearToken} isCounselor={this.state.isCounselor}/>
+          <Sitebar token={this.state.token} clickLogout={this.clearToken} user={this.state.user}/>
           { this.urlPatterns() }
         </Router>
       </>

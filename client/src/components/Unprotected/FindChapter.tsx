@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
-import { Input, Table, Dropdown, DropdownToggle, DropdownMenu, DropdownItem, CardDeck, Card, CardImg, CardBody, CardTitle, CardText, CardImgOverlay, CardColumns } from 'reactstrap'
+import { Input, Card, CardImg, CardBody, CardTitle, CardText } from 'reactstrap'
 import { Chapter } from '../../types'
-import { States } from '../../types'
 import logo from '../../assets/findchapter.jpg'
-import { findByLabelText } from '@testing-library/dom'
 import bfusalogo from '../../assets/logo.png'
 
 type FindChapterProps = {
-    // chapters: Chapter[]
-    // statesArray: States
 }
 
 type FindChapterState = {
     chapters: Chapter[]
     dropdownOpen: boolean
-    states: States | null
     allChapters: Chapter[]
 }
 
@@ -24,7 +19,6 @@ class FindChapter extends Component<FindChapterProps, FindChapterState> {
         this.state ={
             chapters: [], 
             dropdownOpen: false,
-            states: null  ,
             allChapters: []
         }
     }
@@ -44,23 +38,19 @@ class FindChapter extends Component<FindChapterProps, FindChapterState> {
             .then((res) => res.json())
             .then((data) => {
                 this.setState({ chapters: data, allChapters: data })
-                console.info(data);
             })
             .catch((err) => {
                 console.error(err);
-                console.info(err);
             });
         };
         
     filterChapters = (e: React.ChangeEvent<HTMLInputElement>) => {
-        console.info('filter chapters')
         const target = e.target
         const value = target.value.toLowerCase()
 
         const chapterSearch = this.state.allChapters.filter
         (chapter => (`${chapter.chapterState}`.toLowerCase().includes(value)))
         this.setState({ chapters: chapterSearch})
-        console.info(chapterSearch)
     }
     
     chapterMapper = (): JSX.Element[] => {

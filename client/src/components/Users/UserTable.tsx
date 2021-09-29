@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Button, Table } from "reactstrap";
 import { User } from "../../types";
 import APIURL from "../../utils/Environment";
-import { Counselor2, User2 } from '../../types'
+import { Counselor2 } from '../../types'
 
 type UserTableProps = {
     token: string;
@@ -36,8 +36,6 @@ type UserTableProps = {
     };
 
     fetchCounselor = async (): Promise<void> => {
-        console.info("working?");
-        console.info(`${APIURL}/user`);
         try {
             let res = await fetch(`${APIURL}/counselor/all`, {
                 headers: new Headers({
@@ -56,13 +54,10 @@ type UserTableProps = {
     };
 
     counselorReturn = () => {
-        console.log("counselor return");
-
         if (this.state.isCounselor) {
-
-        <>Counselor</>;
+            <>Counselor</>;
         } else {
-        <>broken</>;
+            <>broken</>;
         }
     };
 
@@ -72,10 +67,10 @@ type UserTableProps = {
             <tr key={index}>
             <td>{user.firstName}</td>
             <td>{user.lastName}</td>
-            <td>{ user.id == undefined ?
+            <td>{ user.id === undefined ?
                 user.id = 999999
-                : user.id == user.id}
-            {this.state.userArray.includes(user.id) ? <>Counselor</> : <></>}
+                : 
+            this.state.userArray.includes(user.id) ? <>Counselor</> : <>Member</>}
             </td>
             <td>
                 <Button
