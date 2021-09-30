@@ -84,46 +84,42 @@ class Home extends Component {
             
             <div className='row'>
                 <div className='column'>
-                    <div className='container'>
-                        <img className='darken' src={donate} alt='baby surrounded by milk' />
-                        <div className="centered"><Link to='/donate'><h1>Donate</h1></Link></div>
-                    </div>
-                    <div className='container'>
-                        <img className='darken' src={colorlogo} alt='Breastfeeding USA logo'/>
-                        <div className="centered"><Link to='/aboutus'><h1>About Us</h1></Link></div>
-                    </div>
-                    <div className='container'>
-                        <img className='darken' src={articles} alt='Woman nursing toddler' />
-                        <div className="centered"><Link to='/articles' target=''><h1>Articles</h1></Link></div>
-                    </div>
-                </div>
-                <div className='column'>
-                    <div className='container'>
-                        <img className='darken' src={becomecounselor} alt='Woman helping another woman breastfeed twins'/>
-                        <div className="centered"><Link to='/counselor' target=''><h1>Become a Breastfeeding Counselor</h1></Link></div>
-                    </div>
-                    <div className='container'>
-                        <img className='darken' src={statement} alt='Person breastfeeding in field of flowers'/>
-                        <div className="centered"><Link to='/statement' target=''><h1>Statement on Breastfeeding</h1></Link></div>
-                    </div>
-                    <div className='container'>
-                        <img className='darken' src={biologicalnorm} alt='toddler nursing'/>
-                        <div className="centered"><Link to='/' target=''><h1>The Biological Norm</h1></Link></div>
-                    </div>
-                </div>
-                <div className='column'>
-                <div className='container'>
-                        <img className='darken' src={sleepresources} alt='sleeping mom and baby'/>
-                        <div className="centered"><Link to='/' target=''><h1>Biologically Normal Sleep Habits</h1></Link></div>
-                    </div>
-                    <div className='container'>
-                        <img className='darken' src={supplementation} alt='parent holding supplemental nursing system for nursing parent'/>
-                        <div className="centered"><Link to='/statement' target=''><h1>Supplementation</h1></Link></div>
+                    <div className='container2'>
+                    <a href='https://breastfeedingusa.org/civicrm/contribute/transact?reset=1&id=2' target='_blank' ><img className='darken' src={donate} alt='baby surrounded by milk' /></a>
+                        <div className="centered"><h1>Donate</h1></div>
                     </div>
                    
+                    <div className='container2'>
+                    <a href='https://breastfeedingusa.org/content/article/breastfeeding-information-articles' target='_blank'><img className='darken' src={articles} alt='Woman nursing toddler' /></a>
+                        <div className="centered"><h1>Articles</h1></div>
+                    </div>
+                </div>
+                <div className='column'>
+                <div className='container2'>
+                    <a href='https://breastfeedingusa.org/aboutus' target='_blank'><img className='darken' src={colorlogo} alt='Breastfeeding USA logo'/></a>
+                        <div className="centered"><h1>About Us</h1></div>
+                    </div>
+                <div className='container2'>
+                    <a href='https://breastfeedingusa.org/content/article/sleeping-baby-what-does-really-mean' target='_blank'><img className='darken' src={sleepresources} alt='sleeping mom and baby'/></a>
+                        <div className="centered"><h1>Biologically Normal Sleep Habits</h1></div>
+                    </div>
+                    
+                </div>
+                <div className='column'>
+                <div className='container2'>
+                    <a href='https://breastfeedingusa.org/content/becoming-breastfeeding-counselor' target='_blank'><img className='darken' src={becomecounselor} alt='Woman helping another woman breastfeed twins'/></a>
+                        <div className="centered"><h1>Become a Breastfeeding Counselor</h1></div>
+                    </div>
+                    <div className='container2'>
+                    <a href='https://breastfeedingusa.org/content/article/statement-breastfeeding' target='_blank'><img className='darken' src={statement} alt='Person breastfeeding in field of flowers'/></a>
+                        <div className="centered"><h1>Statement on Breastfeeding</h1></div>
+                    </div>
+                    <div className='container2'>
+                    <a href='https://breastfeedingusa.org/content/article/milk-sharing-formal-and-informal' target='_blank'><img className='darken' src={supplementation} alt='parent holding supplemental nursing system for nursing parent'/></a>
+                        <div className="centered"><h1>Supplementation</h1></div>
+                    </div>
                 </div>
             </div>
-         
             </>
     
         ) 

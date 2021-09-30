@@ -136,7 +136,7 @@ export const GlobalStyle = createGlobalStyle`
         filter: brightness(75%)
     }
 
-    .container {
+    .container2 {
         position: relative;
         text-align: center;
         border-radius: 10px;
@@ -146,7 +146,7 @@ export const GlobalStyle = createGlobalStyle`
         cursor: pointer;
     }
 
-    .container:hover {
+    .container2:hover {
         transform: scale(1.05);
         box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
     }

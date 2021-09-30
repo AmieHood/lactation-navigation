@@ -41,3 +41,19 @@ export interface User {
     id?: number,
 }
 
+//User type for User search component only
+export interface User2 {
+    firstName: string,
+    lastName: string, 
+    email: string, 
+    password: string,
+    confirmPassword: string,
+    emailValid: boolean, 
+    message: string,
+    Counselor: Counselor,
+    userCity?: string,
+    userState?: string,
+    userPhone?: string,
+    id?: number,
+}
+
