@@ -11,9 +11,12 @@ app.use(require('./middleware/headers'))
 
 app.use('/user', controllers.userController)
 app.use('/counselor', controllers.counselorController)
-// ! place validate server here
 app.use('/chapter', controllers.chapterController)
 
+// ! place validate server here
+app.listen(process.env.PORT, () => {
+    console.log(`server is listening on port ${process.env.PORT}`)
+})
 
 
 sequelize.authenticate()
